@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Input from '../components/amountInput/index'
 import SearchInput from '../components/searchInput/index'
-import DropDownMenu from '../components/dropDownMenu/index'
+import DropDownMenu from '../components/gasDropDownMenu/index'
+import {data} from '../globalStore'
 
 export default class testingPage extends Component {
     render() {
@@ -19,6 +20,11 @@ export default class testingPage extends Component {
                     <br/><br/>
                     <DropDownMenu/>
 
+                    <br/><br/>
+                    <button
+                    onClick={(e)=>{console.log(data)}}>
+                        Get GAS
+                    </button>
                     </center>
                 </div>
             </div>
