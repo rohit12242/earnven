@@ -1,0 +1,40 @@
+
+.sideBar{
+  position: absolute;
+  display: block;
+  width: 260px;
+  height: 976px;
+  left: 0px;
+  top: 0px;
+  background-color: #0E1214;
+}
+
+.left-menu{
+  position: absolute;
+  width: 141px;
+  height: 430px;
+  top: 73px;
+  left: 41px
+}
+
+.nav-element{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 30px;
+  color: white;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.025em;
+  line-height: 167.5%;
+}
+
+.nav-element a{
+  text-decoration: none;
+  color: #f5f5f5;
+
+}
