@@ -6,7 +6,7 @@ import LanguageDropDownMenu from '../components/languageDropDown/index'
 import HelpDropDownMenu from '../components/helpDropDown/index'
 import TransparentButton from '../components/TransparentButton'
 import NetworkDropDown from '../components/networkDropDown'
-
+import TotalValueBox from '../components/totalValueBox'
 import {data} from '../globalStore'
 
 export default class testingPage extends Component {
@@ -36,6 +36,9 @@ export default class testingPage extends Component {
 
                     <br/><br/>
                     <NetworkDropDown/>
+
+                    <br/><br/>
+                    <TotalValueBox/>
 
                     <br/><br/><br/>
                     <button
