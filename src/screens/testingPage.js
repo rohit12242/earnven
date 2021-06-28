@@ -7,6 +7,7 @@ import HelpDropDownMenu from '../components/helpDropDown/index'
 import TransparentButton from '../components/TransparentButton'
 import NetworkDropDown from '../components/networkDropDown'
 import TotalValueBox from '../components/totalValueBox'
+import AllAssetsMini from '../components/allAssetsMini'
 import {data} from '../globalStore'
 
 export default class testingPage extends Component {
@@ -15,7 +16,7 @@ export default class testingPage extends Component {
             <div>
                 For Testing Purposes
                 <br/>
-                <div style={{backgroundColor:'#141A1E', height:'1000px', width:'1000px'}}>
+                <div style={{backgroundColor:'#141A1E', height:'1500px', width:'1000px'}}>
                     <center><br/><br/>
                     <Input/> 
                     
@@ -39,6 +40,9 @@ export default class testingPage extends Component {
 
                     <br/><br/>
                     <TotalValueBox/>
+
+                    <br/><br/>
+                    <AllAssetsMini/>
 
                     <br/><br/><br/>
                     <button

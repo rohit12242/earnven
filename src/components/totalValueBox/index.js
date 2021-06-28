@@ -29,7 +29,7 @@ export default class index extends Component {
         const accounts = await web3.eth.getAccounts();
         this.setState({account:accounts[0]})
 
-        await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=freekey`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             var tokens = response.data.tokens;
             var total= parseFloat(response.data.ETH.price.rate)*parseInt(web3.utils.fromWei(response.data.ETH.rawBalance,'ether')) ;
