@@ -15,7 +15,6 @@ import Account from './account/account';
 
 
 export default class Sidebar extends Component{
-  co
   constructor(){
     super();
     this.state={
