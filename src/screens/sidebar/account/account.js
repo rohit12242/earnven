@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import accountLogo from '../../Assets/accountlogo.png';
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 
