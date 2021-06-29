@@ -8,7 +8,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
-          {/* <Sidebar /> */}
+          <Sidebar />
           <Switch>
             <Route exact path="/"> <Home/> </Route>
             <Route exact path="/test"> <TestingPage/> </Route>
