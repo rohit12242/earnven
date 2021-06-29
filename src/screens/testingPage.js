@@ -8,6 +8,8 @@ import TransparentButton from '../components/TransparentButton'
 import NetworkDropDown from '../components/networkDropDown'
 import TotalValueBox from '../components/totalValueBox'
 import AllAssetsMini from '../components/allAssetsMini'
+import AllAssets from '../components/allAssets'
+import TransactionHistory from '../components/transactionHistory'
 import {data} from '../globalStore'
 
 export default class testingPage extends Component {
@@ -16,7 +18,7 @@ export default class testingPage extends Component {
             <div>
                 For Testing Purposes
                 <br/>
-                <div style={{backgroundColor:'#141A1E', height:'1500px', width:'1000px'}}>
+                <div style={{backgroundColor:'#141A1E', height:'3000px', width:'1000px'}}>
                     <center><br/><br/>
                     <Input/> 
                     
@@ -43,6 +45,12 @@ export default class testingPage extends Component {
 
                     <br/><br/>
                     <AllAssetsMini/>
+
+                    <br/><br/>
+                    <AllAssets/>
+
+                    <br/><br/>
+                    <TransactionHistory/>
 
                     <br/><br/><br/>
                     <button
