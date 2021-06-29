@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -26,12 +26,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function nothing(){
-    return
-}
+// function nothing(){
+//     return
+// }
+
 
 export default function SimpleAccordion() {
   const classes = useStyles();
+
+  const [network, setNetwork] = useState(EthereumIcon)
 
   return (
     <div className={classes.root}>
@@ -42,29 +45,38 @@ export default function SimpleAccordion() {
           id="panel1a-header"
         >
         
-        <img src={EthereumIcon} alt=''></img>
+        <img src={network} alt=''></img>
+        {/* <font color='white'>{network.charAt(0).toUpperCase()+network.slice(1)}</font> */}
           
 
         </AccordionSummary>
         <AccordionDetails style={{backgroundColor:'transparent', width:'150px'}}>
           <ul style={{listStyleType:'none'}}>
             <li>
-              <TransparentButton  onMouseOver={nothing()} onMouseOut={nothing()}
-              onClick={(e)=>{data.network='ethereum';}}
+              <TransparentButton
+              onClick={(e)=>{data.network='ethereum';setNetwork(EthereumIcon)}}
               value={<><img src={EthereumIcon} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Ethereum</span></>}/> 
             </li>
 
             <li> 
-              <TransparentButton aria-controls="panel1a-content" value={<><img src={BinanceIcon} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Binance Smart Chain</span></>}/>
+              <TransparentButton aria-controls="panel1a-content" 
+              onClick={(e)=>{data.network='binance';setNetwork(BinanceIcon)}}
+              value={<><img src={BinanceIcon} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Binance Smart Chain</span></>}/>
             </li>
             <li> 
-              <TransparentButton value={<><img src={Solana} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Solana</span></>}/>
+              <TransparentButton 
+              onClick={(e)=>{data.network='solana';setNetwork(Solana)}}
+              value={<><img src={Solana} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Solana</span></>}/>
             </li>
             <li> 
-              <TransparentButton value={<><img src={Polkadot} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Polkadot</span></>}/>
+              <TransparentButton 
+              onClick={(e)=>{data.network='polkadot';setNetwork(Polkadot)}}
+              value={<><img src={Polkadot} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Polkadot</span></>}/>
             </li>
             <li> 
-              <TransparentButton value={<><img src={Polygon} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Polygon</span></>}/>
+              <TransparentButton 
+              onClick={(e)=>{data.network='polygon';setNetwork(Polygon)}}
+              value={<><img src={Polygon} alt='' height='25px'></img> &nbsp; <span style={{fontSize:'18px'}}>Polygon</span></>}/>
             </li>
           </ul>
         </AccordionDetails>

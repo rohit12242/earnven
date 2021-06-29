@@ -74,8 +74,10 @@ export default class Sidebar extends Component{
                   </div>
                   {this.state.subNav && 
                     <div className='product-element'>
+
                       <a href='https://pylon.finance/' target='_blank' rel="noreferrer" className='drop-element'><span className='nav-text'>Pylon Finance</span><RiIcons.RiExternalLinkLine className='icons'/></a>
                       <a href='https://www.darkpylon.com/' target='_blank' rel="noreferrer" className='drop-element'><span className='nav-text'>Dark Pylon</span><RiIcons.RiExternalLinkLine className='icons'/></a>
+
                     </div>
                   }
                 </div>

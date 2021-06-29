@@ -22,7 +22,7 @@
 
 .nav-element{
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px 0px 10px 35px;
   list-style: none;
@@ -98,7 +98,7 @@ li:hover{
 
 .drop-element{
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px 0px 10px 35px;
   list-style: none;
