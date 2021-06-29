@@ -1,4 +1,26 @@
 
 .header{
-    position: absolute;
+    
+}
+
+.search-bar{
+    display: inline-block;
+    margin-left: 64px;
+}
+
+.network-dropdown{
+    display: inline-block;
+    margin-left: 344px;
+}
+
+.gas-dropdown{
+    display: inline-block;  
+}
+
+.language-dropdown{
+    display: inline-block;
+}
+
+.help-dropdown{
+    display: inline-block;
 }
