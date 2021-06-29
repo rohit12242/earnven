@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 // import styles from './styles.css'
 
-export default function index({value,...props}) {
+export default function SearchInput({value,...props}) {
     return (
         <>
         <Paper elevation={3} 

@@ -1,12 +1,12 @@
 
 .dashboard{
-  position: fixed;
+ /*  position: fixed;
   height: 100%;
   width: 100%;
   left: 290px;
-  top: 0px;
+  top: 0px; */
   /*background-color: #141A1E;*/
-  background: linear-gradient(45deg, rgba(20,26,30,1) 0%, rgba(14,18,20,1) 51%, rgba(14,18,20,1) 60%);
+  /* background: linear-gradient(45deg, rgba(20,26,30,1) 0%, rgba(14,18,20,1) 51%, rgba(14,18,20,1) 60%); */
 }
 
 
