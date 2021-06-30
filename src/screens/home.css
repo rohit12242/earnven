@@ -36,3 +36,13 @@
   overflow-x: hidden;
   background-color: #0E1214;
 }
+
+.header-wrapper{
+  position: relative;
+  top: 15px;
+}
+
+.dashboard-wrapper{
+  height: 100%;
+  width: 100%;
+}

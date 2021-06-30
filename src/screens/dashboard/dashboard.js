@@ -8,9 +8,9 @@ export default class Dashboard extends Component {
     render() {
         return (
             <div className='dashboard'>
-                <div>
-                    <div className='portfolio' style={{border:'1px',borderStyle:'solid',borderColor:'#737373',height:'360px',borderRadius:'7px'}}>
-                        <p style={{color:'white', marginTop:'0',height:'0',paddingTop:'10px',paddingLeft:'10px'}}>Portfolio Performance</p>
+                {/* <div>
+                    <div className='portfolio'>
+                        <p style={{color:'white', position:'absolute',top:'15px',left:'66px'}}>Portfolio Performance</p>
                         <PortfolioPerf />
                     </div>
                     <div className='total-value'>
@@ -19,8 +19,29 @@ export default class Dashboard extends Component {
                 </div>
                 <div className='assets'>
                     <AllAssets />
+                </div> */}
+
+                <div className='left-dashboard'>
+                    <div>
+                        <h3 style={{color:'#BB86FC',font:'Poppins',fontWeight:'600',style:'normal',fontSize:'40px',lineHeight:'1px'}} >$ 5,234.54</h3>
+                        <p style={{color:'white',font:'Poppins',fontWeight:'500',style:'normal',fontSize:'16px',lineHeight:'1px'}}>+ 10.4%($207.65)</p>
+                    </div>
+                    <div>
+                    </div>
+                    <div className='portfolio'>
+                        <p style={{ color: 'white', position: 'absolute', top: '15px', left: '66px' }}>Portfolio Performance</p>
+                        <PortfolioPerf />
+                    </div>
+                    <div className='assets'>
+                        <AllAssets />
+                    </div>
                 </div>
-                
+                <div className='right-dashboard'>
+                    <div className='total-value'>
+                        <TotalValueBox />
+                    </div>
+                </div>
+
             </div>
         )
     }

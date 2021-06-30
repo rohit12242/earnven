@@ -65,19 +65,19 @@ export default class index extends Component {
                         backgroundRepeat:'no-repeat',
                         backgroundPositionY:'10px',
                         backgroundPositionX:'-110px',
-                        width:'300px',
+                        width:'260px',
                         height:'100px',
                         border:'1px',
                         borderStyle:'solid',
-                        borderColor:'white',
+                        borderColor:'#737373',
                         borderRadius:'10px',
                     }}>
             {/* <img src={Curve}/> */}
-            <div style={{marginTop:'20px', marginRight:'180px'}}>
+            <div style={{marginTop:'16px', marginLeft:'26px'}}>
                 <font color='white'>Total Value</font>
             </div>
             <br/>
-            <div style={{ fontSize:'40px', marginTop:'-15px', marginRight:'180px', width:'250px'}}>
+            <div style={{ fontSize:'40px', marginTop:'-15px', marginLeft:'26px', width:'216px'}}>
                 <font color='#03DAC6'>$ {this.state.totalValue}</font>
             </div>
             </div>

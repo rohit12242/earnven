@@ -122,13 +122,13 @@ export default class index extends Component {
         this.change(arr2)
         return (
             <div style={{
-                width:'800px',
+                width:'750px',
                 height:'300px',
                 background:'transparent',
                 border:'1px',
                 borderStyle:'solid',
-                borderColor:'white',
-                borderRadius:'20px'
+                borderColor:'#737373',
+                borderRadius:'10px'
             }}>
             <center>
             <div style={{marginTop:'30px', marginRight:'600px', fontSize:'20px', marginBottom:'10px'}}>

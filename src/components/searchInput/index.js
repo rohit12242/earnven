@@ -11,9 +11,9 @@ export default function index({value,...props}) {
         <Paper elevation={3} 
         style={{width:'300px', height:'40px', 
                 background:'transparent', borderStyle:'solid', 
-                borderColor:'white', borderRadius:'10px', borderWidth:'1px'}}>
+                borderColor:'#737373', borderRadius:'10px', borderWidth:'1px'}}>
             
-            <InputBase style={{width:'230px', color:'white', marginTop:'5px'}}
+            <InputBase style={{width:'230px', color:'#737373', marginTop:'5px'}}
                 {...props}
             />
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApexCharts from 'apexcharts';
 import ReactApexChart from 'react-apexcharts'
-
+import './portfolioperf.css'
 
 export default class PortfolioPerf extends Component {
     constructor(props) {
@@ -290,7 +290,7 @@ export default class PortfolioPerf extends Component {
                 chart: {
                     id: 'area-datetime',
                     type: 'area',
-                    height: '50%',
+                    height: '900',
                     zoom: {
                         autoScaleYaxis: true
                     },
@@ -335,6 +335,9 @@ export default class PortfolioPerf extends Component {
                     style:{
                         colors:['#BB86FC'],
                     },
+                },
+                legend:{
+
                 },
                 markers: {
                     size: 0,
@@ -470,7 +473,7 @@ export default class PortfolioPerf extends Component {
 
     render() {
         return (
-            <div id="chart">
+            <div id="chart" className='chart'>
                 {/*<div class="toolbar">
                     <button id="one_month"
 
@@ -504,8 +507,8 @@ export default class PortfolioPerf extends Component {
                     </button>
                 </div>
         */}
-                <div id="chart-timeline" >
-                    <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={350} />
+                <div id="chart-timeline" className='chart-timeline'>
+                    <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={250} />
                 </div>
             </div>
         )
