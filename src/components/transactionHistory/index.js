@@ -49,6 +49,11 @@ export default class index extends Component {
         return link
       }
 
+    etherscanTxLink(link){
+        link = 'https://etherscan.io/tx/'+link;
+        return link
+  }
+
     change = (arr) =>{
         contents = arr.map((object)=>
 
@@ -94,7 +99,7 @@ export default class index extends Component {
                     <ul style={{listStyleType:'none', color:'white'}}>
                         <li>
                             Txn Hash  &nbsp;&nbsp;&nbsp;: 
-                            <a href={this.etherscanLink(object.hash)} target='_blank' rel="noreferrer">
+                            <a href={this.etherscanTxLink(object.hash)} target='_blank' rel="noreferrer">
                             <font style={{fontSize:'15px', color:'white'}}>{object.hash}</font>
                             </a>
                         </li>
