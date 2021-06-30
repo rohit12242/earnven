@@ -18,7 +18,7 @@ export default class testingPage extends Component {
             <div>
                 For Testing Purposes
                 <br/>
-                <div style={{backgroundColor:'#141A1E', height:'3000px', width:'1000px'}}>
+                <div style={{backgroundColor:'#141A1E', height:'auto', width:'1000px', paddingBottom:'50px'}}>
                     <center><br/><br/>
                     <Input/> 
                     

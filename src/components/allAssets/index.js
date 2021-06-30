@@ -59,6 +59,9 @@ export default class index extends Component {
         // console.log(this.state.page)
             var start = (this.state.page-1)*10
             var end = ((this.state.page)*10)
+            if(end>arr1.length){
+                end = arr1.length
+            }
             for(var i=start; i<end; i++){
                 var object = {};
                 object.name = arr1[i].tokenInfo.name

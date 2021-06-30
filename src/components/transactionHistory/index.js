@@ -10,7 +10,9 @@ import UserIcon from '../../assets/icons/userIcon.png'
 
 var contents = ''
 var ops =[]
+var ops2 = []
 var arr1 = []
+var eth = {}
 
 export default class index extends Component {
 
@@ -42,6 +44,11 @@ export default class index extends Component {
         return addynew
     }
 
+    etherscanLink(link){
+        link = 'https://etherscan.io/address/'+link;
+        return link
+      }
+
     change = (arr) =>{
         contents = arr.map((object)=>
 
@@ -67,7 +74,9 @@ export default class index extends Component {
 
                 <div style={{width:'30%', float:'left', textAlign:'left'}}>
                 <font color='white'>From</font><br/>
+                <a href={this.etherscanLink(object.from)} target='_blank' rel="noreferrer">
                 <font style={{fontSize:'15px', color:'white'}}>{this.shortaddress(object.from)}</font>
+                </a>
                 </div>
 
                 <div style={{width:'30%', float:'left', textAlign:'left', marginTop:'8px'}}>
@@ -84,13 +93,16 @@ export default class index extends Component {
                 <AccordionDetails style={{backgroundColor:'transparent', textAlign:'left'}}>
                     <ul style={{listStyleType:'none', color:'white'}}>
                         <li>
-                            Txn Hash  &nbsp;&nbsp;&nbsp;: {object.hash}
+                            Txn Hash  &nbsp;&nbsp;&nbsp;: 
+                            <a href={this.etherscanLink(object.hash)} target='_blank' rel="noreferrer">
+                            <font style={{fontSize:'15px', color:'white'}}>{object.hash}</font>
+                            </a>
                         </li>
                         <li>
-                            Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {object.rate}
+                            Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : $ {object.rate}
                         </li>
                         <li>
-                            24Hr Diff &nbsp;&nbsp;&nbsp;: {object.diff}
+                            24Hr Diff &nbsp;&nbsp;&nbsp;: {object.diff} %
                         </li>
                     </ul>
                 </AccordionDetails>
@@ -108,34 +120,95 @@ export default class index extends Component {
         this.setState({account:accounts[0]})
 
         // await axios.get(`https://api.ethplorer.io/getAddressHistory/0x684fC9fb48fC9c30FAAB35A2030F85ff441553a7?apiKey=EK-qSPda-W9rX7yJ-UY93y&type=transfer`,{},{})
-        await axios.get(`https://api.ethplorer.io/getAddressHistory/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getTokenInfo/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        .then(async(response) => {
+            eth.price = response.data.price.rate
+            eth.diff = response.data.price.diff
+            
+        })
+
+        await axios.get(`https://api.ethplorer.io/getAddressHistory/0x684fC9fb48fC9c30FAAB35A2030F85ff441553a7?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             ops = response.data.operations;
+            // console.log(ops)
+            
+        })
+
+        await axios.get(`https://api.ethplorer.io/getAddressTransactions/0x684fC9fb48fC9c30FAAB35A2030F85ff441553a7?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        .then(async(response) => {
+            ops2 = response.data
+            // console.log(ops2)
+            for(var i = 0; i<ops2.length;i++){
+                ops.push(ops2[i])
+            }
+            ops.sort((a, b) => parseFloat(b.timestamp) - parseFloat(a.timestamp));
+
+            // console.log(ops)
             this.update();
-    })
+        })
+
     }
 
     update = () =>{
+        // try{
+        
         const web3 = window.web3;
-        for(var i = 0; i<ops.length; i++){
+        arr1=[]
+        var start = (this.state.page-1)*10
+        var end = ((this.state.page)*10)
+        // var end2;
+        if(end>ops.length){
+            end = ops.length
+        }
+        for(var i = start; i<end; i++){
             var object = {}
             object.from = web3.utils.toChecksumAddress(ops[i].from)
             object.to = web3.utils.toChecksumAddress(ops[i].to)
             object.timestamp = ops[i].timestamp
-            object.hash = ops[i].transactionHash
-            object.rate = ops[i].tokenInfo.price.rate
-            object.type = ops[i].type[0].toUpperCase() + ops[i].type.slice(1)
-            object.name = ops[i].tokenInfo.name
-            object.symbol = ops[i].tokenInfo.symbol
-            object.tokenAddress = ops[i].tokenInfo.address
-            object.diff = ops[i].tokenInfo.price.diff
+            if(ops[i].transactionHash!==undefined){
+                object.hash = ops[i].transactionHash
+            }
+            else{
+                object.hash = ops[i].hash
+            }
+
+            if(ops[i].tokenInfo!==undefined){
+                object.rate = ops[i].tokenInfo.price.rate
+                object.name = ops[i].tokenInfo.name
+                object.symbol = ops[i].tokenInfo.symbol
+                object.tokenAddress = ops[i].tokenInfo.address
+                object.diff = ops[i].tokenInfo.price.diff
+            }
+            else if(ops[i].hash!==undefined){
+                object.rate = eth.price;
+                object.name = 'Ethereum'
+                object.symbol = 'ETH'
+                object.tokenAddress = ''
+                object.diff = eth.diff
+            }
+
+            if(ops[i].type!==undefined){
+                object.type = ops[i].type[0].toUpperCase() + ops[i].type.slice(1);
+            }
+            else{
+                object.type = 'EthTransfer'
+            }
+
+            
+            
             if(object.diff===undefined){
                 object.diff = 'NA'
             }
             if(object.rate===undefined){
                 object.rate = 'NA'
             }
-            object.value = web3.utils.fromWei(ops[i].value,'ether')
+            if(typeof ops[i].value==='string'){
+                object.value = web3.utils.fromWei(ops[i].value,'ether')
+            }
+            else{
+                object.value = ops[i].value
+            }
+            
             if(object.from===this.state.account){
             
                 object.status = 'Send'
@@ -145,9 +218,15 @@ export default class index extends Component {
             }
             arr1.push(object)
         }
-        console.log(arr1)
+        // console.log(arr1)
         this.change(arr1)
         this.setState({contents})
+
+        // }
+        // catch{
+        //     this.setState({page:this.state.page-1})
+        // }
+        
     }
 
     constructor(){
