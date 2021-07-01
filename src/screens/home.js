@@ -6,7 +6,7 @@ import Header from './header/header';
 
 
 
-export default class home extends Component {
+export default class Home extends Component {
     
     render() {
         return (
@@ -19,6 +19,7 @@ export default class home extends Component {
                         <Header />
                     </div>
                     <hr style={{position:'relative',borderTop:'0',borderBottomColor:'#737373',marginTop:'42px',marginLeft:'61px',marginRight:'342px'}}></hr>
+                    
                     <div className='dashboard-wrapper'>
                         <Dashboard /> 
                     </div>

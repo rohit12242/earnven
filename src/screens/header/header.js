@@ -11,7 +11,7 @@ export default class Header extends Component{
         return(
             <div className='header'>
                 <div className='search-bar'>
-                     <SearchInput />
+                     <SearchInput placeholder='Search Tokens...'/>
                 </div>
                 <div className='network-dropdown'>
                     <NetworkDropDown />
