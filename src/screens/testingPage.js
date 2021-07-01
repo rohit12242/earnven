@@ -10,6 +10,7 @@ import TotalValueBox from '../components/totalValueBox'
 import AllAssetsMini from '../components/allAssetsMini'
 import AllAssets from '../components/allAssets'
 import TransactionHistory from '../components/transactionHistory'
+import SearchTokens from '../components/searchTokens'
 import {data} from '../globalStore'
 
 export default class testingPage extends Component {
@@ -51,6 +52,9 @@ export default class testingPage extends Component {
 
                     <br/><br/>
                     <TransactionHistory/>
+
+                    <br/><br/>
+                    <SearchTokens/>
 
                     <br/><br/><br/>
                     <button

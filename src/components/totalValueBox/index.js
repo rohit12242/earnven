@@ -44,7 +44,7 @@ export default class index extends Component {
             }
             
             this.setState({totalValue: total.toFixed(2)})
-            console.log(total)
+            // console.log(total)
     })
 
     }
