@@ -10,7 +10,7 @@ import TotalValueBox from '../components/totalValueBox'
 import AllAssetsMini from '../components/allAssetsMini'
 import {data} from '../globalStore'
 
-export default class testingPage extends Component {
+export default class TestingPage extends Component {
     render() {
         return (
             <div>

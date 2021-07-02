@@ -1,9 +1,9 @@
 import React,{Component} from 'react';
-import SearchInput from '../../components/searchInput';
-import NetworkDropDown from '../../components/networkDropDown';
-import MenuListComposition from '../../components/gasDropDownMenu';
-import LanguageDropDown from '../../components/languageDropDown';
-import HelpDropDown from '../../components/helpDropDown';
+import SearchInput from '../../../components/searchInput';
+import NetworkDropDown from '../../../components/networkDropDown';
+import MenuListComposition from '../../../components/gasDropDownMenu';
+import LanguageDropDown from '../../../components/languageDropDown';
+import HelpDropDown from '../../../components/helpDropDown';
 import './header.css'
 
 export default class Header extends Component{

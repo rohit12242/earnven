@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Landing() {
     const navigate = useNavigate();
     const route = () => {
-        navigate('/dashboard',{replace:true})
+        navigate('/app/dashboard',{replace:true})
     }
 
     return (
