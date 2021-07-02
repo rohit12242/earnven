@@ -14,7 +14,8 @@ function App() {
           <Switch>
             <Route exact path="/"> <LandingPage/> </Route>
             <Route exact path="/home"> <Home/> </Route>
-            <Route exact path="/test"> <TestingPage/> </Route>
+            <Route path="/test" render={(props) => <TestingPage {...props}/>} />
+            {/* <Route exact path="/test"> <TestingPage/> </Route> */}
 
           </Switch>
     </BrowserRouter>

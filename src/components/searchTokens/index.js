@@ -2,11 +2,26 @@ import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios'
 import Autocomplete from '@material-ui/lab/Autocomplete';
-// import SearchInput from '../searchInput/index'
+// import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router'
+
 
 var allTokens =[]
 
-export default class index extends Component {
+const styles = () => ({
+    root: {
+        background: 'beige',
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        height: 48,
+        paddingBottom:'10px'
+      },
+  });
+
+class App extends Component {
 
     async componentWillMount(){
 
@@ -31,44 +46,90 @@ export default class index extends Component {
         // console.log(arr)
         if(arr.length<1000){
             await this.setState({results:arr})
-            console.log(this.state.results)
+            // console.log(this.state.results)
 
         }
+        // console.log(event)
+        this.setState({searchContent:event.target.value})
               
     }
 
-    constructor(){
-        super()
+    submitSearch = async(event, value) =>{
+        event.preventDefault()
+        // console.log(value)
+        window.token = value
+        window.location.href = '/test'
+        // console.log(window.token)
+        // await this.setState({searchContent:value, redirect:true})
+    }
+
+    constructor(props){
+        super(props)
         this.state={
             searchContent:'',
-            results:[]
+            results:[],
+            redirect:false
         }
     }
 
     render() {
+        const { classes } = this.props;
+
+        if (this.state.redirect===true) {
+            this.setState({redirect:false})
+            return <Redirect 
+              to={{
+                  pathname: '/test',
+                  state: {searchValue : this.state.searchContent}
+                }}/>;
+        }
+
         return (
-            <div >
-                <center>
+            <center>
+            <div style={{width:'500px'}}>
+                
+                <div >
+                
                 <Autocomplete
-                    style={{ width: 500 }}
+                    style={{ width: '100%' , float:'left'}}
                     freeSolo
+                    blurOnSelect
+                    // autoSelect
                     autoComplete
                     autoHighlight
+                    onChange={(event, value) => { this.submitSearch(event,value)}} 
                     options={this.state.results}
                     renderInput={(params) => (
                     <TextField {...params}
+                        id="filled-search"
                         onChange={this.searchTokens}
-                        // classes={{}}
-                        variant="outlined"
-                        label="Search Box"
+                        classes={{
+                            root: classes.root,
+                        }}
+                        variant="filled"
+                        label="Search Tokens..."
                         style={{ borderColor:'white', border:'1px', borderStyle:'solid', borderRadius:'20px'}}
                     />
                     // <SearchInput {...params}
                     //      onChange={this.searchTokens}></SearchInput>
                     )}
                 />
-                </center>
                 </div>
+                <div style={{float:'left'}}>
+                 &nbsp;
+                 {/* <Button style={{height:'60px', borderRadius:'50px'}} variant="contained">
+                     Search
+                </Button> */}
+                 </div>
+                 {/* </form> */}
+                </div>
+                </center>
         )
     }
 }
+
+App.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+  
+  export default withStyles(styles)(App);

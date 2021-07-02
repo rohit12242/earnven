@@ -14,10 +14,26 @@ import SearchTokens from '../components/searchTokens'
 import {data} from '../globalStore'
 
 export default class testingPage extends Component {
+
+    async componentWillMount(){
+        // console.log(this.props.location)
+        var token = window.token
+        this.setState({token})
+    }
+
+    constructor(props){
+        super(props)
+        this.state={
+            token : ''
+        }
+    }
+
     render() {
         return (
             <div>
                 For Testing Purposes
+                <br/><br/>
+                Token : {this.state.token}
                 <br/>
                 <div style={{backgroundColor:'#141A1E', height:'auto', width:'1000px', paddingBottom:'50px'}}>
                     <center><br/><br/>
@@ -56,7 +72,7 @@ export default class testingPage extends Component {
                     <br/><br/>
                     <SearchTokens/>
 
-                    <br/><br/><br/>
+                    <br/><br/><br/><br/><br/>
                     <button
                     onClick={(e)=>{console.log(data)}}>
                         Get Global Variables
