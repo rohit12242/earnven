@@ -3,6 +3,7 @@ import './dashboard.css';
 import PortfolioPerf from './portfolioperf/portfolioperf';
 import AllAssets from '../../components/allAssetsMini';
 import TotalValueBox from '../../components/totalValueBox';
+import DefiAssets from '../../components/defiAssets';
 
 export default class Dashboard extends Component {
     render() {
@@ -39,6 +40,9 @@ export default class Dashboard extends Component {
                 <div className='right-dashboard'>
                     <div className='total-value'>
                         <TotalValueBox />
+                    </div>
+                    <div className='defi-assets' style={{marginTop:'10px'}}>
+                        <DefiAssets />
                     </div>
                 </div>
 

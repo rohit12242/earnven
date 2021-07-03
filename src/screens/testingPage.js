@@ -9,6 +9,9 @@ import NetworkDropDown from '../components/networkDropDown'
 import TotalValueBox from '../components/totalValueBox'
 import AllAssetsMini from '../components/allAssetsMini'
 import {data} from '../globalStore'
+import DefiAssets from '../components/defiAssets'
+import Exchange from '../components/exchange'
+
 
 export default class TestingPage extends Component {
     render() {
@@ -49,7 +52,13 @@ export default class TestingPage extends Component {
                     onClick={(e)=>{console.log(data)}}>
                         Get Global Variables
                     </button>
+
+                    <br/><br/>
+                    
                     </center>
+                    <DefiAssets />
+                    <br/><br/>
+                    <Exchange />
                 </div>
             </div>
         )
