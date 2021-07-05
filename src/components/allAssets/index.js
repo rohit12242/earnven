@@ -1,29 +1,30 @@
 import React, { Component } from 'react'
-import Web3 from 'web3';
+// import Web3 from 'web3';
 import axios from 'axios';
 
 var contents = ''
 var arr2 = []
+var arr1 = []
 export default class index extends Component {
 
     async componentWillMount(){
-        await this.loadWeb3();
+        // await this.loadWeb3();
         await this.loadBlockchainData();
         
     }
 
-    async loadWeb3() {
-        if (window.ethereum) {
-          window.web3 = new Web3(window.ethereum)
-          await window.ethereum.enable()
-        }
-        else if (window.web3) {
-          window.web3 = new Web3(window.web3.currentProvider)
-        }
-        else {
-          window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-        }
-    }
+    // async loadWeb3() {
+    //     if (window.ethereum) {
+    //       window.web3 = new Web3(window.ethereum)
+    //       await window.ethereum.enable()
+    //     }
+    //     else if (window.web3) {
+    //       window.web3 = new Web3(window.web3.currentProvider)
+    //     }
+    //     else {
+    //       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    //     }
+    // }
 
     async loadBlockchainData(){
         const web3 = window.web3;
@@ -33,7 +34,6 @@ export default class index extends Component {
         await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
-            var arr1 = []
             var tokens = response.data.tokens
             // console.log(tokens)
             if(tokens!==undefined){
@@ -44,12 +44,25 @@ export default class index extends Component {
                     }
                 }
 
-                arr1.sort((a, b) => parseFloat(b.totalInvestment) - parseFloat(a.totalInvestment));
+            arr1.sort((a, b) => parseFloat(b.totalInvestment) - parseFloat(a.totalInvestment));
 
             // console.log(arr1)
+            this.update()
+            
+            }    
+    })
+    }
 
-            arr2 = []
-            for(i=0; i<4; i++){
+    update = () =>{
+        const web3 = window.web3;
+        arr2 = []
+        // console.log(this.state.page)
+            var start = (this.state.page-1)*10
+            var end = ((this.state.page)*10)
+            if(end>arr1.length){
+                end = arr1.length
+            }
+            for(var i=start; i<end; i++){
                 var object = {};
                 object.name = arr1[i].tokenInfo.name
                 object.profit = arr1[i].tokenInfo.price.diff
@@ -61,11 +74,10 @@ export default class index extends Component {
                 arr2.push(object)
             }
 
-            
+            // console.log(arr2)
             this.change(arr2)
             this.setState({contents})
-            }    
-    })
+        
     }
 
     change = (arr) =>{
@@ -79,6 +91,7 @@ export default class index extends Component {
                 background:'transparent',
                 cursor:'pointer'
             }}>
+
             <div style={{width:'5%', height:'50px',float:'left'}}>
                 <img style={{height:'30px', width:'30px', marginTop:'15px'}} alt='' src={`https://ethplorer.io${object.image}`}/>
             </div>
@@ -111,7 +124,8 @@ export default class index extends Component {
         super()
         this.state={
             account:'',
-            contents:''
+            contents:'',
+            page: 1
         }
     }
 
@@ -127,20 +141,52 @@ export default class index extends Component {
         this.change(arr2)
         return (
             <div style={{
-                width:'750px',
-                height:'300px',
+                width:'800px',
+                height:'720px',
                 background:'transparent',
                 border:'1px',
                 borderStyle:'solid',
-                borderColor:'#737373',
-                borderRadius:'10px'
+                borderColor:'white',
+                borderRadius:'20px'
             }}>
             <center>
             <div style={{marginTop:'30px', marginRight:'600px', fontSize:'20px', marginBottom:'10px'}}>
                 <font color='white'> All Assets </font>
             </div>
+            
+            <br/><font color='white'>
+            <button
+            onClick={async(e)=>{if(this.state.page!==1){ await this.setState({page:this.state.page-1});this.update()}}}
+            > &lt; </button> &nbsp;&nbsp;&nbsp;
+
+            {this.state.page} &nbsp;&nbsp;&nbsp;
+
+            <button
+            onClick={async(e)=>{await this.setState({page:this.state.page+1});this.update()}}
+            > &gt; </button> 
+
+            </font><br/><br/>
+
+            <hr/>
 
             {this.state.contents}
+
+            <hr/>
+
+            <br/><font color='white'>
+            <button
+            onClick={async(e)=>{if(this.state.page!==1){ await this.setState({page:this.state.page-1});this.update()}}}
+            > &lt; </button> &nbsp;&nbsp;&nbsp;
+
+            {this.state.page} &nbsp;&nbsp;&nbsp;
+
+            <button
+            onClick={async(e)=>{await this.setState({page:this.state.page+1});this.update()}}
+            > &gt; </button> 
+
+            </font><br/><br/>
+
+
             
             </center>      
             </div>

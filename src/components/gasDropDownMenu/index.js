@@ -20,7 +20,7 @@ export default class MenuListComposition extends React.Component {
     
     await axios.get('https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=CISZAVU4237H8CFPFCFWEA25HHBI3QKB8W',{},{})
         .then(async(response) => {
-            console.log(response)
+            // console.log(response)
             this.state.gasData = response.data.result;
             data.gasSelected = response.data.result.ProposeGasPrice;
             this.setState({gasData: response.data.result})

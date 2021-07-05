@@ -8,18 +8,36 @@ import TransparentButton from '../components/TransparentButton'
 import NetworkDropDown from '../components/networkDropDown'
 import TotalValueBox from '../components/totalValueBox'
 import AllAssetsMini from '../components/allAssetsMini'
+import AllAssets from '../components/allAssets'
+import TransactionHistory from '../components/transactionHistory'
+import SearchTokens from '../components/searchTokens'
 import {data} from '../globalStore'
 import DefiAssets from '../components/defiAssets'
 import Exchange from '../components/exchange'
 
-
 export default class TestingPage extends Component {
+
+    async componentWillMount(){
+        // console.log(this.props.location)
+        var token = window.token
+        this.setState({token})
+    }
+
+    constructor(props){
+        super(props)
+        this.state={
+            token : ''
+        }
+    }
+
     render() {
         return (
             <div>
                 For Testing Purposes
+                <br/><br/>
+                Token : {this.state.token}
                 <br/>
-                <div style={{backgroundColor:'#141A1E', height:'1500px', width:'1000px'}}>
+                <div style={{backgroundColor:'#141A1E', height:'auto', width:'1000px', paddingBottom:'50px'}}>
                     <center><br/><br/>
                     <Input/> 
                     
@@ -47,7 +65,16 @@ export default class TestingPage extends Component {
                     <br/><br/>
                     <AllAssetsMini/>
 
-                    <br/><br/><br/>
+                    <br/><br/>
+                    <AllAssets/>
+
+                    <br/><br/>
+                    <TransactionHistory/>
+
+                    <br/><br/>
+                    <SearchTokens/>
+
+                    <br/><br/><br/><br/><br/>
                     <button
                     onClick={(e)=>{console.log(data)}}>
                         Get Global Variables
