@@ -34,6 +34,10 @@ class App extends Component {
         })
     }
 
+    sendData = () => {
+        this.props.parentCallback(this.state.token);
+    }
+
     searchTokens = async(event) => {
         event.preventDefault()
         var arr = []
@@ -57,8 +61,9 @@ class App extends Component {
     submitSearch = async(event, value) =>{
         event.preventDefault()
         // console.log(value)
-        window.token = value
-        window.location.href = '/test'
+        await this.setState({token:value})
+        // window.location.href = '/test'
+        this.sendData();
         // console.log(window.token)
         // await this.setState({searchContent:value, redirect:true})
     }
@@ -68,7 +73,8 @@ class App extends Component {
         this.state={
             searchContent:'',
             results:[],
-            redirect:false
+            redirect:false,
+            token:''
         }
     }
 
