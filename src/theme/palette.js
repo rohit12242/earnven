@@ -29,11 +29,11 @@ const GREY = {
 };
 
 const PRIMARY = {
-  lighter: '#C8FACD',
-  light: '#5BE584',
-  main: '#00AB55',
-  dark: '#007B55',
-  darker: '#005249',
+  lighter: '#f1e6fe',
+  light: '#d5b4fd',
+  main: '#BB86FC',
+  dark: '#ab6afb',
+  darker: '#811ff9',
   contrastText: '#fff'
 };
 const SECONDARY = {
@@ -77,12 +77,22 @@ const ERROR = {
   contrastText: '#fff'
 };
 
+const BACKGROUND = {
+  lighter: '#444342',
+  light: '#383737',
+  main: '#232222',
+  dark: '#141313',
+  darker: '#060606',
+  contrastText: '#fff'
+}
+
 const GRADIENTS = {
   primary: createGradient(PRIMARY.light, PRIMARY.main),
   info: createGradient(INFO.light, INFO.main),
   success: createGradient(SUCCESS.light, SUCCESS.main),
   warning: createGradient(WARNING.light, WARNING.main),
-  error: createGradient(ERROR.light, ERROR.main)
+  error: createGradient(ERROR.light, ERROR.main),
+  background: createGradient(BACKGROUND.light, BACKGROUND.dark)
 };
 
 const palette = {
@@ -97,7 +107,7 @@ const palette = {
   gradients: GRADIENTS,
   divider: GREY[500_24],
   text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
-  background: { paper: '#fff', default: '#fff', neutral: GREY[200] },
+  background: { paper: '#fff', default: '#000', neutral: GREY[200] },
   action: {
     active: GREY[600],
     hover: GREY[500_8],

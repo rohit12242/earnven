@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 
@@ -31,17 +31,17 @@ const MainStyle = styled('div')(({ theme }) => ({
 
 
 export default function AppLayout() {
-
+    const [open, setOpen] = useState(false);
     return (
         <RootStyle>
-            <Header />
-            <Sidebar />
+            <Header onOpenSidebar={() => setOpen(true)}/>
+            <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)}/>
             <MainStyle>
                 <Outlet />
             </MainStyle>
         </RootStyle>
 
-        /*  < div className='flex-container' >
+         /* < div className='flex-container' >
              <div className='sidebar-wrapper'>
                  <Sidebar />
              </div>

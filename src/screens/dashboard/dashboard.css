@@ -13,21 +13,21 @@
 
 .left-dashboard{
   float:left;
-  margin-left: 60px;
+  margin-left: 32px;
 }
 .right-dashboard{
   float: left;
   margin-left: 32px;
-  margin-top: 107px;
+  margin-top: 72px;
 }
 
 .portfolio{
   position: relative;
-  width: 750px;
+  width: 678px;
   height: 250px;
   top: 0;
   display: inline-block;
-  margin-top:10px
+  margin-top:38px
 }
 
 .assets{
