@@ -6,19 +6,25 @@ import React from 'react'
 // import Landing from './screens/landing/landing';
 
 import Router from './routes';
+import ThemeConfig from './theme';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
-   /*  <>
-    <BrowserRouter>
-          <Switch>
-            <Route exact path="/"> <Home/> </Route>
-            <Route exact path="/"><Landing/></Route>
-            <Route exact path="/test"> <TestingPage/> </Route>
-          </Switch>
-    </BrowserRouter>
-    </> */
-    <Router />
+    /*  <>
+     <BrowserRouter>
+           <Switch>
+             <Route exact path="/"> <Home/> </Route>
+             <Route exact path="/"><Landing/></Route>
+             <Route exact path="/test"> <TestingPage/> </Route>
+           </Switch>
+     </BrowserRouter>
+     </> */
+    <ThemeConfig>
+      <ScrollToTop/>
+      <Router />
+    </ThemeConfig>
+
 
   );
 }
