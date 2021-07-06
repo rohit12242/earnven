@@ -74,8 +74,8 @@ export default class index extends Component {
 
         <div 
             style={{
-                height:'50px',
-                width:'678px',
+                // height:'50px',
+                // width:'678px',
                 background:'transparent',
                 cursor:'pointer'
             }}>
@@ -127,8 +127,8 @@ export default class index extends Component {
         this.change(arr2)
         return (
             <div style={{
-                width:'683px',
-                height:'300px',
+                // width:'683px',
+                // height:'300px',
                 background:'transparent',
                 border:'1px',
                 borderStyle:'solid',

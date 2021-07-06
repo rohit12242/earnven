@@ -25,7 +25,7 @@ const sidebarConfig = [
     icon: getIcon(historyLogo)
   },
   {
-    title: 'defimadeesy',
+    title: 'defi made easy',
     path: '/app/defimadeesy',
     icon: getIcon(defiMadeEasyLogo)
   },

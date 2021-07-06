@@ -50,10 +50,12 @@ import TotalValueBox from '../../components/totalValueBox';
 import DefiAssets from '../../components/defiAssets';
 import PortfolioPerf from '../../components/portfolioperf/portfolioperf';
 import './dashboard.css';
+import { Grid } from '@material-ui/core';
 
 export default function Dashboard() {
     return (
         <Page title="Dashboard | Minimal-UI">
+           
             <Container maxWidth="xl">
                 {/* <Box sx={{ pb: 5 }}>
                     <Typography variant="h4">$ 5,234.54</Typography>
@@ -72,7 +74,7 @@ export default function Dashboard() {
                         <DefiAssets />
                     </Grid>
                 </Grid> */}
-                <div className='dashboard'>
+                {/* <div className='dashboard'>
                     
                     <div className='left-dashboard'>
                         <div>
@@ -98,7 +100,28 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                </div>
+                </div> */}
+                
+
+                <Grid container spacing={3}>
+                
+                    <Grid container spacing={3} xs={12} md={8}>
+                        <Grid item xs={12} >
+                            <PortfolioPerf />
+                        </Grid>
+                        <Grid item xs={12} >
+                            <AllAssets />
+                        </Grid>
+                    </Grid>
+                    <Grid container rowSpacing={1} xs={12} md={4}>
+                        <Grid item xs={12}  >
+                            <TotalValueBox />
+                        </Grid>
+                        <Grid item xs={12} style={{border: '1px solid #737373', borderRadius: '7px'}}>
+                            <DefiAssets />
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Container>
         </Page>
     );

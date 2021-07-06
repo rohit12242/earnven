@@ -4,6 +4,7 @@ import { experimentalStyled as styled } from '@material-ui/core/styles';
 
 import Sidebar from './sidebar/sidebar';
 import Header from './header/header';
+// import { Divider } from '@material-ui/core';
 
 import './app.css';
 
@@ -34,28 +35,30 @@ export default function AppLayout() {
     const [open, setOpen] = useState(false);
     return (
         <RootStyle>
-            <Header onOpenSidebar={() => setOpen(true)}/>
-            <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)}/>
+            <Header onOpenSidebar={() => setOpen(true)} />
+            <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
+
             <MainStyle>
+
                 <Outlet />
             </MainStyle>
         </RootStyle>
 
-         /* < div className='flex-container' >
-             <div className='sidebar-wrapper'>
-                 <Sidebar />
-             </div>
-             <div className='main-wrapper'>
-                 <div className='header-wrapper'>
-                     <Header />
-                 </div>
-                 <hr style={{ position: 'relative', borderTop: '0', borderBottomColor: '#737373', marginTop: '42px', marginLeft: '61px', marginRight: '342px' }}></hr>
+        /* < div className='flex-container' >
+            <div className='sidebar-wrapper'>
+                <Sidebar />
+            </div>
+            <div className='main-wrapper'>
+                <div className='header-wrapper'>
+                    <Header />
+                </div>
+                <hr style={{ position: 'relative', borderTop: '0', borderBottomColor: '#737373', marginTop: '42px', marginLeft: '61px', marginRight: '342px' }}></hr>
  
-                 <div className='dashboard-wrapper'>
-                     <Outlet />
-                 </div>
-             </div>
+                <div className='dashboard-wrapper'>
+                    <Outlet />
+                </div>
+            </div>
  
-         </div > */
+        </div > */
     );
 }

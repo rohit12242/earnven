@@ -2,11 +2,21 @@ import React, { Component } from 'react';
 import ApexCharts from 'apexcharts';
 import ReactApexChart from 'react-apexcharts'
 import './portfolioperf.css'
+// material
+// import { Card, CardHeader, Box, Paper } from '@material-ui/core';
+// import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
+// import { BorderColor } from '@material-ui/icons';
 
+
+// const RootStyle = styled(Paper)(({theme}) =>({
+//     backgroundColor: theme.palette.background.default,
+//     borderRadius:theme.shape.borderRadius,
+//     borderColor:'#737373'
+// }))
 export default class PortfolioPerf extends Component {
 
-    componentWillMount(){
-       const points = [{
+    componentWillMount() {
+        const points = [{
             data: [
                 [1327359600000, 30.95],
                 [1327446000000, 31.34],
@@ -286,7 +296,7 @@ export default class PortfolioPerf extends Component {
             ]
         }];
 
-        this.setState({series:points})
+        this.setState({ series: points })
     }
 
     constructor(props) {
@@ -301,13 +311,13 @@ export default class PortfolioPerf extends Component {
                     zoom: {
                         autoScaleYaxis: true
                     },
-                    sparkline:{
-                        enabled:false,
+                    sparkline: {
+                        enabled: false,
                     },
-                    toolbar:{
-                        show:false
+                    toolbar: {
+                        show: false
                     },
-                    
+
                 },
                 /*annotations: {
                     yaxis: [{
@@ -336,14 +346,14 @@ export default class PortfolioPerf extends Component {
                         }
                     }]
                 },*/
-                
+
                 dataLabels: {
                     enabled: false,
-                    style:{
-                        colors:['#BB86FC'],
+                    style: {
+                        colors: ['#BB86FC'],
                     },
                 },
-                legend:{
+                legend: {
 
                 },
                 markers: {
@@ -354,46 +364,46 @@ export default class PortfolioPerf extends Component {
                     type: 'datetime',
                     min: new Date('01 Apr 2012').getTime(),
                     tickAmount: 0,
-                    labels:{
-                        show:false ,       
+                    labels: {
+                        show: false,
                     },
-                    axisBorder:{
-                        show:false,
+                    axisBorder: {
+                        show: false,
                     },
-                    axisTicks:{
-                        show:false,
+                    axisTicks: {
+                        show: false,
                     }
                 },
-                yaxis:{
-                     labels:{
-                         show:false,
-                     }
+                yaxis: {
+                    labels: {
+                        show: false,
+                    }
                 },
                 grid: {
-                    show:false,
-                    xaxis:{
-                        lines:{
-                            show:false
+                    show: false,
+                    xaxis: {
+                        lines: {
+                            show: false
                         }
                     },
-                    yaxis:{
-                        lines:{
-                            show:false
+                    yaxis: {
+                        lines: {
+                            show: false
                         }
                     }
-                  },
-                
+                },
+
                 tooltip: {
                     x: {
                         format: 'dd MMM yyyy'
                     }
                 },
-                stroke:{
-                    width:1,
-                    colors:['#BB86FC'],
+                stroke: {
+                    width: 1,
+                    colors: ['#BB86FC'],
                 },
                 fill: {
-                    colors:['#493864','#291d41','#1c515b'],
+                    colors: ['#493864', '#291d41', '#1c515b'],
                     opacity: 0.4,
                     type: 'gradient',
                     gradient: {
@@ -402,21 +412,21 @@ export default class PortfolioPerf extends Component {
                         stops: [0, 100],
                         colorStops: [
                             {
-                              offset: 0,
-                              color: "#493864",
-                              opacity: 0.4
+                                offset: 0,
+                                color: "#493864",
+                                opacity: 0.4
                             },
                             {
-                              offset: 35,
-                              color: "#291d41",
-                              opacity: 0.4
+                                offset: 35,
+                                color: "#291d41",
+                                opacity: 0.4
                             },
                             {
-                              offset: 70,
-                              color: "#1c515b",
-                              opacity: 0.4
+                                offset: 70,
+                                color: "#1c515b",
+                                opacity: 0.4
                             }
-                          ]
+                        ]
                     }
                 },
             },
@@ -482,42 +492,44 @@ export default class PortfolioPerf extends Component {
         return (
             <div id="chart" className='chart'>
                 {/*<div class="toolbar">
-                    <button id="one_month"
+                <button id="one_month"
 
-                        onClick={() => this.updateData('one_month')} className={(this.state.selection === 'one_month' ? 'active' : '')}>
-                        1M
-                    </button>
-                    &nbsp;
-                    <button id="six_months"
+                    onClick={() => this.updateData('one_month')} className={(this.state.selection === 'one_month' ? 'active' : '')}>
+                    1M
+                </button>
+                &nbsp;
+                <button id="six_months"
 
-                        onClick={() => this.updateData('six_months')} className={(this.state.selection === 'six_months' ? 'active' : '')}>
-                        6M
-                    </button>
-                    &nbsp;
-                    <button id="one_year"
+                    onClick={() => this.updateData('six_months')} className={(this.state.selection === 'six_months' ? 'active' : '')}>
+                    6M
+                </button>
+                &nbsp;
+                <button id="one_year"
 
 
-                        onClick={() => this.updateData('one_year')} className={(this.state.selection === 'one_year' ? 'active' : '')}>
-                        1Y
-                    </button>
-                    &nbsp;
-                    <button id="ytd"
+                    onClick={() => this.updateData('one_year')} className={(this.state.selection === 'one_year' ? 'active' : '')}>
+                    1Y
+                </button>
+                &nbsp;
+                <button id="ytd"
 
-                        onClick={() => this.updateData('ytd')} className={(this.state.selection === 'ytd' ? 'active' : '')}>
-                        YTD
-                    </button>
-                    &nbsp;
-                    <button id="all"
+                    onClick={() => this.updateData('ytd')} className={(this.state.selection === 'ytd' ? 'active' : '')}>
+                    YTD
+                </button>
+                &nbsp;
+                <button id="all"
 
-                        onClick={() => this.updateData('all')} className={(this.state.selection === 'all' ? 'active' : '')}>
-                        ALL
-                    </button>
-                </div>
+                    onClick={() => this.updateData('all')} className={(this.state.selection === 'all' ? 'active' : '')}>
+                    ALL
+                </button>
+            </div>
         */}
                 <div id="chart-timeline" className='chart-timeline'>
                     <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={250} />
                 </div>
             </div>
+
+
         )
     }
 }
