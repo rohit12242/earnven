@@ -65,6 +65,7 @@ export default class testingPage extends Component {
                     <TransactionHistory/>
 
                     <br/><br/>
+                    <br/><br/>
                     <TokenDetails/>
 
                     <br/><br/><br/><br/><br/>

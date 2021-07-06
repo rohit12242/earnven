@@ -3,14 +3,14 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import Home from './screens/home'
 import TestingPage from './screens/testingPage';
-import Sidebar from './screens/sidebar/sidebar';
+// import Sidebar from './screens/sidebar/sidebar';
 import LandingPage from './screens/landingPage'
 
 function App() {
   return (
     <>
     <BrowserRouter>
-          <Sidebar />
+          {/* <Sidebar /> */}
           <Switch>
             <Route exact path="/"> <LandingPage/> </Route>
             <Route exact path="/home"> <Home/> </Route>

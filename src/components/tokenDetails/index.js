@@ -20,8 +20,9 @@ export default class index extends Component {
         return (
             <div>
                 
-                {this.state.token}
+                {/* {this.state.token} */}
                 <SearchTokens parentCallback = {this.callbackFunction}/> <br/><br/><br/><br/>
+                <hr width='80%'/>
                 <Chart token={this.state.token}/> 
             </div>
         )
