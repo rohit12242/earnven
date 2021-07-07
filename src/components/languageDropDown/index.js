@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -78,3 +78,88 @@ export default class MenuListComposition extends React.Component {
   }
 }
 
+ */
+
+
+import { useRef, useState } from 'react';
+// material
+import { alpha } from '@material-ui/core/styles';
+import { Box, MenuItem, ListItemIcon, ListItemText, IconButton } from '@material-ui/core';
+// components
+import MenuPopover from "../../components/MenuPopover";
+import globe from '../../assets/icons/globe.svg'
+import languageImg from '../../assets/icons/language.png'
+
+// ----------------------------------------------------------------------
+
+const LANGS = [
+  {
+    value: 'en',
+    label: 'EN',
+    icon: '/static/icons/language.svg'
+  },
+  {
+    value: 'dt',
+    label: 'DT',
+    icon: '/static/icons/language.svg'
+  },
+  {
+    value: 'fr',
+    label: 'FR',
+    icon: '/static/icons/language.svg'
+  }
+];
+
+// ----------------------------------------------------------------------
+
+export default function LanguagePopover() {
+  const anchorRef = useRef(null);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <IconButton
+        ref={anchorRef}
+        onClick={handleOpen}
+        sx={{
+          padding: 0,
+          width: 44,
+          height: 44,
+          ...(open && {
+            bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity)
+          })
+        }}
+      >
+        <img src={globe} alt=""/>
+      </IconButton>
+
+      <MenuPopover open={open} onClose={handleClose} anchorEl={anchorRef.current}>
+        <Box sx={{ py: 1 }}>
+          {LANGS.map((option) => (
+            <MenuItem
+              key={option.value}
+              selected={option.value === LANGS[0].value}
+              onClick={handleClose}
+              sx={{ py: 1, px: 2.5 }}
+            >
+              <ListItemIcon>
+                <Box component="img" alt={option.label} src={languageImg} />
+              </ListItemIcon>
+              <ListItemText primaryTypographyProps={{ variant: 'body2' }}>
+                {option.label}
+              </ListItemText>
+            </MenuItem>
+          ))}
+        </Box>
+      </MenuPopover>
+    </>
+  );
+}

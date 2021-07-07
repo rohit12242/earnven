@@ -1,43 +1,44 @@
 
 import * as BiIcons from "react-icons/bi";
 // material
-import {  experimentalStyled as styled } from '@material-ui/core/styles';
+import { experimentalStyled as styled } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 
 
 const AssetList = [
     {
-        asset:'Wallet',
-        value:'$5687'
+        asset: 'Wallet',
+        value: '$5687'
     },
     {
-        asset:'Deposits',
-        value:'$7834'
+        asset: 'Deposits',
+        value: '$7834'
     },
     {
-        asset:'NFTs',
-        value:'$1245'
+        asset: 'NFTs',
+        value: '$1245'
     },
     {
-        asset:'Liquidity pools',
-        value:'$9876'
+        asset: 'Liquidity pools',
+        value: '$9876'
     }
 ]
 
 const RootStyle = styled('div')(({ theme }) => ({
-   color:"#fff",
-   margin:'30px'
-  }));
+    color: "#fff",
+    border: '1px solid #737373',
+    borderRadius: '7px'
+}));
 
 
-function AssetItem({asset,value}){
+function AssetItem({ asset, value }) {
     return (
-        <div style={{  height: '28px', marginTop: '17px' }}>
-                    <BiIcons.BiWallet className='icons' style={{ float: 'left', paddingTop: '0px' }} />
-                    <p style={{ float: 'left', position: 'relative', margin: '0px', marginLeft: '11px' }}>{asset}</p>
-                    <hr style={{ borderTop: '1px dashed', borderBottom: '0px', width: '30%',margin: 'revert', marginLeft: '11px', float: 'left',marginRight:'10px' }}></hr>
-                    <p style={{ display: 'contents' }}>{value}</p>
-                </div>
+        <div style={{ height: '28px', marginTop: '17px' }}>
+            <BiIcons.BiWallet className='icons' style={{ float: 'left', paddingTop: '0px' }} />
+            <p style={{ float: 'left', position: 'relative', margin: '0px', marginLeft: '11px' }}>{asset}</p>
+            <hr style={{ borderTop: '1px dashed', borderBottom: '0px', width: '30%', margin: 'revert', marginLeft: '11px', float: 'left', marginRight: '10px' }}></hr>
+            <p style={{ display: 'contents' }}>{value}</p>
+        </div>
     );
 }
 
@@ -72,11 +73,14 @@ export default function DefiAssets() {
                 </div>
             </div>
         </div> */
-        <RootStyle >
-            <Typography>Defi assets</Typography>
-            {AssetList.map((item)=> (
-                <AssetItem asset={item.asset} value={item.value}/>
-            ))}
+        <RootStyle>
+            <div style={{margin:'9px'}}>
+                <Typography>Defi assets</Typography>
+                {AssetList.map((item) => (
+                    <AssetItem asset={item.asset} value={item.value} />
+                ))}
+            </div>
+
         </RootStyle>
     );
 }
