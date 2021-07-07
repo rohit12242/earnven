@@ -10,18 +10,13 @@ import TotalValueBox from '../components/totalValueBox'
 import AllAssetsMini from '../components/allAssetsMini'
 import AllAssets from '../components/allAssets'
 import TransactionHistory from '../components/transactionHistory'
-import SearchTokens from '../components/searchTokens'
+// import SearchTokens from '../components/searchTokens'
+import TokenDetails from '../components/tokenDetails'
 import {data} from '../globalStore'
 import DefiAssets from '../components/defiAssets'
 import Exchange from '../components/exchange'
 
 export default class TestingPage extends Component {
-
-    async componentWillMount(){
-        // console.log(this.props.location)
-        var token = window.token
-        this.setState({token})
-    }
 
     constructor(props){
         super(props)
@@ -72,7 +67,8 @@ export default class TestingPage extends Component {
                     <TransactionHistory/>
 
                     <br/><br/>
-                    <SearchTokens/>
+                    <br/><br/>
+                    <TokenDetails/>
 
                     <br/><br/><br/><br/><br/>
                     <button
