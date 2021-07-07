@@ -74,8 +74,8 @@ export default class index extends Component {
 
         <div 
             style={{
-                height:'50px',
-                width:'700px',
+                // height:'50px',
+                // width:'678px',
                 background:'transparent',
                 cursor:'pointer'
             }}>
@@ -127,16 +127,16 @@ export default class index extends Component {
         this.change(arr2)
         return (
             <div style={{
-                width:'800px',
-                height:'300px',
+                // width:'683px',
+                // height:'300px',
                 background:'transparent',
                 border:'1px',
                 borderStyle:'solid',
-                borderColor:'white',
-                borderRadius:'20px'
+                borderColor:'#737373',
+                borderRadius:'10px'
             }}>
             <center>
-            <div style={{marginTop:'30px', marginRight:'600px', fontSize:'20px', marginBottom:'10px'}}>
+            <div style={{marginTop:'30px', marginRight:'500px', fontSize:'20px', marginBottom:'10px'}}>
                 <font color='white'> All Assets </font>
             </div>
 

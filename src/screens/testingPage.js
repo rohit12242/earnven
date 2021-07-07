@@ -13,8 +13,10 @@ import TransactionHistory from '../components/transactionHistory'
 // import SearchTokens from '../components/searchTokens'
 import TokenDetails from '../components/tokenDetails'
 import {data} from '../globalStore'
+import DefiAssets from '../components/defiAssets'
+import Exchange from '../components/exchange'
 
-export default class testingPage extends Component {
+export default class TestingPage extends Component {
 
     constructor(props){
         super(props)
@@ -73,7 +75,13 @@ export default class testingPage extends Component {
                     onClick={(e)=>{console.log(data)}}>
                         Get Global Variables
                     </button>
+
+                    <br/><br/>
+                    
                     </center>
+                    <DefiAssets />
+                    <br/><br/>
+                    <Exchange />
                 </div>
             </div>
         )

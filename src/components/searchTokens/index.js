@@ -3,9 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 // import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router'
+// import { Redirect } from 'react-router'
 
 
 var allTokens =[]
@@ -81,14 +81,14 @@ class App extends Component {
     render() {
         const { classes } = this.props;
 
-        if (this.state.redirect===true) {
-            this.setState({redirect:false})
-            return <Redirect 
-              to={{
-                  pathname: '/test',
-                  state: {searchValue : this.state.searchContent}
-                }}/>;
-        }
+        // if (this.state.redirect===true) {
+        //     this.setState({redirect:false})
+        //     return <Redirect 
+        //       to={{
+        //           pathname: '/test',
+        //           state: {searchValue : this.state.searchContent}
+        //         }}/>;
+        // }
 
         return (
             <center>
@@ -140,3 +140,5 @@ App.propTypes = {
   };
   
   export default withStyles(styles)(App);
+
+  

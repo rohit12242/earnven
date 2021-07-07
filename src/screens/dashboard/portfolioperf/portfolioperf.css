@@ -1,0 +1,11 @@
+
+.chart{
+    border: 1px solid #737373;
+    border-radius: 10px;
+    height: 250px;
+}
+
+.chart-timeline{
+    position: relative;
+    width: 100%;
+}

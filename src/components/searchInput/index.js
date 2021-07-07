@@ -11,7 +11,7 @@ export default function index({value,onSubmit1,...props}) {
         <Paper elevation={3} 
         style={{width:'300px', height:'40px', 
                 background:'transparent', borderStyle:'solid', 
-                borderColor:'white', borderRadius:'10px', borderWidth:'1px'}}>
+                borderColor:'#737373', borderRadius:'10px', borderWidth:'1px'}}>
             <form onSubmit={onSubmit1}>
             <InputBase style={{width:'230px', color:'white', marginTop:'5px'}}
                 value={value}

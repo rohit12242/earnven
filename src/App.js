@@ -1,25 +1,32 @@
 import React from 'react'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+// import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
-import Home from './screens/home'
-import TestingPage from './screens/testingPage';
-// import Sidebar from './screens/sidebar/sidebar';
-import LandingPage from './screens/landingPage'
+// import Home from './screens/home'
+// import TestingPage from './screens/testingPage';
+// import Landing from './screens/landing/landing';
+
+import Router from './routes';
+import ThemeConfig from './theme';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
-    <>
-    <BrowserRouter>
-          {/* <Sidebar /> */}
-          <Switch>
-            <Route exact path="/"> <LandingPage/> </Route>
-            <Route exact path="/home"> <Home/> </Route>
-            <Route path="/test" render={(props) => <TestingPage {...props}/>} />
-            {/* <Route exact path="/test"> <TestingPage/> </Route> */}
+    /*  <>
+     <BrowserRouter>
+           <Switch>
+             <Route exact path="/"> <Home/> </Route>
+             <Route exact path="/"><Landing/></Route>
+             <Route exact path="/test"> <TestingPage/> </Route>
+           </Switch>
+     </BrowserRouter>
+     </> */
+    <ThemeConfig>
+      <ScrollToTop/>
+      <Router />
+    </ThemeConfig>
 
-          </Switch>
-    </BrowserRouter>
-    </>
+    /* <Router /> */
+
   );
 }
 
