@@ -72,7 +72,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 // import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@material-ui/core';
-import { Box, Link, Drawer, Typography, Avatar, Stack,Button } from '@material-ui/core';
+import { Box, Link, Drawer, Typography, Avatar, Stack } from '@material-ui/core';
 
 import accountLogo from '../../../assets/icons/accountlogo.png';
 
@@ -160,8 +160,8 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar }){
             bgcolor: 'black'
           }}
         >
-         <img src={CompanyLogo}></img>
-         <img src={Earnven}></img>
+         <img src={CompanyLogo} alt=""></img>
+         <img src={Earnven} alt=""></img>
         </Stack>
         </Box>
     </Scrollbar>

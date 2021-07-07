@@ -79,11 +79,11 @@ export default function SimpleAccordion() {
 import { useRef, useState } from 'react';
 // material
 import { alpha } from '@material-ui/core/styles';
-import { Box, MenuItem, ListItemIcon, ListItemText, IconButton, Icon,Avatar } from '@material-ui/core';
+import { Box, MenuItem, ListItemText, IconButton} from '@material-ui/core';
 // components
 import MenuPopover from "../../components/MenuPopover";
-import globe from '../../assets/icons/globe.svg'
-import languageImg from '../../assets/icons/language.png'
+// import globe from '../../assets/icons/globe.svg'
+// import languageImg from '../../assets/icons/language.png'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { IoIosHelpCircleOutline } from "react-icons/io";
 
