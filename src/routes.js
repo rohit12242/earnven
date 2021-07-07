@@ -1,5 +1,5 @@
 import {Navigate, useRoutes} from 'react-router-dom';
-import Landing from './screens/landing/landing';
+import Landing from './screens/landingPage';
 import PageNotFound from './screens/PageNotFound';
 import AppLayout from './layout/app';
 import Dashboard from './screens/dashboard/dashboard';

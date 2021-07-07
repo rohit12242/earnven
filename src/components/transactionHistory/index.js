@@ -132,14 +132,14 @@ export default class index extends Component {
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressHistory/0x684fC9fb48fC9c30FAAB35A2030F85ff441553a7?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressHistory/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             ops = response.data.operations;
             // console.log(ops)
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressTransactions/0x684fC9fb48fC9c30FAAB35A2030F85ff441553a7?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressTransactions/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             ops2 = response.data
             // console.log(ops2)

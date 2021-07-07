@@ -115,7 +115,7 @@ class App extends Component {
                         variant="filled"
                         size="small"
                         label="Search Tokens..."
-                        style={{ height:'35px', borderColor:'white', border:'1px', borderStyle:'solid', borderRadius:'20px'}}
+                        style={{ borderColor:'white', border:'1px', borderStyle:'solid', borderRadius:'20px'}}
                     />
                     // <SearchInput {...params}
                     //      onChange={this.searchTokens}></SearchInput>
