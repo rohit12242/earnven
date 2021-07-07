@@ -41,7 +41,7 @@ export default class MenuListComposition extends React.Component {
     this.setState(state => ({ open: !state.open }));
   };
 
-  handleClose = event => {
+  handleClose = (event) => {
     if (this.anchorEl.contains(event.target)) {
       return ;
     }
@@ -69,7 +69,7 @@ export default class MenuListComposition extends React.Component {
             aria-haspopup="true"
             onClick={this.handleToggle}
           >
-          <img src={gas} alt='gasIcon'></img> <font color='white'>&nbsp; {data.gasSelected} &#8681; </font> &nbsp;&nbsp;&nbsp; 
+          <img src={gas} alt='gasIcon'></img> <font color='white'>&nbsp; {data.gasSelected} &#8681; </font> 
           </Button>
           <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
             {({ TransitionProps, placement }) => (
@@ -79,7 +79,7 @@ export default class MenuListComposition extends React.Component {
                 style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
               >
                 <Paper>
-                  <ClickAwayListener onClickAway={this.handleClose}>
+                  <ClickAwayListener onClickAway={(e)=>this.handleClose(e)}>
                     <MenuList>
                       <MenuItem onClick={(e)=>{this.handleClose(e); this.handleGasDataChange(this.state.gasData.SafeGasPrice)}} >Safe &nbsp; {this.state.gasData.SafeGasPrice}&nbsp;Gwei</MenuItem>
                       <MenuItem onClick={(e)=>{this.handleClose(e); this.handleGasDataChange(this.state.gasData.ProposeGasPrice)}}>Med &nbsp; {this.state.gasData.ProposeGasPrice}&nbsp;Gwei</MenuItem>

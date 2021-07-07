@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 // import { makeStyles } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -27,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// function nothing(){
-//     return
-// }
 
 
 export default function SimpleAccordion() {
@@ -47,7 +44,7 @@ export default function SimpleAccordion() {
         >
         
         <img src={network} alt=''></img>
-        {/* <font color='white'>{network.charAt(0).toUpperCase()+network.slice(1)}</font> */}
+       
           
 
         </AccordionSummary>
@@ -85,5 +82,111 @@ export default function SimpleAccordion() {
       
 
     </div>
+  );
+}
+ */
+
+import { useRef, useState } from 'react';
+// material
+import { alpha } from '@material-ui/core/styles';
+import { Box, MenuItem, ListItemIcon, ListItemText, IconButton, Icon,Avatar } from '@material-ui/core';
+// components
+import MenuPopover from "../../components/MenuPopover";
+import globe from '../../assets/icons/globe.svg'
+import languageImg from '../../assets/icons/language.png'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { IoIosHelpCircleOutline } from "react-icons/io";
+
+import EthereumIcon from '../../assets/icons/ethereum.svg'
+import BinanceIcon from '../../assets/icons/binance.svg'
+import Solana from '../../assets/icons/solana.svg'
+import Polkadot from '../../assets/icons/polkadot.svg'
+import Polygon from '../../assets/icons/polygon.svg'
+
+import {data} from '../../globalStore'
+
+// ----------------------------------------------------------------------
+
+const LANGS = [
+  {
+    value: 'eth',
+    label: 'Ethereum',
+    icon: EthereumIcon,
+  },
+  {
+    value: 'bsc',
+    label: 'Binance Smart Chain',
+    icon: BinanceIcon
+  },
+  {
+    value: 'sol',
+    label: 'Solana',
+    icon: Solana
+  },
+  {
+    value: 'pol',
+    label: 'Polkadot',
+    icon: Polkadot
+  },
+  {
+    value: 'matic',
+    label: 'Polygon',
+    icon: Polygon
+  }
+];
+
+// ----------------------------------------------------------------------
+
+export default function NetworkDropDown() {
+  const anchorRef = useRef(null);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <IconButton
+        ref={anchorRef}
+        onClick={handleOpen}
+        sx={{
+          padding: 0,
+          width: 44,
+          height: 44,
+          ...(open && {
+            bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity)
+          })
+        }}
+      >
+        <img src={EthereumIcon} alt=""/><ExpandMoreIcon style={{color:'#fff'}}/>
+        
+       {/* <IoIosHelpCircleOutline style={{color:'#fff'}}/><ExpandMoreIcon style={{color:'#fff'}}/> */}
+      </IconButton>
+
+      <MenuPopover open={open} onClose={handleClose} anchorEl={anchorRef.current}>
+        <Box sx={{ py: 1 }}>
+          {LANGS.map((option) => (
+            <MenuItem
+              key={option.value}
+              selected={option.value === LANGS[0].value}
+              onClick={handleClose}
+              sx={{ py: 1, px: 2.5 }}
+            >
+              <ListItemIcon>
+                <Box component="img" alt={option.label} src={option.icon} />
+              </ListItemIcon>
+              <ListItemText primaryTypographyProps={{ variant: 'body2',color:'#fff' }}>
+                {option.label}
+              </ListItemText>
+            </MenuItem>
+          ))}
+        </Box>
+      </MenuPopover>
+    </>
   );
 }

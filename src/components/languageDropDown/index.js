@@ -89,6 +89,7 @@ import { Box, MenuItem, ListItemIcon, ListItemText, IconButton } from '@material
 import MenuPopover from "../../components/MenuPopover";
 import globe from '../../assets/icons/globe.svg'
 import languageImg from '../../assets/icons/language.png'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // ----------------------------------------------------------------------
 
@@ -138,7 +139,7 @@ export default function LanguagePopover() {
           })
         }}
       >
-        <img src={globe} alt=""/>
+        <img src={globe} alt=""/><ExpandMoreIcon style={{color:'#fff'}}/>
       </IconButton>
 
       <MenuPopover open={open} onClose={handleClose} anchorEl={anchorRef.current}>
@@ -153,7 +154,7 @@ export default function LanguagePopover() {
               <ListItemIcon>
                 <Box component="img" alt={option.label} src={languageImg} />
               </ListItemIcon>
-              <ListItemText primaryTypographyProps={{ variant: 'body2' }}>
+              <ListItemText primaryTypographyProps={{ variant: 'body2',color:'#fff' }}>
                 {option.label}
               </ListItemText>
             </MenuItem>
