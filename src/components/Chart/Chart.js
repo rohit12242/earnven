@@ -26,6 +26,7 @@ export const Chart = (props) => {
             console.log(response.data)
             setSelection(response.data)
     })
+    setView('Month View')
 
     if(props.token!=='' && props.token!==null){
       console.log(1, props.token)
