@@ -6,6 +6,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ReceiveIcon from '../../assets/icons/receive.png'
+import SendIcon from '../../assets/icons/send.png'
 import UserIcon from '../../assets/icons/userIcon.png'
 
 var contents = ''
@@ -64,7 +65,7 @@ export default class index extends Component {
                 id="panel1a-header"
                 >
                 <div style={{width:'10%', float:'left'}}>
-                <img src={ReceiveIcon} alt=''/>
+                <img src={object.status==='Receive'? ReceiveIcon:SendIcon} alt=''/>
                 </div>
 
                 <div style={{width:'20%', float:'left', textAlign:'left'}}>

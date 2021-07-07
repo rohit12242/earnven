@@ -31,8 +31,8 @@ export default class index extends Component {
         const accounts = await web3.eth.getAccounts();
         this.setState({account:accounts[0]})
 
-        // await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
-        await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             var tokens = response.data.tokens
             // console.log(tokens)

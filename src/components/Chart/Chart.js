@@ -23,7 +23,7 @@ export const Chart = (props) => {
 
     axios.get(`https://api.coingecko.com/api/v3/coins/${props.token}`,{},{})
         .then(async(response) => {
-            console.log(response.data)
+            // console.log(response.data)
             setSelection(response.data)
     })
     setView('Month View')
@@ -186,10 +186,10 @@ export const Chart = (props) => {
           <div style={{textAlign:'left', marginTop:'20px'}}>
 
           <font color='white'>
-            <img alt='' style={{marginTop:'5px'}}src={ Selection.image? Selection.image.small:'' }/> &nbsp;
+            <img alt='' style={{marginTop:'5px'}}src={ Selection.image? Selection.image.small:'' }/>
             {/* {Selection.symbol} <br/> */}
 
-            &nbsp;&nbsp;{ Selection.symbol? '$'+Selection.symbol.toUpperCase():'' }
+          { Selection.symbol? '$'+Selection.symbol.toUpperCase():'' }
           </font>
           </div>
 

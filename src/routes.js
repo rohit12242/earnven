@@ -26,7 +26,7 @@ export default function Router(){
                 {path:'/',element: <Navigate to="/app/dashboard" replace /> },
                 {path:'dashboard',element:<Dashboard/>},
                 {path:'history',element:<History />},
-                {path:'defimadeesy',element:<DefiMadeEasy />},
+                {path:'defimadeasy',element:<DefiMadeEasy />},
                 {path:'bridge',element:<Bridge />},
                 {path:'multisender',element:<Multisender />},
                 {path:'safefarm',element:<SafeFarm />},
