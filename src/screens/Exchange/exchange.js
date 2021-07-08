@@ -20,7 +20,7 @@ export default class Exchange extends Component {
                                     <div>
                                         <button className="select-button-wrapper" onClick={this.openModal}>
                                             <span className="select-token-container">
-                                                <img src={eth} />
+                                                <img src={eth} alt=''/>
                                                 <div className="select-token-wrapper">
                                                     <span className="select-token-text">
                                                         ETH

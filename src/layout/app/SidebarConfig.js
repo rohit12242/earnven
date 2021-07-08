@@ -26,7 +26,7 @@ const sidebarConfig = [
   },
   {
     title: 'defi made easy',
-    path: '/app/defimadeesy',
+    path: '/app/defimadeasy',
     icon: getIcon(defiMadeEasyLogo)
   },
   {

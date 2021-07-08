@@ -104,7 +104,7 @@ export default class safefarm extends Component {
               <div className="bottom-text"> Vesting schedule for rewards? </div>{" "}
               <div className="info">
                 {" "}
-                <img src={info} />
+                <img src={info} alt=''/>
                 <span className="tooltiptext">
                   A vesting schedule of 10%-100% over the duration of the
                   contract. If the user interrupts the vesting schedule early by
@@ -119,7 +119,7 @@ export default class safefarm extends Component {
               <img src={checkbox} alt="checkbox" />{" "}
               <div className="bottom-text"> Halving schedule? </div>{" "}
               <div className="info1">
-                <img src={info} />
+                <img src={info} alt=''/>
                 <span className="tooltiptext1">
                   {" "}
                   A halving schedule for the duration of the contact. Halving

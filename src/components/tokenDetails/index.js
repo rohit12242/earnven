@@ -34,11 +34,11 @@ export default class index extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{margin:'auto'}}>
                 
                 {/* {this.state.token} */}
                 <SearchTokens parentCallback = {this.callbackFunction}/> <br/><br/><br/><br/>
-                <hr width='80%'/>
+                <center><hr width='80%'/></center>
                 <Chart token={this.state.token}/> 
             </div>
         )

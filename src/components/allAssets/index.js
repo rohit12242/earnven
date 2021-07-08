@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import Web3 from 'web3';
+import Web3 from 'web3';
 import axios from 'axios';
 
 var contents = ''
@@ -8,31 +8,31 @@ var arr1 = []
 export default class index extends Component {
 
     async componentWillMount(){
-        // await this.loadWeb3();
+        await this.loadWeb3();
         await this.loadBlockchainData();
         
     }
 
-    // async loadWeb3() {
-    //     if (window.ethereum) {
-    //       window.web3 = new Web3(window.ethereum)
-    //       await window.ethereum.enable()
-    //     }
-    //     else if (window.web3) {
-    //       window.web3 = new Web3(window.web3.currentProvider)
-    //     }
-    //     else {
-    //       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-    //     }
-    // }
+    async loadWeb3() {
+        if (window.ethereum) {
+          window.web3 = new Web3(window.ethereum)
+          await window.ethereum.enable()
+        }
+        else if (window.web3) {
+          window.web3 = new Web3(window.web3.currentProvider)
+        }
+        else {
+          window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+        }
+    }
 
     async loadBlockchainData(){
         const web3 = window.web3;
         const accounts = await web3.eth.getAccounts();
         this.setState({account:accounts[0]})
 
-        await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
-        // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        // await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             var tokens = response.data.tokens
             // console.log(tokens)

@@ -7,9 +7,11 @@ import History from './screens/History';
 import DefiMadeEasy from './screens/DefiMadeEasy';
 import Bridge from './screens/Bridge';
 import Multisender from './screens/MultiSender';
-import SafeFarm from './screens/SafeFarm';
-import Trading from './screens/Trading';
+import SafeFarm from './screens/safeFarms/safefarm';
+import Trading from './screens/Exchange/exchange';
 import TestingPage from './screens/testingPage';
+import AllAssetsPage from './screens/AllAssetsPage';
+import TokenDetailsPage from './components/tokenDetails'
 
 
 export default function Router(){
@@ -27,6 +29,8 @@ export default function Router(){
                 {path:'dashboard',element:<Dashboard/>},
                 {path:'history',element:<History />},
                 {path:'defimadeasy',element:<DefiMadeEasy />},
+                {path:'assets',element:<AllAssetsPage />},
+                {path:'token',element:<TokenDetailsPage />},
                 {path:'bridge',element:<Bridge />},
                 {path:'multisender',element:<Multisender />},
                 {path:'safefarm',element:<SafeFarm />},
