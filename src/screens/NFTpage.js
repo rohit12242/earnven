@@ -18,17 +18,18 @@ function NFTpage() {
     var change = (arr) =>{
         contents = arr.map((object)=>
 
-        <Accordion style={{background:'transparent', marginBottom:'5px', width:'700px', border:'1px', borderColor:'white', borderStyle:'solid', borderRadius:'10px'}}>
+        <Accordion style={{background:'transparent', marginBottom:'5px',width:'700px', border:'1px', borderColor:'white', borderStyle:'solid', borderRadius:'10px'}}>
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon style={{fill:'white'}}/>}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
+                style={{height:'100px'}}
                 >
                 <font color='white'>{object.name}</font>
 
                 </AccordionSummary>
-                <AccordionDetails style={{backgroundColor:'transparent', textAlign:'left'}}>
-                    <NFTPageTokenIDs tokenIDs={object.tokens}/>
+                <AccordionDetails style={{backgroundColor:'transparent', paddingBottom:'30px', textAlign:'left'}}>
+                    <NFTPageTokenIDs contractAddress={object.address} tokenIDs={object.tokens}/>
                 </AccordionDetails>
             </Accordion>
 
@@ -58,7 +59,8 @@ function NFTpage() {
             const accounts = await web3.eth.getAccounts();
             // var account = accounts[0]
             // var account = '0x6975be450864c02b4613023c2152ee0743572325';
-            var account = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
+            // var account = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
+            var account = '0xbfbe5822a880a41c2075dc7e1d92663739cf119e';
             setAccount(accounts[0])
             console.log(Account)
 
@@ -118,7 +120,11 @@ function NFTpage() {
 
     return (
         <>
-        <center>{Content}</center>
+        <center>
+            <br/>
+        <h1 style={{color:'white', fontSize:'50px'}}>My NFTs</h1> <br/><br/>
+            {Content}
+        </center>
         </>
     )
 }

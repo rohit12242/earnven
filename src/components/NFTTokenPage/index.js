@@ -16,11 +16,16 @@ export default function Index() {
         async function getData(){
             await axios.get(`https://api.opensea.io/api/v1/assets?token_ids=${id}&asset_contract_addresses=${contract}`,{},{})
             .then(async(response) => {
-                setName(response.data.assets[0].name)
-                setObjectURL(response.data.assets[0].image_url)
-                setContractName(response.data.assets[0].asset_contract.name)
-                setDesc(response.data.assets[0].description)
-                setOpenSeaURL(response.data.assets[0].permalink)
+                if(response.data.assets[0]){
+                    setName(response.data.assets[0].name)
+                    setObjectURL(response.data.assets[0].image_url)
+                    setContractName(response.data.assets[0].asset_contract.name)
+                    setDesc(response.data.assets[0].description)
+                    setOpenSeaURL(response.data.assets[0].permalink)
+                }
+                else{
+                    alert('NFT Details Not Available! Go Back!')
+                }
             })
         }
         getData();    
@@ -31,7 +36,7 @@ export default function Index() {
             <center>
             <div style={{background:'rgba(255, 255, 255, 0.1)',border:'1px', borderColor:'white', borderStyle:'solid', width:'500px', borderRadius:'50px'}}>
                 <br/>
-                <div style={{background:'rgba(0, 0, 0, 0.1)',border:'1px', borderColor:'white', borderStyle:'solid', width:'300px', borderRadius:'50px', padding:'15px'}}>
+                <div style={{background:'rgba(0, 0, 0, 0.1)',border:'1px', borderColor:'white', borderStyle:'solid', width:'330px', borderRadius:'10px', padding:'15px'}}>
                     <img src={ObjectURL} style={{maxHeight:'400px', maxWidth:'300px'}} aria-label='image'></img>
                 </div>
 
@@ -42,7 +47,7 @@ export default function Index() {
                     <h2 style={{color:'white'}}>{Name}</h2> <br/>
                     <h4 style={{color:'white'}}>{ContractName}</h4>
                     <br/> 
-                    {Desc}
+                    <div style={{wordBreak:'break-word'}}>{Desc}</div>
 
                     <br/> <br/> 
                 <a href={OpenSeaURL} target='_blank' rel="noreferrer">
