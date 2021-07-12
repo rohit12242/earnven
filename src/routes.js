@@ -1,4 +1,5 @@
 import {Navigate, useRoutes} from 'react-router-dom';
+// import { BrowserRouter , Routes, Route, Link } from 'react-router-dom'
 import Landing from './screens/landingPage';
 import PageNotFound from './screens/PageNotFound';
 import AppLayout from './layout/app';
@@ -12,14 +13,24 @@ import Trading from './screens/Exchange/exchange';
 import TestingPage from './screens/testingPage';
 import AllAssetsPage from './screens/AllAssetsPage';
 import TokenDetailsPage from './components/tokenDetails'
+import NFTpage from './screens/NFTpage';
+import NFTTokenPage from './components/NFTTokenPage'
 
 
 export default function Router(){
+
+    // return(
+    //         <Routes>
+    //             {/* <AppLayout/> */}
+    //             <Route exact path="/lol" render={<></>} />
+    //         </Routes>
+    // )
+
+
     return useRoutes([
         {
             path:'/',
             element:<Landing />,
-            
         },
         {
             path:'/app',
@@ -35,6 +46,9 @@ export default function Router(){
                 {path:'multisender',element:<Multisender />},
                 {path:'safefarm',element:<SafeFarm />},
                 {path:'trading',element:<Trading />},
+                {path:'nft',element:<NFTpage />},
+                // {path:'nft-token',element:<NFTTokenPage/>},
+                {path:'nft-token/:contract/:id',element:<NFTTokenPage/>},
                 { path: '*', element: <Navigate to="/404" replace /> }
 
             ]
