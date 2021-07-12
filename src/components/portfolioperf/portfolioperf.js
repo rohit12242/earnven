@@ -3,7 +3,7 @@ import ApexCharts from 'apexcharts';
 import ReactApexChart from 'react-apexcharts'
 import './portfolioperf.css'
 import axios from 'axios'
-import { SportsMotorsportsSharp } from '@material-ui/icons';
+
 // material
 // import { Card, CardHeader, Box, Paper } from '@material-ui/core';
 // import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
@@ -297,7 +297,7 @@ export default class PortfolioPerf extends Component {
     render() {
         return (
             <div id="chart" className='chart'>
-                {/* <div >
+                <div style={{float:'right'}}>
                 <button id="one_month"
 
                     onClick={() => this.updateData('one_month')} className={(this.state.selection === 'one_month' ? 'active' : '')}>
@@ -322,7 +322,7 @@ export default class PortfolioPerf extends Component {
                     onClick={() => this.updateData('all')} className={(this.state.selection === 'all' ? 'active' : '')}>
                     ALL
                 </button>
-            </div> */}
+            </div>
 
                 <div className='chart-timeline'>
                     
