@@ -12,9 +12,9 @@ const CoinGeckoClient = new CoinGecko()
 //   'Sunday',
 // ]
 //Fetch 24 hour data
-export const ChartDataTwentyFour = async () => {
+export const ChartDataTwentyFour = async (coin) => {
   const data = await CoinGeckoClient.coins
-    .fetchMarketChart('bitcoin')
+    .fetchMarketChart(coin)
     .then((data) => {
       //   console.log(data.data.prices)
       let price = data.data.prices
@@ -36,9 +36,9 @@ export const ChartDataTwentyFour = async () => {
   return data
 }
 //Fetch one week data
-export const ChartDataOneWeek = async () => {
+export const ChartDataOneWeek = async (coin) => {
   const data = await CoinGeckoClient.coins
-    .fetchMarketChart('bitcoin', { days: 7 })
+    .fetchMarketChart(coin, { days: 7 })
     .then((data) => {
       // console.log(data.data.prices)
       let price = data.data.prices

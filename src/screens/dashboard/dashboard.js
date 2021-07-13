@@ -45,11 +45,12 @@ export default class Dashboard extends Component {
 import { Container } from '@material-ui/core';
 // components
 import Page from '../../components/Page';
-import AllAssets from '../../components/allAssetsMini';
+import AllAssetsMini from '../../components/allAssetsMini';
 import TotalValueBox from '../../components/totalValueBox';
 import DefiAssets from '../../components/defiAssets';
 import PortfolioPerf from '../../components/portfolioperf/portfolioperf';
 import Balance from '../../components/Balance';
+import { Link } from 'react-router-dom';
 import './dashboard.css';
 import { Grid } from '@material-ui/core';
 
@@ -111,7 +112,8 @@ export default function Dashboard() {
                                 <PortfolioPerf />
                             </Grid>
                             <Grid item xs={12} md={12}>
-                                <AllAssets />
+                                <AllAssetsMini /><br/>
+                                <Link to="/app/assets"><div style={{float:'right', color:'white'}}>See More</div></Link>
                             </Grid>
                         </Grid>
 

@@ -23,9 +23,10 @@ export const Chart = (props) => {
 
     axios.get(`https://api.coingecko.com/api/v3/coins/${props.token}`,{},{})
         .then(async(response) => {
-            console.log(response.data)
+            // console.log(response.data)
             setSelection(response.data)
     })
+    setView('Month View')
 
     if(props.token!=='' && props.token!==null){
       console.log(1, props.token)
@@ -180,15 +181,15 @@ export const Chart = (props) => {
     <div>
 
       {Selection ? (
-        <div style={{width:'80%'}}>
+        <div style={{width:'80%', margin:'auto'}}>
 
           <div style={{textAlign:'left', marginTop:'20px'}}>
 
           <font color='white'>
-            <img alt='' style={{marginTop:'5px'}}src={ Selection.image? Selection.image.small:'' }/> &nbsp;
+            <img alt='' style={{marginTop:'5px'}}src={ Selection.image? Selection.image.small:'' }/>
             {/* {Selection.symbol} <br/> */}
 
-            &nbsp;&nbsp;{ Selection.symbol? '$'+Selection.symbol.toUpperCase():'' }
+          { Selection.symbol? '$'+Selection.symbol.toUpperCase():'' }
           </font>
           </div>
 
@@ -222,9 +223,9 @@ export const Chart = (props) => {
         <div style={{height: '350px', border:'1px', borderColor:'white',
          borderStyle:'solid',
          borderRadius:'20px',
-         paddingBottom:'50px',
+         paddingBottom:'70px',
          }}>
-          <div style={{marginTop:'10px', color:'white'}}>{View}</div>
+          <div style={{marginTop:'30px', color:'white', textAlign:'center'}}>{View}</div>
           
           <ResponsiveLine
             data={data}
@@ -267,6 +268,7 @@ export const Chart = (props) => {
           <br/><br/>
         </div>
           <br/>
+          <center>
           <TransparentButton value='Week View' style={{
                 height:'45px',
                 width:'15%',
@@ -307,7 +309,7 @@ export const Chart = (props) => {
                 cursor:'pointer'
             }}
             onClick = {loadDayData}
-            />
+            /></center>
 
           <br/><br/>
           <hr/>

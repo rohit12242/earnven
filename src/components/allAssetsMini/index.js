@@ -30,8 +30,8 @@ export default class index extends Component {
         const accounts = await web3.eth.getAccounts();
         this.setState({account:accounts[0]})
 
-        await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
-        // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        // await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             var arr1 = []
             var tokens = response.data.tokens
@@ -50,7 +50,8 @@ export default class index extends Component {
 
             arr2 = []
             for(i=0; i<4; i++){
-                var object = {};
+                if(arr1[i]){
+                    var object = {};
                 object.name = arr1[i].tokenInfo.name
                 object.profit = arr1[i].tokenInfo.price.diff
                 object.symbol = arr1[i].tokenInfo.symbol
@@ -59,6 +60,7 @@ export default class index extends Component {
                 object.rate = parseFloat(arr1[i].tokenInfo.price.rate).toFixed(2)
                 object.totalInvestment = parseFloat(arr1[i].totalInvestment).toFixed(2)
                 arr2.push(object)
+                }
             }
 
             

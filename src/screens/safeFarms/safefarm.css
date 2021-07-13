@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins");
+
+
+
+.home-main-container{
+  background: #141a1e;
+  width: calc(100% - 345px);
+  display: flex;
+  margin-left: 280px;
+  margin-right: 0px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 65px 0px 0px 65px;
+  height: calc(100% - 65px);
+  overflow-x: hidden;
+}
+
+.main-container-safe {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.heading {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: 1.8px;
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+.form-process {
+  margin-bottom: 14px;
+}
+
+.form-p-black {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 167.5%;
+  color: rgba(255, 255, 255, 0.6);
+}
+.form-p-white {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 167.5%;
+  color: rgba(255, 255, 255, 01);
+}
+
+.form-heading {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 167.5%;
+  letter-spacing: 0.025em;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.form-data {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+
+.custominput {
+  width: 410px;
+  height: 50px;
+  background: #141a1e;
+  border: 1px solid #737373;
+  box-sizing: border-box;
+  border-radius: 7px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  padding: 0px 26px;
+}
+
+.inputfield1 {
+  width: 240px;
+  height: 40px;
+  background: #141a1e;
+  border: 0px solid #737373;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 167.5%;
+}
+
+.inputfield {
+  width: 410px;
+  height: 50px;
+  background: #141a1e;
+  border: 1px solid #737373;
+  box-sizing: border-box;
+  border-radius: 7px;
+  margin-bottom: 8px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 167.5%;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0px 26px;
+}
+
+.Percentage {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 167.5%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #ffffff;
+  margin-left: auto;
+}
+
+.bottom-box {
+  display: flex;
+  justify-content: flex-start;
+  
+}
+.bottom-1 {
+  display: flex;
+  justify-content: first baseline;
+  margin-bottom: 7px;
+}
+
+.bottom-text {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 167.5%;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.info {
+  margin-left: 8px;
+  margin-top: 5px;
+}
+
+.info .tooltiptext {
+  visibility: hidden;
+  width: 144px;
+  height: 177px;
+  background-color: white;
+  color: #000;
+  border-radius: 7px;
+  padding: 5px 9px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  margin-left: 10px;
+  line-height: 18px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.info:hover .tooltiptext {
+  visibility: visible;
+}
+
+.info1 {
+  margin-left: 8px;
+  margin-top: 5px;
+}
+
+.info1 .tooltiptext1 {
+  /* margin-left: 10px; */
+  visibility: hidden;
+  width: 144px;
+  height: 240px;
+  background-color: white;
+  color: #000;
+  border-radius: 7px;
+  padding: 5px 9px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 18px;
+
+  /* Position the tooltip */
+  position: absolute;
+  margin-left: -75px;
+  margin-top: 20px;
+}
+
+.info1:hover .tooltiptext1 {
+  visibility: visible;
+}
+
+.yes-text {
+  color: #03dac6;
+}
+
+.box-color {
+  color: #bb86fc;
+}
+.submit {
+  width: 270px;
+  height: 50px;
+  left: 1055px;
+  top: 602px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-left: 350px;
+}
+
+.submit-btn {
+  width: 100%;
+  text-align: center;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  background: #141a1e;
+  color: #ffffff;
+  border: 1px solid #bb86fc;
+  box-sizing: border-box;
+  border-radius: 7px;
+}
+
+.end {
+  display: flex;
+  justify-content: center;
+}

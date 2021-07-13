@@ -6,6 +6,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ReceiveIcon from '../../assets/icons/receive.png'
+import SendIcon from '../../assets/icons/send.png'
 import UserIcon from '../../assets/icons/userIcon.png'
 
 var contents = ''
@@ -64,7 +65,7 @@ export default class index extends Component {
                 id="panel1a-header"
                 >
                 <div style={{width:'10%', float:'left'}}>
-                <img src={ReceiveIcon} alt=''/>
+                <img src={object.status==='Receive'? ReceiveIcon:SendIcon} alt=''/>
                 </div>
 
                 <div style={{width:'20%', float:'left', textAlign:'left'}}>
@@ -132,14 +133,14 @@ export default class index extends Component {
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressHistory/0x684fC9fb48fC9c30FAAB35A2030F85ff441553a7?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressHistory/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             ops = response.data.operations;
             // console.log(ops)
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressTransactions/0x684fC9fb48fC9c30FAAB35A2030F85ff441553a7?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressTransactions/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             ops2 = response.data
             // console.log(ops2)

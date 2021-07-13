@@ -34,7 +34,7 @@ export default class TestingPage extends Component {
                 <br/>
                 <div style={{backgroundColor:'#141A1E', height:'auto', width:'1000px', paddingBottom:'50px'}}>
                     <center><br/><br/>
-                    <Input/> 
+                    <Input /> 
                     
                     <br/><br/>
                     <SearchInput placeholder='Search Tokens...'/>
