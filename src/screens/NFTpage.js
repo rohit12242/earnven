@@ -18,9 +18,10 @@ function NFTpage() {
     var change = (arr) =>{
         contents = arr.map((object)=>
 
-        <Accordion style={{background:'transparent', marginBottom:'5px',width:'700px', border:'1px', borderColor:'white', borderStyle:'solid', borderRadius:'10px'}}>
+        <Accordion style={{background:'transparent', marginBottom:'5px',width:'90%', border:'1px', borderColor:'white', borderStyle:'solid', borderRadius:'10px'}}>
                 <AccordionSummary
-                expandIcon={<ExpandMoreIcon style={{fill:'white'}}/>}
+                // expandIcon={<ExpandMoreIcon style={{fill:'white'}}/>}
+                expandIcon={object.image? <img src={object.image} alt='' style={{height:'60px', border:'3px', borderColor:'white', borderStyle:'solid', borderRadius:'50px'}}></img>:<ExpandMoreIcon/>}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 style={{height:'100px'}}
@@ -58,9 +59,9 @@ function NFTpage() {
             const web3 = window.web3;
             const accounts = await web3.eth.getAccounts();
             // var account = accounts[0]
-            // var account = '0x6975be450864c02b4613023c2152ee0743572325';
+            var account = '0x6975be450864c02b4613023c2152ee0743572325';
             // var account = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
-            var account = '0xbfbe5822a880a41c2075dc7e1d92663739cf119e';
+            // var account = '0xbfbe5822a880a41c2075dc7e1d92663739cf119e';
             setAccount(accounts[0])
             console.log(Account)
 
@@ -82,10 +83,17 @@ function NFTpage() {
                             b[res[i].tokenName]['qtty'] = 1
                             b[res[i].tokenName]['tokens'].push(res[i].tokenID)
                         }
+                        await axios.get(`https://api.opensea.io/api/v1/assets?token_ids=${res[i].tokenID}&asset_contract_addresses=${res[i].contractAddress}`,{},{})
+                        .then(async(response) => {
+                            if(response.data.assets[0]){
+                                b[res[i].tokenName]['image'] = response.data.assets[0].image_url
+                            }
+                            else{
+                                b[res[i].tokenName]['image'] = undefined
+                            }
+                        })
                         b[res[i].tokenName]['name'] = res[i].tokenName
                         b[res[i].tokenName]['address'] = res[i].contractAddress
-                        
-
                     }
                     else{
                         if(res[i].from.toLowerCase() === account.toLowerCase()){
@@ -118,15 +126,28 @@ function NFTpage() {
         
     }, [Account])
 
-    return (
-        <>
-        <center>
-            <br/>
-        <h1 style={{color:'white', fontSize:'50px'}}>My NFTs</h1> <br/><br/>
-            {Content}
-        </center>
-        </>
-    )
+    if(Content===''){
+        return (
+            <>
+            <center>
+                <br/>
+            <h1 style={{color:'white', fontSize:'50px'}}>My NFTs</h1> <br/><br/>
+            <h3 style={{color:'white', fontSize:'20px'}}>Loading...</h3> <br/><br/>
+            </center>
+            </>
+        )
+    }
+    else{
+        return (
+            <>
+            <center>
+                <br/>
+            <h1 style={{color:'white', fontSize:'50px'}}>My NFTs</h1> <br/><br/>
+                {Content}
+            </center>
+            </>
+        )
+    }
 }
 
 export default NFTpage

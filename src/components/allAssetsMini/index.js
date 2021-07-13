@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Web3 from 'web3';
 import axios from 'axios';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 var contents = ''
 var arr2 = []
@@ -30,8 +31,8 @@ export default class index extends Component {
         const accounts = await web3.eth.getAccounts();
         this.setState({account:accounts[0]})
 
-        // await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
-        await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             var arr1 = []
             var tokens = response.data.tokens
@@ -72,39 +73,74 @@ export default class index extends Component {
 
     change = (arr) =>{
         contents = arr.map((object)=>
+        
         <div>
-
+    <BrowserView>
         <div 
             style={{
-                // height:'50px',
+                height:'75px',
                 // width:'678px',
                 background:'transparent',
                 cursor:'pointer'
             }}>
-            <div style={{width:'5%', height:'50px',float:'left'}}>
-                <img style={{height:'30px', width:'30px', marginTop:'15px'}} alt='' src={`https://ethplorer.io${object.image}`}/>
+            <div style={{width:'7%', height:'75px',float:'left'}}>
+                <img style={{marginLeft:'10px', height:'30px', width:'30px', marginTop:'15px'}} alt='' src={`https://ethplorer.io${object.image}`}/>
             </div>
 
-            <div style={{width:'25%', height:'50px',float:'left'}}>
+            <div style={{width:'23%', height:'75px',float:'left'}}>
                 <font color='white'> <br/>{object.name}</font>
             </div>
 
-            <div style={{width:'15%', height:'50px',float:'left'}}>
+            <div style={{width:'15%', height:'75px',float:'left'}}>
                 <font color='white'> <br/>{object.profit} %</font>
             </div>
 
-            <div style={{width:'30%', height:'50px',float:'left'}}>
+            <div style={{width:'30%', height:'75px',float:'left'}}>
                 <font color='white'> <br/> {object.balance} {object.symbol} | ${object.rate} </font>
             </div>
 
-            <div style={{width:'25%', height:'50px',float:'left'}}>
+            <div style={{width:'25%', height:'75px',float:'left'}}>
                 <font color='white'><br/> ${object.totalInvestment} </font>
             </div>
 
             <hr></hr>
 
         </div>
+        </BrowserView>
+        <MobileView>
+        <div 
+            style={{
+                // height:'75px',
+                // width:'678px',
+                background:'transparent',
+                cursor:'pointer'
+            }}>
+            <div style={{ height:'50px'}}>
+                <img style={{marginLeft:'10px', height:'30px', width:'30px', marginTop:'15px', display:'inline-block'}} alt='' src={`https://ethplorer.io${object.image}`}/>
+                &nbsp;&nbsp;<font color='white'>{object.name}</font>
+            </div>
+
+            <div style={{ height:'50px'}}>
+                <font color='white'> <br/>{object.profit} %</font>
+            </div>
+
+            <div style={{height:'50px'}}>
+                <font color='white'> <br/> {object.balance} {object.symbol} | ${object.rate} </font>
+            </div>
+
+            <div style={{height:'50px'}}>
+                <font color='white'><br/> ${object.totalInvestment} </font>
+            </div> 
+            
+            <br/>
+
+            <hr></hr>
+
         </div>
+
+        </MobileView>
+        </div>
+        
         )
         // console.log(contents)
     }
@@ -138,7 +174,7 @@ export default class index extends Component {
                 borderRadius:'10px'
             }}>
             <center>
-            <div style={{marginTop:'30px', marginRight:'500px', fontSize:'20px', marginBottom:'10px'}}>
+            <div style={{marginTop:'30px', marginRight:'60%', fontSize:'20px', marginBottom:'10px'}}>
                 <font color='white'> All Assets </font>
             </div>
 

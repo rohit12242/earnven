@@ -34,15 +34,15 @@ export default function Index() {
     return (
         <div>
             <center>
-            <div style={{background:'rgba(255, 255, 255, 0.1)',border:'1px', borderColor:'white', borderStyle:'solid', width:'500px', borderRadius:'50px'}}>
+            <div style={{background:'rgba(255, 255, 255, 0.1)',border:'1px', borderColor:'white', borderStyle:'solid', width:'90%', borderRadius:'50px'}}>
                 <br/>
-                <div style={{background:'rgba(0, 0, 0, 0.1)',border:'1px', borderColor:'white', borderStyle:'solid', width:'330px', borderRadius:'10px', padding:'15px'}}>
+                <div style={{background:'rgba(0, 0, 0, 0.1)',border:'1px', borderColor:'white', borderStyle:'solid', width:'95%', borderRadius:'10px', padding:'15px'}}>
                     <img src={ObjectURL} style={{maxHeight:'400px', maxWidth:'300px'}} aria-label='image'></img>
                 </div>
 
                 <br/>
 
-                <div style={{background:'rgba(0, 0, 0, 0.1)', color:'white', border:'1px', borderColor:'white', textAlign:'left', borderStyle:'solid', width:'450px', borderRadius:'20px', padding:'15px'}}>
+                <div style={{background:'rgba(0, 0, 0, 0.1)', color:'white', border:'1px', borderColor:'white', textAlign:'left', borderStyle:'solid', width:'95%', borderRadius:'20px', padding:'15px'}}>
                 <center>
                     <h2 style={{color:'white'}}>{Name}</h2> <br/>
                     <h4 style={{color:'white'}}>{ContractName}</h4>
@@ -51,7 +51,17 @@ export default function Index() {
 
                     <br/> <br/> 
                 <a href={OpenSeaURL} target='_blank' rel="noreferrer">
-                <TransparentButton value='View on OpenSea &#8599;'/> 
+                <TransparentButton style={{
+                        height:'45px',
+                        width:'200px',
+                        borderWidth:'1px',
+                        background:'transparent',
+                        borderStyle:'solid',
+                        borderColor:'#ac6afc',
+                        borderRadius:'5px',
+                        color:'white',
+                        cursor:'pointer'
+                    }} value='View on OpenSea &#8599;'/> 
                 </a>
 
                 </center>  

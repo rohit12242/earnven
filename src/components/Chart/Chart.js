@@ -8,6 +8,7 @@ import {
   ChartDataOneWeek,
   ChartDataOneMonth,
 } from './ChartDataFetch/ChartDataFetch'
+import { MobileView, BrowserView } from 'react-device-detect';
 
 export const Chart = (props) => {
 
@@ -315,6 +316,7 @@ export const Chart = (props) => {
           <hr/>
         <div style={{color:'white', textAlign:'left'}}>STATS</div><br/><br/>
         <div>
+          <BrowserView>
             <div style={{width:'25%', height:'125px', display:'inline-block', color:'white'}}>
             1 DAY
             <br/><br/>
@@ -388,8 +390,89 @@ export const Chart = (props) => {
             </font>
             <br/><br/><br/><br/>
             </div>
+          </BrowserView>
+          <MobileView>
+          <div style={{width:'50%', height:'125px', display:'inline-block', color:'white'}}>
+            1 DAY
+            <br/><br/>
+            <font color='#00FFE7'>
+            { Selection.market_data? parseFloat(Selection.market_data.price_change_percentage_24h).toFixed(2)+'%':'' }
+            </font>
+            <br/><br/><br/><br/>
+            </div>
 
+            <div style={{width:'50%', height:'125px', display:'inline-block', color:'white'}}>
+            1 MONTH
+            <br/><br/>
+            <font color='#00FFE7'>
+            { Selection.market_data? parseFloat(Selection.market_data.price_change_percentage_30d).toFixed(2)+'%':'' }
+            </font>
+            <br/><br/><br/><br/>
+            </div>
+            <br/>
+
+            <div style={{width:'50%', height:'125px', display:'inline-block', color:'white'}}>
+            2 MONTHS
+            <br/><br/>
+            <font color='#00FFE7'>
+            { Selection.market_data? parseFloat(Selection.market_data.price_change_percentage_60d).toFixed(2)+'%':'' }
+            </font>
+            <br/><br/><br/><br/>
+            </div>
+
+            <div style={{width:'50%', height:'125px', display:'inline-block', color:'white'}}>
+            1 YEAR
+            <br/><br/>
+            <font color='#00FFE7'>
+            { Selection.market_data? parseFloat(Selection.market_data.price_change_percentage_1y).toFixed(2)+'%':'' }
+            </font>
+            <br/><br/><br/><br/>
+            </div>
+
+            <br/>
+
+            <div style={{width:'50%', height:'125px', display:'inline-block', color:'white'}}>
+            MARKET CAP
+            <br/><br/>
+            <font color='#00FFE7'>
+            { Selection.market_data? '$'+Selection.market_data.market_cap.usd:'' }
+            </font>
+            <br/><br/><br/><br/>
+            </div>
+
+            <div style={{width:'50%', height:'125px', display:'inline-block', color:'white'}}>
+            24H HIGH
+            <br/><br/>
+            <font color='#00FFE7'>
+            { Selection.market_data? '$'+Selection.market_data.high_24h.usd:'' }
+            </font>
+            <br/><br/><br/><br/>
+            </div>
+
+            <br/>
+
+            <div style={{width:'50%', height:'125px', display:'inline-block', color:'white'}}>
+            24H LOW
+            <br/><br/>
+            <font color='#00FFE7'>
+            { Selection.market_data? '$'+Selection.market_data.low_24h.usd:'' }
+            </font>
+            <br/><br/><br/><br/>
+            </div>
+
+            <div style={{width:'50%', height:'125px', display:'inline-block', color:'white'}}>
+            COINGECKO SCORE
+            <br/><br/>
+            <font color='#00FFE7'>
+            { Selection.coingecko_score? Selection.coingecko_score:'' }
+            </font>
+            <br/><br/><br/><br/>
+            </div>
+
+          </MobileView>
         </div>
+
+
         <hr/>
         <br/>
         <div style={{color:'white', textAlign:'left'}}>ABOUT</div><br/><br/>
@@ -401,7 +484,7 @@ export const Chart = (props) => {
         <hr/>
         <br/>
         <div>
-
+          <BrowserView>
           <div style={{width:'20%', height:'125px', display:'inline-block', color:'#00FFE7'}}>
             <a href={ Selection.links? Selection.links.chat_url[0]:'' } style={{textDecoration:'none', color:'#00FFE7'}} target='blank'>
               Discord &#8599;
@@ -431,7 +514,40 @@ export const Chart = (props) => {
               Coingecko &#8599;
             </a>
           </div>
+        </BrowserView>
+        <MobileView>
+          <div style={{width:'33%', height:'125px', display:'inline-block', color:'#00FFE7'}}>
+            <a href={ Selection.links? Selection.links.chat_url[0]:'' } style={{textDecoration:'none', color:'#00FFE7'}} target='blank'>
+              Discord &#8599;
+            </a>
+          </div>
 
+          <div style={{width:'33%', height:'125px', display:'inline-block', color:'#00FFE7'}}>
+            <a href={ Selection.links? Selection.links.homepage[0]:'' } style={{textDecoration:'none', color:'#00FFE7'}} target='blank'>
+              Website &#8599;
+            </a>
+          </div>
+
+          <div style={{width:'33%', height:'125px', display:'inline-block', color:'#00FFE7'}}>
+            <a href={ Selection.links? `https://twitter.com/${Selection.links.twitter_screen_name}`:'' } style={{textDecoration:'none', color:'#00FFE7'}} target='blank'>
+              Twitter &#8599;
+            </a>
+          </div>
+
+          <br/>
+
+          <div style={{width:'50%', height:'125px', display:'inline-block', color:'#00FFE7'}}>
+            <a href={ Selection.links? Selection.links.blockchain_site[0]:'' } style={{textDecoration:'none', color:'#00FFE7'}} target='blank'>
+              Etherscan &#8599;
+            </a>
+          </div>
+
+          <div style={{width:'50%', height:'125px', display:'inline-block', color:'#00FFE7'}}>
+            <a href={ Selection.links? `https://www.coingecko.com/en/coins/${Selection.id}`:'' } style={{textDecoration:'none', color:'#00FFE7'}} target='blank'>
+              Coingecko &#8599;
+            </a>
+          </div>
+        </MobileView>
         </div>
 
         </div>

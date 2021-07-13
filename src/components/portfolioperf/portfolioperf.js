@@ -72,7 +72,7 @@ export default class PortfolioPerf extends Component {
         super(props);
         this.state = {
             account: '',
-            series: 0,
+            series: [],
             options: {
                 chart: {
                     id: 'area-datetime',

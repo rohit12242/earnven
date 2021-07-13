@@ -40,15 +40,16 @@ import { Icon } from '@iconify/react';
 import menu2Fill from '@iconify/icons-eva/menu-2-fill';
 // material
 import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
-import { Box, Stack, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import { Box, AppBar, Toolbar, IconButton } from '@material-ui/core';
 // components
 import {MHidden} from '../../../components/@material-extend';
-import SearchInput from '../../../components/searchInput';
+// import SearchInput from '../../../components/searchInput';
 import NetworkDropDown from '../../../components/networkDropDown';
 import MenuListComposition from '../../../components/gasDropDownMenu';
 import LanguageDropDown from '../../../components/languageDropDown';
 import HelpDropDown from '../../../components/helpDropDown';
-
+import TransparentButton from '../../../components/TransparentButton'
+import {Link} from 'react-router-dom'
 
 const DRAWER_WIDTH = 280;
 const APPBAR_MOBILE = 64;
@@ -87,15 +88,24 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
             </IconButton>
           </MHidden>
   
-          <SearchInput />
+          {/* <SearchInput /> */}
+          <Link to='/app/token'><TransparentButton value='Search Tokens'/></Link>
           <Box sx={{ flexGrow: 1 }} />
   
-          <Stack direction="row" spacing={{ xs: 0.5, sm: 1.5 }}>
+          {/* <Stack direction="row" spacing={{ xs: 0.5, sm: 1.5 }}> */}
+          <div style={{marginRight:'20px'}}>
             <NetworkDropDown />
+          </div>
+          <div style={{marginRight:'20px'}}>
             <MenuListComposition />
+          </div>
+          <div style={{marginRight:'20px'}}>
             <LanguageDropDown/>
+          </div>
+          <div style={{marginRight:'20px'}}>
             <HelpDropDown />
-          </Stack>
+          </div>
+          {/* </Stack> */}
         </ToolbarStyle>
         
       </RootStyle>

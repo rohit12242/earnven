@@ -20,7 +20,17 @@ export default function Index({contractAddress, tokenIDs}) {
         contents = arr.map((object)=>
             <div style={{color:'white', display:'inline-block', marginLeft:'20px', marginTop:'10px'}}>
                 <Link to={{pathname: `/app/nft-token/${contractAddress}/${object}`}}>
-                    <TransparentButton value={shorten(object)}/>
+                    <TransparentButton style={{
+                        height:'45px',
+                        width:'200px',
+                        borderWidth:'1px',
+                        background:'transparent',
+                        borderStyle:'solid',
+                        borderColor:'#ac6afc',
+                        borderRadius:'5px',
+                        color:'white',
+                        cursor:'pointer'
+                    }} value={shorten(object)}/>
                 </Link>
             </div>
         )

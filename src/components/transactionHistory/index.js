@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ReceiveIcon from '../../assets/icons/receive.png'
 import SendIcon from '../../assets/icons/send.png'
 import UserIcon from '../../assets/icons/userIcon.png'
+import { MobileView, BrowserView } from 'react-device-detect';
 
 var contents = ''
 var ops =[]
@@ -57,8 +58,9 @@ export default class index extends Component {
 
     change = (arr) =>{
         contents = arr.map((object)=>
-
-        <Accordion style={{background:'transparent', marginBottom:'5px', width:'700px', border:'1px', borderColor:'white', borderStyle:'solid', borderRadius:'10px'}}>
+        <div>
+        <BrowserView>
+        <Accordion style={{background:'transparent', marginBottom:'5px', width:'90%', border:'1px', borderColor:'white', borderStyle:'solid', borderRadius:'10px'}}>
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon style={{fill:'white'}}/>}
                 aria-controls="panel1a-content"
@@ -113,8 +115,68 @@ export default class index extends Component {
                     </ul>
                 </AccordionDetails>
             </Accordion>
+            </BrowserView>
+            <MobileView>
+            <Accordion style={{background:'transparent', marginBottom:'5px', width:'90%', border:'1px', borderColor:'white', borderStyle:'solid', borderRadius:'10px'}}>
+                <AccordionSummary
+                expandIcon={<ExpandMoreIcon style={{fill:'white'}}/>}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                >
+                    <div style={{width:'100%'}}>
+                <div style={{display:'inline-block', float:'left'}}>
+                <img src={object.status==='Receive'? ReceiveIcon:SendIcon} alt=''/>
+                </div> 
 
-        
+                <div style={{textAlign:'left', display:'inline-block', float:'left'}}>
+                <font color='white'>&nbsp;&nbsp;&nbsp;{object.status}</font><br/>
+                <font style={{fontSize:'10px', color:'white'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11:31 AM</font>
+                </div> 
+                <br/><br/><br/>
+
+                <div style={{display:'inline-block', float:'left'}}>
+                <img width='25px' alt='' style={{marginTop:'5px'}}src={UserIcon}/>
+                </div>
+
+                <div style={{textAlign:'left', display:'inline-block', float:'left'}}>
+                <font color='white'>&nbsp;&nbsp;&nbsp;From</font><br/>
+                &nbsp;&nbsp;&nbsp;<a href={this.etherscanLink(object.from)} target='_blank' rel="noreferrer">
+                <font style={{fontSize:'15px', color:'white'}}>{this.shortaddress(object.from)}</font>
+                </a>
+                </div> <br/><br/><br/>
+
+                <div style={{ marginTop:'8px', textAlign:'left'}}>
+                <font style={{fontSize:'20px', color:'white'}}>{(parseFloat(object.value)).toFixed(2)} {object.symbol}</font>
+                </div>
+
+                <div style={{width:'15%', float:'left', textAlign:'left'}}>
+                <font color='white'>TYPE&nbsp;&nbsp;&nbsp;</font> 
+                <font style={{fontSize:'13px', color:'white'}}>{object.type}</font>
+                </div>
+
+                </div>
+                
+
+                </AccordionSummary>
+                <AccordionDetails style={{backgroundColor:'transparent', textAlign:'left'}}>
+                    <ul style={{listStyleType:'none', color:'white'}}>
+                        <li>
+                            Txn Hash  &nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;
+                            <a href={this.etherscanTxLink(object.hash)} target='_blank' rel="noreferrer">
+                            <font style={{fontSize:'15px', color:'white'}}>{this.shortaddress(object.hash)}</font>
+                            </a>
+                        </li>
+                        <li>
+                            Rate &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; $ {parseFloat(object.rate).toFixed(4)}
+                        </li>
+                        <li>
+                            24Hr Diff &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;{object.diff} %
+                        </li>
+                    </ul>
+                </AccordionDetails>
+            </Accordion>
+            </MobileView>
+            </div>
         )
         // console.log(contents)
     }
@@ -247,7 +309,7 @@ export default class index extends Component {
     render() {
         return (
             <div style={{
-                width:'800px',
+                width:'95%',
                 height:'auto',
                 paddingBottom:'30px',
                 background:'transparent',
@@ -257,7 +319,7 @@ export default class index extends Component {
                 borderRadius:'20px'
             }}>
             <center>
-            <div style={{marginTop:'30px', marginRight:'600px', fontSize:'20px', marginBottom:'10px'}}>
+            <div style={{marginTop:'30px', fontSize:'20px', marginBottom:'10px'}}>
                 <font color='white'> All Transactions </font>
             </div>
             
