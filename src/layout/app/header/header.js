@@ -90,7 +90,7 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
           <SearchInput />
           <Box sx={{ flexGrow: 1 }} />
   
-          <Stack direction="row" spacing={{ xs: 0.5, sm: 1.5 }}>
+          <Stack direction="row" spacing={{ xs: 1.5, sm: 3.5 }}>
             <NetworkDropDown />
             <MenuListComposition />
             <LanguageDropDown/>
