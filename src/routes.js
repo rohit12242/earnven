@@ -41,6 +41,7 @@ export default function Router(){
                 {path:'history',element:<History />},
                 {path:'defimadeasy',element:<DefiMadeEasy />},
                 {path:'assets',element:<AllAssetsPage />},
+                {path:'token/:tokenid',element:<TokenDetailsPage />},
                 {path:'token',element:<TokenDetailsPage />},
                 {path:'bridge',element:<Bridge />},
                 {path:'multisender',element:<Multisender />},

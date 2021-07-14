@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Web3 from 'web3';
 import axios from 'axios';
 import { BrowserView, MobileView } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 
 
 var contents = ''
@@ -67,14 +68,15 @@ export default class index extends Component {
             for(var i=start; i<end; i++){
                 if(arr1[i]){
                     var object = {};
-                object.name = arr1[i].tokenInfo.name
-                object.profit = arr1[i].tokenInfo.price.diff
-                object.symbol = arr1[i].tokenInfo.symbol
-                object.image = arr1[i].tokenInfo.image
-                object.balance = parseFloat(web3.utils.fromWei(arr1[i].rawBalance, 'ether')).toFixed(2)
-                object.rate = parseFloat(arr1[i].tokenInfo.price.rate).toFixed(2)
-                object.totalInvestment = parseFloat(arr1[i].totalInvestment).toFixed(2)
-                arr2.push(object)
+                    object.coingecko = arr1[i].tokenInfo.coingecko
+                    object.name = arr1[i].tokenInfo.name
+                    object.profit = arr1[i].tokenInfo.price.diff
+                    object.symbol = arr1[i].tokenInfo.symbol
+                    object.image = arr1[i].tokenInfo.image
+                    object.balance = parseFloat(web3.utils.fromWei(arr1[i].rawBalance, 'ether')).toFixed(2)
+                    object.rate = parseFloat(arr1[i].tokenInfo.price.rate).toFixed(2)
+                    object.totalInvestment = parseFloat(arr1[i].totalInvestment).toFixed(2)
+                    arr2.push(object)
                 }
             }
 
@@ -89,6 +91,7 @@ export default class index extends Component {
         
         <div>
     <BrowserView>
+    <Link to={`/app/token/${object.coingecko}`}>
         <div 
             style={{
                 height:'75px',
@@ -119,8 +122,10 @@ export default class index extends Component {
             <hr></hr>
 
         </div>
+        </Link>
         </BrowserView>
         <MobileView>
+        <Link to={`/app/token/${object.coingecko}`}>
         <div 
             style={{
                 // height:'75px',
@@ -150,7 +155,7 @@ export default class index extends Component {
             <hr></hr>
 
         </div>
-
+        </Link>
         </MobileView>
         </div>
         

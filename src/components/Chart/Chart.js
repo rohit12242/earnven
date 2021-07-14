@@ -2,6 +2,7 @@ import { ResponsiveLine } from '@nivo/line'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import parse from "html-react-parser";
+import {useParams} from 'react-router-dom';
 import TransparentButton from '../TransparentButton/index'
 import {
   ChartDataTwentyFour,
@@ -10,8 +11,9 @@ import {
 } from './ChartDataFetch/ChartDataFetch'
 import { MobileView, BrowserView } from 'react-device-detect';
 
-export const Chart = (props) => {
+export const Chart = () => {
 
+  const {tokenid} = useParams();
   const [Price, setPrice] = useState(null)
   const [Selection, setSelection] = useState(null)
   const [View, setView] = useState('Month View')
@@ -20,42 +22,45 @@ export const Chart = (props) => {
 
   React.useEffect(() => {
     
-    console.log(props.token)
-
-    axios.get(`https://api.coingecko.com/api/v3/coins/${props.token}`,{},{})
+    // console.log(tokenid)
+    // console.log(tokenid)
+    axios.get(`https://api.coingecko.com/api/v3/coins/${tokenid}`,{},{})
         .then(async(response) => {
             // console.log(response.data)
             setSelection(response.data)
     })
     setView('Month View')
 
-    if(props.token!=='' && props.token!==null){
-      console.log(1, props.token)
-      ChartDataOneMonth(props.token).then((res) => {
+    if(tokenid!=='' && tokenid!==null && tokenid!==undefined){
+      
+      console.log(1, tokenid)
+      ChartDataOneMonth(tokenid).then((res) => {
         setPrice(res)
         // console.log(Price)
       })
 
+    }else{
+      alert('Data Not Available For This Coin!')
     }
     
 
-  }, [props]);
+  }, [tokenid]);
 
 
   function loadWeekData(){
 
-    console.log(props.token)
-    if(props.token!=='' && props.token!==null){
+    console.log(tokenid)
+    if(tokenid!=='' && tokenid!==null){
 
-      axios.get(`https://api.coingecko.com/api/v3/coins/${props.token}`,{},{})
+      axios.get(`https://api.coingecko.com/api/v3/coins/${tokenid}`,{},{})
         .then(async(response) => {
             console.log(response.data)
             setSelection(response.data)
     })
       setView('Week View')
       
-      console.log(1, props.token)
-      ChartDataOneWeek(props.token).then((res) => {
+      console.log(1, tokenid)
+      ChartDataOneWeek(tokenid).then((res) => {
         setPrice(res)
         // console.log(Price)
       })
@@ -66,18 +71,18 @@ export const Chart = (props) => {
 
   function loadMonthData(){
 
-    console.log(props.token)
-    if(props.token!=='' && props.token!==null){
+    console.log(tokenid)
+    if(tokenid!=='' && tokenid!==null){
 
-      axios.get(`https://api.coingecko.com/api/v3/coins/${props.token}`,{},{})
+      axios.get(`https://api.coingecko.com/api/v3/coins/${tokenid}`,{},{})
         .then(async(response) => {
             console.log(response.data)
             setSelection(response.data)
     })
     setView('Month View')
 
-      console.log(1, props.token)
-      ChartDataOneMonth(props.token).then((res) => {
+      console.log(1, tokenid)
+      ChartDataOneMonth(tokenid).then((res) => {
         setPrice(res)
         // console.log(Price)
       })
@@ -88,18 +93,18 @@ export const Chart = (props) => {
 
   function loadDayData(){
 
-    console.log(props.token)
-    if(props.token!=='' && props.token!==null){
+    console.log(tokenid)
+    if(tokenid!=='' && tokenid!==null){
 
-      axios.get(`https://api.coingecko.com/api/v3/coins/${props.token}`,{},{})
+      axios.get(`https://api.coingecko.com/api/v3/coins/${tokenid}`,{},{})
         .then(async(response) => {
             console.log(response.data)
             setSelection(response.data)
     })
     setView('Day View')
 
-      console.log(1, props.token)
-      ChartDataTwentyFour(props.token).then((res) => {
+      console.log(1, tokenid)
+      ChartDataTwentyFour(tokenid).then((res) => {
         setPrice(res)
         // console.log(Price)
       })

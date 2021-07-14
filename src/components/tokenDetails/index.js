@@ -1,46 +1,28 @@
-import React, { Component } from 'react'
+import React, {useState} from 'react'
 import SearchTokens from '../searchTokens'
 import {Chart} from '../Chart/Chart'
+import { useNavigate } from 'react-router'
 
-export default class index extends Component {
 
-    componentWillMount = async()=>{
-        if(this.props==={}){
-            // console.log(this.props)
-            if(this.props.token){
-                await this.setState({token:this.props.token})
-            }
-        }
-        else if(this.props.location){
-            if(this.props.location.state){
-                if(this.props.location.state.token){
-                    await this.setState({token:this.props.location.state.token})
-                }
-            }
-        }
+export default function Index() {
+
+    var navigate = useNavigate();
+
+    const [Token, setToken] = useState('')
+
+    function callbackFunction(childData){
+        setToken(childData)
+        navigate(`/app/token/${childData}`)
     }
 
-    callbackFunction = (childData) => {
-        this.setState({token: childData})
-    }
-
-    constructor(props){
-        super(props)
-        this.state={
-            value:'',
-            token:''
-        }
-    }
-
-    render() {
-        return (
-            <div style={{margin:'auto'}}>
-                
-                {/* {this.state.token} */}
-                <SearchTokens parentCallback = {this.callbackFunction}/> <br/><br/><br/><br/>
-                <center><hr width='80%'/></center>
-                <Chart token={this.state.token}/> 
-            </div>
-        )
-    }
+    return (
+        <div style={{margin:'auto'}}>
+            
+            <span style={{visibility:'hidden'}}>{Token}
+            <SearchTokens parentCallback = {callbackFunction}/> </span>
+            {/* <br/><br/><br/><br/> */}
+            <center><hr width='80%'/></center>
+            <Chart/> 
+        </div>
+    )
 }

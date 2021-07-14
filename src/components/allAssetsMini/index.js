@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Web3 from 'web3';
 import axios from 'axios';
 import { BrowserView, MobileView } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 
 var contents = ''
 var arr2 = []
@@ -47,12 +48,13 @@ export default class index extends Component {
 
                 arr1.sort((a, b) => parseFloat(b.totalInvestment) - parseFloat(a.totalInvestment));
 
-            // console.log(arr1)
+            console.log(arr1)
 
             arr2 = []
             for(i=0; i<4; i++){
                 if(arr1[i]){
                     var object = {};
+                object.coingecko = arr1[i].tokenInfo.coingecko
                 object.name = arr1[i].tokenInfo.name
                 object.profit = arr1[i].tokenInfo.price.diff
                 object.symbol = arr1[i].tokenInfo.symbol
@@ -76,6 +78,7 @@ export default class index extends Component {
         
         <div>
     <BrowserView>
+        <Link to={`/app/token/${object.coingecko}`}>
         <div 
             style={{
                 height:'75px',
@@ -106,8 +109,10 @@ export default class index extends Component {
             <hr></hr>
 
         </div>
+        </Link>
         </BrowserView>
         <MobileView>
+        <Link to={`/app/token/${object.coingecko}`}>
         <div 
             style={{
                 // height:'75px',
@@ -137,7 +142,7 @@ export default class index extends Component {
             <hr></hr>
 
         </div>
-
+        </Link>
         </MobileView>
         </div>
         

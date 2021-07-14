@@ -59,8 +59,8 @@ function NFTpage() {
             const web3 = window.web3;
             const accounts = await web3.eth.getAccounts();
             // var account = accounts[0]
-            var account = '0x6975be450864c02b4613023c2152ee0743572325';
-            // var account = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
+            // var account = '0x6975be450864c02b4613023c2152ee0743572325';
+            var account = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
             // var account = '0xbfbe5822a880a41c2075dc7e1d92663739cf119e';
             setAccount(accounts[0])
             console.log(Account)

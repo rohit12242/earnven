@@ -34,7 +34,7 @@ export default class Header extends Component{
 
 
 
-
+import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import menu2Fill from '@iconify/icons-eva/menu-2-fill';
@@ -48,8 +48,9 @@ import NetworkDropDown from '../../../components/networkDropDown';
 import MenuListComposition from '../../../components/gasDropDownMenu';
 import LanguageDropDown from '../../../components/languageDropDown';
 import HelpDropDown from '../../../components/helpDropDown';
-import TransparentButton from '../../../components/TransparentButton'
-import {Link} from 'react-router-dom'
+// import TransparentButton from '../../../components/TransparentButton'
+import SearchTokens from '../../../components/searchTokens';
+import {useNavigate} from 'react-router-dom'
 
 const DRAWER_WIDTH = 280;
 const APPBAR_MOBILE = 64;
@@ -79,6 +80,16 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
   };
 
   export default function Header({ onOpenSidebar }) {
+
+    var navigate = useNavigate();
+
+    const [Token, setToken] = useState('')
+
+    function callbackFunction(childData){
+        setToken(childData)
+        navigate(`/app/token/${childData}`)
+    }
+
     return (
       <RootStyle>
         <ToolbarStyle>
@@ -89,9 +100,15 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
           </MHidden>
   
           {/* <SearchInput /> */}
-          <Link to='/app/token'><TransparentButton value='Search Tokens'/></Link>
+          {/* <Link to='/app/token'><TransparentButton value='Search Tokens'/></Link> */}
+          
+          <div>
+          <span style={{visibility:'hidden'}}>{Token}</span>
+            <SearchTokens parentCallback = {callbackFunction}/> 
+          </div>
+          
           <Box sx={{ flexGrow: 1 }} />
-  
+          
           {/* <Stack direction="row" spacing={{ xs: 0.5, sm: 1.5 }}> */}
           <div style={{marginRight:'20px'}}>
             <NetworkDropDown />

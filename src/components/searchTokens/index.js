@@ -36,6 +36,7 @@ class App extends Component {
 
     sendData = () => {
         this.props.parentCallback(this.state.token);
+        
     }
 
     searchTokens = async(event) => {
