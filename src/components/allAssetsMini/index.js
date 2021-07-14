@@ -55,6 +55,7 @@ export default class index extends Component {
                 if(arr1[i]){
                     var object = {};
                 object.coingecko = arr1[i].tokenInfo.coingecko
+                object.address = arr1[i].tokenInfo.address
                 object.name = arr1[i].tokenInfo.name
                 object.profit = arr1[i].tokenInfo.price.diff
                 object.symbol = arr1[i].tokenInfo.symbol

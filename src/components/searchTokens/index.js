@@ -12,13 +12,31 @@ var allTokens =[]
 
 const styles = () => ({
     root: {
-        background: 'beige',
-        borderRadius: 3,
-        border: 0,
-        color: 'white',
-        height: 48,
-        paddingBottom:'10px'
+        "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
+          // Default transform is "translate(14px, 20px) scale(1)""
+          // This lines up the label with the initial cursor position in the input
+          // after changing its padding-left.
+          transform: "translate(34px, 20px) scale(1);"
+        }
       },
+      inputRoot: {
+        color: "white",
+        // This matches the specificity of the default styles at https://github.com/mui-org/material-ui/blob/v4.11.3/packages/material-ui-lab/src/Autocomplete/Autocomplete.js#L90
+        '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
+          // Default left padding is 6px
+          paddingLeft: 26
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: "green"
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          borderColor: "red"
+        },
+        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+          borderColor: "purple"
+        }
+      }
+    
   });
 
 class App extends Component {
@@ -29,8 +47,7 @@ class App extends Component {
         // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             allTokens = response.data;
-
-        
+            console.log(allTokens)
         })
     }
 
@@ -104,19 +121,23 @@ class App extends Component {
                     // autoSelect
                     autoComplete
                     autoHighlight
+                    classes={classes}
                     onChange={(event, value) => { this.submitSearch(event,value)}} 
                     options={this.state.results}
                     renderInput={(params) => (
                     <TextField {...params}
                         id="filled-search"
                         onChange={this.searchTokens}
-                        classes={{
-                            root: classes.root,
-                        }}
+                        // InputProps={{
+                        //     className: classes.multilineColor
+                        // }}
+                        // classes={{
+                        //     root: classes.root,
+                        // }}
                         variant="filled"
                         size="small"
                         label="Search Tokens..."
-                        style={{ borderColor:'white', border:'1px', borderStyle:'solid', borderRadius:'20px'}}
+                        style={{ borderColor:'white', color:'white', border:'1px', borderStyle:'solid', borderRadius:'7px'}}
                     />
                     // <SearchInput {...params}
                     //      onChange={this.searchTokens}></SearchInput>

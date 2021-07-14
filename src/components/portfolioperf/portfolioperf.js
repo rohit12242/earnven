@@ -175,7 +175,7 @@ export default class PortfolioPerf extends Component {
                     },
                 },
                 stroke: {
-                    show:true,
+                    show: true,
                     curve: 'smooth',
                     width: 1,
                     colors: ['#BB86FC'],
@@ -212,7 +212,7 @@ export default class PortfolioPerf extends Component {
                     align: 'left',
                     margin: 20,
                     offsetX: 15,
-                    offsetY: 10,
+                    offsetY: -15,
                     floating: false,
                     style: {
                         fontSize: '16px',
@@ -228,11 +228,11 @@ export default class PortfolioPerf extends Component {
                     offsetX: 0,
                     offsetY: 0,
                     style: {
-                      color: '#fff',
-                      fontSize: '14px',
-                      fontFamily: undefined
+                        color: '#fff',
+                        fontSize: '14px',
+                        fontFamily: undefined
                     }
-                  },
+                },
                 selection: 'one_month',
             },
         };
@@ -296,40 +296,44 @@ export default class PortfolioPerf extends Component {
 
     render() {
         return (
-            <div id="chart" className='chart'>
-                <div style={{float:'right'}}>
-                <button id="one_month"
+            <div style={{border:'1px solid #737373',borderRadius:'10px'}}>
+                <div>
+                <div style={{ textAlign:'end' }}>
+                        <button id="one_month"
 
-                    onClick={() => this.updateData('one_month')} className={(this.state.selection === 'one_month' ? 'active' : '')}>
-                    1M
-                </button>
-                &nbsp;
-                <button id="one_year"
+                            onClick={() => this.updateData('one_month')} className={(this.state.selection === 'one_month' ? 'active' : '')}>
+                            1M
+                        </button>
+                        &nbsp;
+                        <button id="one_year"
 
 
-                    onClick={() => this.updateData('one_year')} className={(this.state.selection === 'one_year' ? 'active' : '')}>
-                    1Y
-                </button>
-                &nbsp;
-                <button id="ytd"
+                            onClick={() => this.updateData('one_year')} className={(this.state.selection === 'one_year' ? 'active' : '')}>
+                            1Y
+                        </button>
+                        &nbsp;
+                        <button id="ytd"
 
-                    onClick={() => this.updateData('ytd')} className={(this.state.selection === 'ytd' ? 'active' : '')}>
-                    YTD
-                </button>
-                &nbsp;
-                <button id="all"
+                            onClick={() => this.updateData('ytd')} className={(this.state.selection === 'ytd' ? 'active' : '')}>
+                            YTD
+                        </button>
+                        &nbsp;
+                        <button id="all"
 
-                    onClick={() => this.updateData('all')} className={(this.state.selection === 'all' ? 'active' : '')}>
-                    ALL
-                </button>
-            </div>
-
-                <div className='chart-timeline'>
+                            onClick={() => this.updateData('all')} className={(this.state.selection === 'all' ? 'active' : '')}>
+                            ALL
+                        </button>
+                    </div>
+                    </div>
+                <div id="chart" className='chart'>
                     
-                    <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={250} />
+
+                    <div className='chart-timeline' style={{ float: 'left' }}>
+
+                        <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={250} />
+                    </div>
                 </div>
             </div>
-
 
         )
     }

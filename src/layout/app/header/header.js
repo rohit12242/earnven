@@ -108,10 +108,10 @@ const RootStyle = styled(AppBar)(({ theme }) => ({
           </div>
           
           <Box sx={{ flexGrow: 1 }} />
-          
-          {/* <Stack direction="row" spacing={{ xs: 0.5, sm: 1.5 }}> */}
+  
+          {/* <Stack direction="row" spacing={{ xs: 1.5, sm: 3.5 }}> */}
           <div style={{marginRight:'20px'}}>
-            <NetworkDropDown />
+             <NetworkDropDown />
           </div>
           <div style={{marginRight:'20px'}}>
             <MenuListComposition />

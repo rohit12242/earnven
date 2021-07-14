@@ -38,7 +38,7 @@ export default class index extends Component {
         // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             var tokens = response.data.tokens
-            // console.log(tokens)
+            console.log(tokens)
             if(tokens!==undefined){
                 for(var i = 0; i<tokens.length ; i++){
                     if(tokens[i].tokenInfo.price !== false){
@@ -69,6 +69,7 @@ export default class index extends Component {
                 if(arr1[i]){
                     var object = {};
                     object.coingecko = arr1[i].tokenInfo.coingecko
+                    object.address = arr1[i].tokenInfo.address
                     object.name = arr1[i].tokenInfo.name
                     object.profit = arr1[i].tokenInfo.price.diff
                     object.symbol = arr1[i].tokenInfo.symbol
