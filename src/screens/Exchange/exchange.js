@@ -6,6 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
+import TransparentButton from '../../components/TransparentButton'
+import Web3 from 'web3';
+import ERC20ABI from '../../abi/ERC20.json'
 
 
 export default function Exchange()  {
@@ -15,37 +18,58 @@ export default function Exchange()  {
     const [TokenFromAmount, setTokenFromAmount] = useState();
     const [TokenToAmount, setTokenToAmount] = useState();
     // const [ReturnText, setReturnText] = useState();
-    // const [ReturnAmount, setReturnAmount] = useState(0);
+    const [Price, setPrice] = useState(0);
+    const [minPrice, setMinPrice] = useState(0);
 
     useEffect(() => {
         async function getData(){
             if(TokenFromAmount!=='' && TokenFrom!=='' && TokenTo!==''){
                 // alert(TokenFromAmount)
                 let amount = parseFloat(TokenFromAmount)*Math.pow(10, 18).toString()
-                await axios.get(`https://api.0x.org/swap/v1/quote?buyToken=${TokenTo}&sellToken=${TokenFrom}&sellAmount=${amount}`,{},{})
+                await axios.get(`https://ropsten.api.0x.org/swap/v1/quote?buyToken=${TokenTo}&sellToken=${TokenFrom}&sellAmount=${amount}`,{},{})
                 .then(async(response)=>{
                     console.log(response)
+                    setPrice(response.data.price)
+                    setMinPrice(response.data.guaranteedPrice)
                     setTokenToAmount(parseFloat(response.data.buyAmount)*Math.pow(10, -18).toString())
+
                 })
             }
         }
         getData()
     }, [TokenFromAmount, TokenFrom, TokenTo])
 
-    // useEffect(() => {
-    //     async function getData(){
-    //         if(TokenToAmount!=='' && TokenTo!=='' && TokenFrom!==''){
-    //             // alert(TokenToAmount)
-    //             let amount = parseFloat(TokenToAmount)*Math.pow(10, 18).toString()
-    //             await axios.get(`https://api.0x.org/swap/v1/quote?buyToken=${TokenTo}&sellToken=${TokenFrom}&buyAmount=${amount}`,{},{})
-    //             .then(async(response)=>{
-    //                 console.log(response)
-    //                 setTokenFromAmount(parseFloat(response.data.sellAmount)*Math.pow(10, -18).toString())
-    //             })
-    //         }
-    //     }
-    //     getData()
-    // }, [TokenToAmount, TokenTo, TokenFrom])
+    async function loadWeb3(){
+    
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum)
+            await window.ethereum.enable()
+        }
+        else if (window.web3) {
+            window.web3 = new Web3(window.web3.currentProvider)
+        }
+        else {
+            window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+        }
+    
+    }
+    async function transact(){
+        await loadWeb3()
+        const web3 = window.web3;
+        const accounts = await web3.eth.getAccounts()
+        if(TokenFromAmount!=='' && TokenFrom!=='' && TokenTo!==''){
+            // alert(TokenFromAmount)
+            let amount = parseFloat(TokenFromAmount)*Math.pow(10, 18).toString()
+            await axios.get(`https://ropsten.api.0x.org/swap/v1/quote?buyToken=${TokenTo}&sellToken=${TokenFrom}&sellAmount=${amount}`,{},{})
+            .then(async(response)=>{
+                console.log(response)
+                response.data.from = accounts[0]
+                const ERC20contract = new web3.eth.Contract(ERC20ABI, response.data.sellTokenAddress);
+                await ERC20contract.methods.approve(response.data.allowanceTarget, response.data.sellAmount).send({from: accounts[0]});
+                await web3.eth.sendTransaction(await response.data);
+            })
+        }
+    }
     
     return (
             <div className="main-container">
@@ -62,7 +86,7 @@ export default function Exchange()  {
                                 <FormControl variant="outlined" style={{width:'120px'}}>
                                     <InputLabel id="demo-simple-select-outlined-label" >Token</InputLabel>
                                     <Select
-                                    style={{height:'50px'}}
+                                    style={{height:'50px', color:'white'}}
                                     labelId="demo-simple-select-outlined-label"
                                     id="demo-simple-select-outlined"
                                     value={TokenFrom}
@@ -77,19 +101,6 @@ export default function Exchange()  {
                                     <MenuItem value={'ZRX'}>ZRX</MenuItem>
                                     </Select>
                                 </FormControl>
-                                    {/* <button className="select-button-wrapper" onClick={this.openModal}>
-                                        <span className="select-token-container">
-                                            <img src={eth} alt=''/>
-                                            <div className="select-token-wrapper">
-                                                <span className="select-token-text">
-                                                    ETH
-                                                </span>
-                                            </div>
-                                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L5.5 5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </button> */}
 
                                 </div>
                             </div>
@@ -117,7 +128,7 @@ export default function Exchange()  {
                                 <FormControl variant="outlined" style={{width:'120px'}}>
                                     <InputLabel id="demo-simple-select-outlined-label" >Token</InputLabel>
                                     <Select
-                                    style={{height:'50px'}}
+                                    style={{height:'50px', color:'white'}}
                                     labelId="demo-simple-select-outlined-label"
                                     id="demo-simple-select-outlined"
                                     value={TokenTo}
@@ -132,18 +143,6 @@ export default function Exchange()  {
                                     <MenuItem value={'ZRX'}>ZRX</MenuItem>
                                     </Select>
                                 </FormControl>
-                                    {/* <button className="select-button-wrapper" onClick={openModal}>
-                                        <span className="select-token-container">
-                                            <div className="select-token-wrapper">
-                                                <span className="select-token-text">
-                                                    Select
-                                                </span>
-                                            </div>
-                                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 1L5.5 5L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </button> */}
                                 </div>
                             </div>
 
@@ -164,18 +163,33 @@ export default function Exchange()  {
                             </div>
 
                         </div>
-
+                        <br/>
                         <div className="seconddiv">Transaction Settings</div>
-                        <div className="thirddiv"> <div className="thirddiv-title"> Slippage </div> <div className="dash"></div> <div className="slippage-input-box"> <input className="slippage-input" placeholder="0" maxLength="3"></input>
+                        <br/>
+                        {/* <div className="thirddiv"> <div className="thirddiv-title"> Slippage </div> <div className="dash"></div> <div className="slippage-input-box"> <input className="slippage-input" placeholder="0" maxLength="3"></input>
                             <div className="Percentage"> <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.406781 2.85C0.406781 2.19133 0.597448 1.67567 0.978781 1.303C1.36878 0.930333 1.86711 0.744 2.47378 0.744C3.08045 0.744 3.57445 0.930333 3.95578 1.303C4.34578 1.67567 4.54078 2.19133 4.54078 2.85C4.54078 3.51733 4.34578 4.03733 3.95578 4.41C3.57445 4.78267 3.08045 4.969 2.47378 4.969C1.86711 4.969 1.36878 4.78267 0.978781 4.41C0.597448 4.03733 0.406781 3.51733 0.406781 2.85ZM8.75278 0.899999L3.64378 10H1.87578L6.97178 0.899999H8.75278ZM2.46078 1.836C1.98411 1.836 1.74578 2.174 1.74578 2.85C1.74578 3.53467 1.98411 3.877 2.46078 3.877C2.69478 3.877 2.87678 3.79467 3.00678 3.63C3.13678 3.45667 3.20178 3.19667 3.20178 2.85C3.20178 2.174 2.95478 1.836 2.46078 1.836ZM6.11378 8.037C6.11378 7.36967 6.30445 6.854 6.68578 6.49C7.07578 6.11733 7.57411 5.931 8.18078 5.931C8.78745 5.931 9.27712 6.11733 9.64978 6.49C10.0311 6.854 10.2218 7.36967 10.2218 8.037C10.2218 8.70433 10.0311 9.22433 9.64978 9.597C9.27712 9.96967 8.78745 10.156 8.18078 10.156C7.56545 10.156 7.06711 9.96967 6.68578 9.597C6.30445 9.22433 6.11378 8.70433 6.11378 8.037ZM8.16778 7.023C7.67378 7.023 7.42678 7.361 7.42678 8.037C7.42678 8.72167 7.67378 9.064 8.16778 9.064C8.65312 9.064 8.89578 8.72167 8.89578 8.037C8.89578 7.361 8.65312 7.023 8.16778 7.023Z" fill="white" />
                             </svg>
                             </div>
-                        </div> </div>
-                        <div className="fourthdiv"><div className="fourthdiv-title"> Minimum output </div> <div className="dash1"> </div> <div className="minimum-op-text">77</div> </div>
-                        <div className="fifthdiv"><div className="fifthdiv-title"> Rate </div> <span className="dash2"></span> <div className="rate-text">1 DAI = 0.00034 ETH</div> </div>
+                        </div> </div> */}
+                        <div className="fourthdiv"><div className="fourthdiv-title"> Min. output </div> <div className="dash1"> </div> <div className="minimum-op-text">{TokenFromAmount>0? (parseFloat(TokenFromAmount)*parseFloat(minPrice)).toFixed(3):'0'}</div> </div>
+                        <div className="fifthdiv"><div className="fifthdiv-title"> Rate </div> <span className="dash2"></span> <div className="rate-text"> 1 {TokenFrom} = {parseFloat(Price).toFixed(3)} {TokenTo}</div> </div>
                     </div>
-                    <div className="end"><div className="submit"> <button className="submit-btn">Submit</button></div></div>
+                    <TransparentButton value='Submit Transaction'
+                    onClick={transact}
+                    style={{
+                        height:'45px',
+                        width:'300px',
+                        background:'transparent',
+                        borderWidth:'1px',
+                        borderStyle:'solid',
+                        borderColor:'#ac6afc',
+                        borderRadius:'5px',
+                        color:'white',
+                        cursor:'pointer',
+                        float:'right'
+                    }}></TransparentButton>
+                    {/* <div className="end"><div className="submit"> <button onClick={transact} className="submit-btn">Submit</button></div></div> */}
                 </div>
             </div>
     )
