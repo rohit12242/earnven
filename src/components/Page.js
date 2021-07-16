@@ -7,7 +7,7 @@ import { Box } from '@material-ui/core';
 // ----------------------------------------------------------------------
 
 const Page = forwardRef(({ children, title = '', ...other }, ref) => (
-  <Box ref={ref} {...other}>
+  <Box ref={ref} {...other} sx={{mt:2}}>
     <Helmet>
       <title>{title}</title>
     </Helmet>

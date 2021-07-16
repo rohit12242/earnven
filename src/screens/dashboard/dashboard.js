@@ -56,7 +56,7 @@ import { Grid } from '@material-ui/core';
 
 export default function Dashboard() {
     return (
-        <Page title="Dashboard | Minimal-UI">
+        <Page title="Dashboard">
 
             <Container maxWidth="xl">
                 {/* <Box sx={{ pb: 5 }}>

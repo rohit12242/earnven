@@ -6,7 +6,7 @@ import Portis from '@portis/web3';
 import Fortmatic from 'fortmatic';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Torus from "@toruslabs/torus-embed";
-
+import { data } from "../../globalStore";
 
 class App extends Component {
 
@@ -63,7 +63,9 @@ class App extends Component {
     async loadBlockchainData(){
         const web3 = window.web3;
         const accounts = await web3.eth.getAccounts();
+        data.account = accounts[0];
         this.setState({account:accounts[0], connected:true})
+        localStorage.setItem('selected-account',accounts[0]);
     }
 
     constructor(){

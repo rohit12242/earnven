@@ -14,7 +14,8 @@ import TestingPage from './screens/testingPage';
 import AllAssetsPage from './screens/AllAssetsPage';
 import TokenDetailsPage from './components/tokenDetails'
 import NFTpage from './screens/NFTpage';
-import NFTTokenPage from './components/NFTTokenPage'
+import NFTTokenPage from './components/NFTTokenPage';
+import ConnectWallet from './components/ConnectWallet';
 
 
 export default function Router(){
@@ -50,6 +51,7 @@ export default function Router(){
                 {path:'nft',element:<NFTpage />},
                 // {path:'nft-token',element:<NFTTokenPage/>},
                 {path:'nft-token/:contract/:id',element:<NFTTokenPage/>},
+                {path:'connect-wallet',element:<ConnectWallet/>},
                 { path: '*', element: <Navigate to="/404" replace /> }
 
             ]
