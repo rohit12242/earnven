@@ -54,7 +54,13 @@ export default class index extends Component {
     etherscanTxLink(link){
         link = 'https://etherscan.io/tx/'+link;
         return link
-  }
+    }
+
+    convertTimestamp(epoch){
+        var myDate = new Date( epoch*1000);
+        return myDate.toLocaleString();
+    }
+  
 
     change = (arr) =>{
         contents = arr.map((object)=>
@@ -72,7 +78,7 @@ export default class index extends Component {
 
                 <div style={{width:'20%', float:'left', textAlign:'left'}}>
                 <font color='white'>{object.status}</font><br/>
-                <font style={{fontSize:'10px', color:'white'}}>11:31 AM</font>
+                <font style={{fontSize:'10px', color:'white'}}>{this.convertTimestamp(object.timestamp)}</font>
                 
                 </div>
 

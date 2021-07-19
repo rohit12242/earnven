@@ -17,14 +17,14 @@
 }
 .outbox {
   width: 830px;
-  height: 481px;
+  height: auto;
   left: 495px;
   top: 171px;
 }
 .box {
   padding: 58px;
   width: 830px;
-  height: 316px;
+  height: auto;
   left: 495px;
   top: 246px;
   border: 1px solid #737373;
