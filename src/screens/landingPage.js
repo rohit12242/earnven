@@ -65,8 +65,9 @@ export default function LandingPage(params) {
             setshoWalletComponent(true)
         }
 
-    }, [shoWalletComponent])
+    }, [navigate])
 
+  
    
 
     return (
