@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import WalletSelector from '../components/WalletSelector'
 import { Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
@@ -43,4 +43,37 @@ export default function LandingPage() {
 
         </>
     )
+} */
+
+
+import { useNavigate } from 'react-router-dom';
+
+import { useEffect, useState } from "react";
+import ConnectWallet from "../components/ConnectWallet";
+
+
+
+export default function LandingPage(params) {
+    const navigate = useNavigate();
+    const [shoWalletComponent, setshoWalletComponent] = useState(false)
+
+    useEffect(() => {
+        if (localStorage.getItem('selected-account')) {
+            navigate('/app/dashboard')
+        }
+        else {
+            setshoWalletComponent(true)
+        }
+
+    }, [shoWalletComponent])
+
+   
+
+    return (
+        <div>
+            {shoWalletComponent && <ConnectWallet />}
+        </div>
+    );
+
+
 }

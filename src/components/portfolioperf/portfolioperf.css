@@ -9,3 +9,8 @@
     position: relative;
     width: 100%;
 }
+
+.apexcharts-tooltip {
+    background: #737373;
+    color: #000;
+  }
