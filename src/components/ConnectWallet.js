@@ -34,25 +34,30 @@ export default function ConnectWallet() {
 
     const routeToDashboard = async (account, provider) => {
         let existingWallet = localStorage.getItem('wallets');
-        // let parsedExistingWallet = JSON.parse(existingWallet)
-        // console.log('parsed wallet existing',parsedExistingWallet)
+        let parsedExistingWallet = JSON.parse(existingWallet)
+
         const newWallet = {
             address: account,
             provider: provider,
 
         }
-        console.log("see new wallet::",newWallet)
         let newDetails = [];
-        if (existingWallet == null) {
-            newDetails.push(JSON.stringify(newWallet));
-            console.log("see new details::",newDetails)
+        if (existingWallet === null) {
+            newDetails.push(newWallet);
         }
         else {
-            newDetails.push(existingWallet);
-            newDetails.push(JSON.stringify(newWallet))
+            const isAddressPresent = parsedExistingWallet.findIndex((element) => element.address === account);
+            if (isAddressPresent === -1) {
+                newDetails.push(newWallet);
+                newDetails = [...parsedExistingWallet, newWallet]
+            }
+            else{
+                newDetails=[...parsedExistingWallet];
+            }
         }
+        localStorage.setItem('wallets', JSON.stringify(newDetails))
 
-        localStorage.setItem('wallets', newDetails)
+
         localStorage.setItem('selected-account', account);
         navigate('/app/dashboard')
     }

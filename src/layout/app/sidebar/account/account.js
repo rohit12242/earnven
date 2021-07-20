@@ -1,15 +1,14 @@
-
-
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 import accountLogo from '../../../../assets/icons/accountlogo.png';
 import { Box, Typography, Avatar, MenuItem, ListItemIcon, ListItemText, Stack, Divider } from '@material-ui/core';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import MenuPopover from '../../../../components/MenuPopover'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { RiSettings5Line } from "react-icons/ri";
 import { VscAdd } from "react-icons/vsc";
 import './account.css';
 import { useNavigate } from 'react-router-dom';
+// import AccountBalance from '../../../../components/AccountBalance';
 const AccountStyle = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -24,30 +23,13 @@ export default function Account() {
     const navigate = useNavigate();
     const anchorRef = useRef(null)
     const [account, setaccount] = useState(false)
+    const [accountList, setaccountList] = useState([])
 
-    /* useEffect(()=>{
-        
-        async function getAccounts(){
-            if (window.ethereum) {
-                window.web3 = new Web3(window.ethereum)
-                await window.ethereum.enable()
-              }
-              else if (window.web3) {
-                window.web3 = new Web3(window.web3.currentProvider)
-              }
-              else {
-                window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-              }
-            const web3 = window.web3;
-            console.log("test web3::",web3)
-            const accounts = await web3.eth.getAccounts();
-            console.log("test accounts::",accounts)
-            selectedAccount = accounts[0];
-            console.log('selected account',selectedAccount)
-        }
-        getAccounts();
-        console.log("test account::",selectedAccount)
-    },[]) */
+
+    useEffect(() => {
+        const result = localStorage.getItem('wallets');
+        setaccountList(JSON.parse(result));
+    }, [account])
 
     const showAccountPopover = () => {
         setaccount(true);
@@ -59,6 +41,10 @@ export default function Account() {
     const routeToConnectWallet = () => {
         navigate('/app/connect-wallet')
         setaccount(false);
+    }
+
+    const updateSelectedAccount = (address) => {
+        localStorage.setItem('selected-account', address)
     }
 
     function shortaddress(addy) {
@@ -80,8 +66,9 @@ export default function Account() {
     }
 
 
+
     return (
-        <div>
+        <>
             <AccountStyle ref={anchorRef} onClick={showAccountPopover}>
                 <Avatar src={accountLogo} alt="photoURL" />
                 <Box sx={{ ml: 2 }}>
@@ -92,20 +79,28 @@ export default function Account() {
                         <ExpandMoreIcon style={{ color: 'fff' }} />
                     </Stack>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        developer1
+                        $12345
                     </Typography>
                 </Box>
             </AccountStyle>
             <MenuPopover open={account} onClose={hideAccountPopover} anchorEl={anchorRef.current}>
                 <Box sx={{ py: 1 }}>
-                    <MenuItem onClick={hideAccountPopover} sx={{ py: 1, px: 2.5 }}>
-                        <ListItemText primaryTypographyProps={{ variant: 'body2', color: '#fff' }}>
-                            {shortaddress1(localStorage.getItem('selected-account'))}
-                        </ListItemText>
-                    </MenuItem>
+                    {accountList.map((option) => (
+                        <MenuItem onClick={() => {
+                            hideAccountPopover();
+                            updateSelectedAccount(option.address);
+                        }}
+                            sx={{ py: 1, px: 2.5 }}>
+                            <ListItemText primaryTypographyProps={{ variant: 'body2', color: '#fff' }}>
+                                {shortaddress1(option.address)}
+                            </ListItemText>
+                        </MenuItem>
+                    )
+                    )}
+
                     <Divider variant="middle" />
                     <MenuItem onClick={routeToConnectWallet} sx={{
-                        py: 1, px: 1, mx: 2,my:1, borderRadius: '8px', background: (theme) => theme.palette.gradients.custom
+                        py: 1, px: 1, mx: 2, my: 1, borderRadius: '8px', background: (theme) => theme.palette.gradients.custom
                     }} >
                         <ListItemIcon sx={{ mr: 1, minWidth: '17px' }}>
                             <VscAdd style={{ color: 'fff' }} />
@@ -126,6 +121,6 @@ export default function Account() {
                     </MenuItem>
                 </Box>
             </MenuPopover >
-        </div>
+        </>
     );
 }
