@@ -29,6 +29,13 @@ export default class PortfolioPerf extends Component {
 
     }
 
+    componentDidUpdate(){
+        if(this.state.account!== this.props.address){
+            this.getAddressChartHistory();
+        }
+    }
+
+
     // Will return history of ethereum account address
     async getAddressChartHistory() {
         // const web3 = window.web3;
@@ -38,8 +45,12 @@ export default class PortfolioPerf extends Component {
         var points = [];
         let result = [];
         let c = {};
+        // const accountAddress = localStorage.getItem('selected-account')
+        const accountAddress = this.props.address;
+        this.setState({account:this.props.address})
+        const path = 'https://api2.ethplorer.io/getAddressChartHistory/'+accountAddress+'?apiKey=ethplorer.widget'
         // let points = {}
-        await axios.get(`https://api2.ethplorer.io/getAddressChartHistory/0xf58d751CC07E55A7a64fe80b2A3D8880D03FEC39?apiKey=ethplorer.widget`, {}, {})
+        await axios.get(path, {}, {})
             .then(async (response) => {
                 // result = JSON.parse(response.history);
                 console.log('response:::' + response.data.history.timestamp);
@@ -48,7 +59,7 @@ export default class PortfolioPerf extends Component {
                 for (var i = 0; i < result.length; i++) {
                     var temp = [];
                     temp.push(result[i].date);
-                    temp.push(result[i].max);
+                    temp.push((result[i].max).toFixed(2));
                     // console.log("temp:::"+temp)
                     data.push(temp);
                     // console.log("data array:::"+data.type);
@@ -62,6 +73,12 @@ export default class PortfolioPerf extends Component {
                 points.push(c);
                 console.log(c);
                 this.setState({ series: points })
+                // if(points[0].data.length==0){
+                //     this.setState({hideFilter:true})
+                // }
+                // else{
+                //     this.setState({hideFilter:false})
+                // }
                 console.log("account::" + this.state.account);
             })
 
@@ -72,6 +89,7 @@ export default class PortfolioPerf extends Component {
         super(props);
         this.state = {
             account: '',
+            // hideFilter: false,
             series: [],
             options: {
                 chart: {

@@ -8,7 +8,7 @@ import { RiSettings5Line } from "react-icons/ri";
 import { VscAdd } from "react-icons/vsc";
 import './account.css';
 import { useNavigate } from 'react-router-dom';
-// import AccountBalance from '../../../../components/AccountBalance';
+import AccountBalance from '../../../../components/AccountBalance';
 const AccountStyle = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -47,6 +47,11 @@ export default function Account() {
         localStorage.setItem('selected-account', address)
     }
 
+    const routeToDashboard = () => {
+        const address = localStorage.getItem('selected-account');
+        navigate(`/app/dashboard/${address}`,{replace:true})
+    }
+
     function shortaddress(addy) {
         if (addy === '') {
             return addy
@@ -79,7 +84,7 @@ export default function Account() {
                         <ExpandMoreIcon style={{ color: 'fff' }} />
                     </Stack>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        $12345
+                        <AccountBalance fetchData={account} />
                     </Typography>
                 </Box>
             </AccountStyle>
@@ -89,6 +94,7 @@ export default function Account() {
                         <MenuItem onClick={() => {
                             hideAccountPopover();
                             updateSelectedAccount(option.address);
+                            routeToDashboard();
                         }}
                             sx={{ py: 1, px: 2.5 }}>
                             <ListItemText primaryTypographyProps={{ variant: 'body2', color: '#fff' }}>

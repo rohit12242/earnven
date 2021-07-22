@@ -9,30 +9,39 @@ var arr2 = []
 export default class index extends Component {
 
     async componentWillMount(){
-        await this.loadWeb3();
+        // await this.loadWeb3();
         await this.loadBlockchainData();
         
     }
 
-    async loadWeb3() {
-        if (window.ethereum) {
-          window.web3 = new Web3(window.ethereum)
-          await window.ethereum.enable()
-        }
-        else if (window.web3) {
-          window.web3 = new Web3(window.web3.currentProvider)
-        }
-        else {
-          window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    // async loadWeb3() {
+    //     if (window.ethereum) {
+    //       window.web3 = new Web3(window.ethereum)
+    //       await window.ethereum.enable()
+    //     }
+    //     else if (window.web3) {
+    //       window.web3 = new Web3(window.web3.currentProvider)
+    //     }
+    //     else {
+    //       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    //     }
+    // }
+
+    componentDidUpdate(){
+        if(this.state.account !== this.props.address){
+            this.loadBlockchainData();
         }
     }
 
-    async loadBlockchainData(){
-        const web3 = window.web3;
-        const accounts = await web3.eth.getAccounts();
-        this.setState({account:accounts[0]})
 
-        await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+    async loadBlockchainData(){
+        // const web3 = window.web3;
+        // const accounts = await web3.eth.getAccounts();
+        // this.setState({account:accounts[0]})
+        const web3 = new Web3();
+        const address = this.props.address;
+        this.setState({account:this.props.address})
+        await axios.get(`https://api.ethplorer.io/getAddressInfo/${address}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             var arr1 = []
@@ -41,7 +50,7 @@ export default class index extends Component {
             if(tokens!==undefined){
                 for(var i = 0; i<tokens.length ; i++){
                     if(tokens[i].tokenInfo.price !== false){
-                        tokens[i].totalInvestment = parseFloat(web3.utils.fromWei(tokens[i].rawBalance, 'ether'))*parseFloat(tokens[i].tokenInfo.price.rate)
+                        tokens[i].totalInvestment = (web3.utils.fromWei(tokens[i].rawBalance, 'ether'))*(tokens[i].tokenInfo.price.rate)
                         arr1.push(tokens[i])
                     }
                 }

@@ -5,6 +5,7 @@ import { experimentalStyled as styled } from '@material-ui/core/styles';
 import Sidebar from './sidebar/sidebar';
 import Header from './header/header';
 import { Divider } from '@material-ui/core';
+// import { useParams } from 'react-router-dom';
 
 import './app.css';
 
@@ -34,6 +35,7 @@ const MainStyle = styled('div')(({ theme }) => ({
 
 export default function AppLayout() {
     const [open, setOpen] = useState(false);
+    // const {address} = useParams();
     return (
         <RootStyle>
             <Header onOpenSidebar={() => setOpen(true)} />
