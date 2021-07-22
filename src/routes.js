@@ -15,7 +15,8 @@ import AllAssetsPage from './screens/AllAssetsPage';
 import TokenDetailsPage from './components/tokenDetails'
 import NFTpage from './screens/NFTpage';
 import NFTTokenPage from './components/NFTTokenPage'
-
+import AllTokensApprovals from './screens/allTokensApprovals'
+import TokenApproval from './screens/tokenApproval'
 
 export default function Router(){
 
@@ -50,6 +51,8 @@ export default function Router(){
                 {path:'nft',element:<NFTpage />},
                 // {path:'nft-token',element:<NFTTokenPage/>},
                 {path:'nft-token/:contract/:id',element:<NFTTokenPage/>},
+                {path:'approvals',element:<AllTokensApprovals />},
+                {path:'approvals/:tokenAddress',element:<TokenApproval />},
                 { path: '*', element: <Navigate to="/404" replace /> }
 
             ]

@@ -39,8 +39,6 @@ export default class index extends Component {
         .then(async(response) => {
             var tokens = response.data.tokens
             console.log(tokens)
-
-            
             var total= parseFloat(response.data.ETH.price.rate)*parseInt(web3.utils.fromWei(response.data.ETH.rawBalance,'ether')) ;
             if(tokens!==undefined){
                 for(var i = 0; i<tokens.length; i++){
@@ -95,11 +93,9 @@ export default class index extends Component {
                     arr2.push(object)
                 }
             }
-
             // console.log(arr2)
             this.change(arr2)
             this.setState({contents})
-        
     }
 
     change = (arr) =>{
@@ -245,10 +241,7 @@ export default class index extends Component {
             onClick={async(e)=>{await this.setState({page:this.state.page+1});this.update()}}
             > &gt; </button> 
 
-            </font><br/><br/>
-
-
-            
+            </font><br/><br/> 
             </center>      
             </div>
         )

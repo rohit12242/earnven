@@ -193,7 +193,6 @@ export default class index extends Component {
         const accounts = await web3.eth.getAccounts();
         this.setState({account:accounts[0]})
 
-        // await axios.get(`https://api.ethplorer.io/getAddressHistory/0x684fC9fb48fC9c30FAAB35A2030F85ff441553a7?apiKey=EK-qSPda-W9rX7yJ-UY93y&type=transfer`,{},{})
         await axios.get(`https://api.ethplorer.io/getTokenInfo/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
             eth.price = response.data.price.rate
@@ -201,14 +200,14 @@ export default class index extends Component {
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressHistory/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressHistory/0xbfbe5822a880a41c2075dc7e1d92663739cf119e?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
         .then(async(response) => {
             ops = response.data.operations;
             // console.log(ops)
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressTransactions/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressTransactions/0xbfbe5822a880a41c2075dc7e1d92663739cf119e?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
         .then(async(response) => {
             ops2 = response.data
             // console.log(ops2)
