@@ -26,10 +26,9 @@ export default function Dashboard() {
                             <Grid item xs={12} md={12}>
                                 <PortfolioPerf address={address}/>
                             </Grid>
-                            {console.log("dashboard rendered")}
                             <Grid item xs={12} md={12}>
                                 <AllAssetsMini address={address}/><br />
-                                <Link to="/app/assets"><div style={{ float: 'right', color: 'white' }}>See More</div></Link>
+                                <Link to={`/${address}/assets`} ><div style={{ float: 'right', color: 'white' }}>See More</div></Link>
                             </Grid>
                         </Grid>
 

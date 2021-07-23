@@ -38,10 +38,10 @@ NavItem.propTypes = {
   active: PropTypes.func
 };
 
-function NavItem({ item, active }) {
+function NavItem({ item, active ,address}) {
   
-  const isActiveRoot = active(item.path);
   const { title, path, icon, info, children } = item;
+  const isActiveRoot = active(`/${address}${path}`);
   const [open, setOpen] = useState(isActiveRoot);
 
   const handleOpen = () => {
@@ -125,9 +125,10 @@ function NavItem({ item, active }) {
   }
 
   return (
+   
     <ListItemStyle
       component={RouterLink}
-      to={path}
+      to= {`/${address}/${path}`}
       sx={{
         ...(isActiveRoot && activeRootStyle)
       }}
@@ -143,7 +144,7 @@ NavSection.propTypes = {
   navConfig: PropTypes.array
 };
 
-export default function NavSection({ navConfig, ...other }) {
+export default function NavSection({ navConfig,address, ...other }) {
   const { pathname } = useLocation();
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
 
@@ -151,7 +152,7 @@ export default function NavSection({ navConfig, ...other }) {
     <Box {...other} sx={{p:4,mt:3}}>
       <List disablePadding>
         {navConfig.map((item) => (
-          <NavItem key={item.title} item={item} active={match} />
+          <NavItem key={item.title} item={item} active={match} address={address} />
         ))}
       </List>
     </Box>

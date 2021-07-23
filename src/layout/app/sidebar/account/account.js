@@ -19,7 +19,7 @@ const AccountStyle = styled('div')(({ theme }) => ({
 }));
 
 
-export default function Account() {
+export default function Account({address}) {
     const navigate = useNavigate();
     const anchorRef = useRef(null)
     const [account, setaccount] = useState(false)
@@ -49,7 +49,7 @@ export default function Account() {
 
     const routeToDashboard = () => {
         const address = localStorage.getItem('selected-account');
-        navigate(`/app/dashboard/${address}`,{replace:true})
+        navigate(`/${address}/dashboard/`,{replace:true})
     }
 
     function shortaddress(addy) {
@@ -74,7 +74,7 @@ export default function Account() {
 
     return (
         <>
-            <AccountStyle ref={anchorRef} onClick={showAccountPopover}>
+            <AccountStyle ref={anchorRef} onClick={showAccountPopover} style={{cursor:'pointer'}}>
                 <Avatar src={accountLogo} alt="photoURL" />
                 <Box sx={{ ml: 2 }}>
                     <Stack direction='row'>
@@ -84,7 +84,7 @@ export default function Account() {
                         <ExpandMoreIcon style={{ color: 'fff' }} />
                     </Stack>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        <AccountBalance fetchData={account} />
+                        <AccountBalance address={address}/>
                     </Typography>
                 </Box>
             </AccountStyle>

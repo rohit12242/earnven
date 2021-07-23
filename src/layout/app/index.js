@@ -7,6 +7,7 @@ import Header from './header/header';
 import { Divider } from '@material-ui/core';
 // import { useParams } from 'react-router-dom';
 
+
 import './app.css';
 
 
@@ -39,8 +40,7 @@ export default function AppLayout() {
     return (
         <RootStyle>
             <Header onOpenSidebar={() => setOpen(true)} />
-            <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
-            
+             <Sidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} address={localStorage.getItem('selected-account')} />
             <MainStyle>
             <Divider variant='middle' />
                 <Outlet />

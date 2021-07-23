@@ -13,40 +13,41 @@ import multiSenderLogo from '../../assets/icons/multisender.png';
 
 const getIcon = (name) => <img src={name} alt="" width={22} height={22} />;
 
+
 const sidebarConfig = [
   {
     title: 'dashboard',
-    path: '/app/dashboard',
+    path: '/dashboard',
     icon: getIcon(dashboardLogo)
   },
   {
     title: 'history',
-    path: '/app/history',
+    path: '/history',
     icon: getIcon(historyLogo)
   },
   {
     title: 'defi made easy',
-    path: '/app/defimadeasy',
+    path: '/defimadeasy',
     icon: getIcon(defiMadeEasyLogo)
   },
   {
     title: 'bridge',
-    path: '/app/bridge',
+    path: '/bridge',
     icon: getIcon(tradingLogo)
   },
   {
     title: 'multisender',
-    path: '/app/multisender',
+    path: '/multisender',
     icon: getIcon(bridgeLogo)
   },
   {
     title: 'safefarm',
-    path: '/app/safefarm',
+    path: '/safefarm',
     icon: getIcon(safeFarmsLogo)
   },
   {
     title: 'trading',
-    path: '/app/trading',
+    path: '/trading',
     icon: getIcon(multiSenderLogo)
   }
 ];

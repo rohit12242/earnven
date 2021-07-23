@@ -27,9 +27,10 @@ export default class index extends Component {
     //     }
     // }
 
-    componentDidUpdate(){
+     componentDidUpdate(){
         if(this.state.account !== this.props.address){
-            this.loadBlockchainData();
+            console.log("all assets mini should re render")
+             this.loadBlockchainData();
         }
     }
 
@@ -41,6 +42,7 @@ export default class index extends Component {
         const web3 = new Web3();
         const address = this.props.address;
         this.setState({account:this.props.address})
+        this.setState({contents:''})
         await axios.get(`https://api.ethplorer.io/getAddressInfo/${address}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         // await axios.get(`https://api.ethplorer.io/getAddressInfo/${this.state.account}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
@@ -80,6 +82,7 @@ export default class index extends Component {
             this.change(arr2)
             this.setState({contents})
             }    
+            
     })
     }
 
@@ -188,6 +191,7 @@ export default class index extends Component {
                 borderColor:'#737373',
                 borderRadius:'10px'
             }}>
+                {console.log("all asset mini jsx is rendered")}
             <center>
             <div style={{marginTop:'30px', marginRight:'60%', fontSize:'20px', marginBottom:'10px'}}>
                 <font color='white'> All Assets </font>

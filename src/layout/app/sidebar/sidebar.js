@@ -100,7 +100,7 @@ Sidebar.propTypes = {
 };
 
 
-export default function Sidebar({ isOpenSidebar, onCloseSidebar }){
+export default function Sidebar({ isOpenSidebar, onCloseSidebar,address }){
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -125,10 +125,10 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar }){
       </Box> */}
 
       <Box sx={{ mb: 0, mx: 4, mt:3 }}>
-          <Account/>
+          <Account address={address}/>
       </Box>
 
-      <NavSection navConfig={sidebarConfig} />
+      <NavSection navConfig={sidebarConfig} address={address}/>
 
       <Box sx={{ flexGrow: 1 }} />
 

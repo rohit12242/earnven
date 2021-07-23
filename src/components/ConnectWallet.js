@@ -59,7 +59,7 @@ export default function ConnectWallet() {
 
 
         localStorage.setItem('selected-account', account);
-        navigate('/app/dashboard')
+        navigate(`/${account}/dashboard`)
     }
 
     const addressUpdate = (e) => {

@@ -34,11 +34,11 @@ export default function Router(){
             element:<Landing />,
         },
         {
-            path:'/app',
+            path:'/:address',
             element: <AppLayout/>,
             children:[
-                {path:'/',element: <Navigate to="/app/dashboard/:address" replace /> },
-                {path:'dashboard/:address',element:<Dashboard/>},
+                {path:'/',element: <Navigate to="/:address/dashboard" replace /> },
+                {path:'dashboard',element:<Dashboard/>},
                 {path:'history',element:<History />},
                 {path:'defimadeasy',element:<DefiMadeEasy />},
                 {path:'assets',element:<AllAssetsPage />},

@@ -29,8 +29,8 @@ export default class PortfolioPerf extends Component {
 
     }
 
-    componentDidUpdate(){
-        if(this.state.account!== this.props.address){
+    componentDidUpdate() {
+        if (this.state.account !== this.props.address) {
             this.getAddressChartHistory();
         }
     }
@@ -47,8 +47,8 @@ export default class PortfolioPerf extends Component {
         let c = {};
         // const accountAddress = localStorage.getItem('selected-account')
         const accountAddress = this.props.address;
-        this.setState({account:this.props.address})
-        const path = 'https://api2.ethplorer.io/getAddressChartHistory/'+accountAddress+'?apiKey=ethplorer.widget'
+        this.setState({ account: this.props.address })
+        const path = 'https://api2.ethplorer.io/getAddressChartHistory/' + accountAddress + '?apiKey=ethplorer.widget'
         // let points = {}
         await axios.get(path, {}, {})
             .then(async (response) => {
@@ -255,68 +255,99 @@ export default class PortfolioPerf extends Component {
             },
         };
     }
-
+    monthDiff(d1, d2) {
+        var months;
+        months = (d2.getFullYear() - d1.getFullYear()) * 12;
+        months -= d1.getMonth();
+        months += d2.getMonth();
+        return months <= 0 ? 0 : months;
+    }
 
     updateData(timeline) {
-        const length = this.state.series[0].data.length;
-        const firstDay = new Date(this.state.series[0].data[0][0]);
-        const lastDay = new Date(this.state.series[0].data[length - 1][0]);
-        const oneMonthBackDate = new Date();
-        const oneDayBackDate = new Date();
-        const oneYearBackDate = new Date();
-        oneMonthBackDate.setMonth(lastDay.getMonth() - 1);
-        oneDayBackDate.setDate(lastDay.getDate() - 2);
-        oneYearBackDate.setFullYear(lastDay.getFullYear() - 1);
-        console.log("example date:::" + new Date('12 Jun 2021').getTime())
-        console.log("your result::" + oneMonthBackDate.getTime())
-
-        this.setState({
-            selection: timeline
-        })
-
-        switch (timeline) {
-            case 'one_month':
-                ApexCharts.exec(
-                    'area-datetime',
-                    'zoomX',
-                    oneMonthBackDate.getTime(),
-                    lastDay.getTime()
-                )
-                break
-
-            case 'one_year':
-                ApexCharts.exec(
-                    'area-datetime',
-                    'zoomX',
-                    oneYearBackDate.getTime(),
-                    lastDay.getTime()
-                )
-                break
-            case 'ytd':
-                ApexCharts.exec(
-                    'area-datetime',
-                    'zoomX',
-                    oneDayBackDate.getTime(),
-                    lastDay.getTime()
-                )
-                break
-            case 'all':
-                ApexCharts.exec(
-                    'area-datetime',
-                    'zoomX',
-                    firstDay.getTime(),
-                    lastDay.getTime()
-                )
-                break
-            default:
+        if (this.state.series[0].data.length === 0) {
+            
         }
+        else {
+            const length = this.state.series[0].data.length;
+            const firstDay = new Date(this.state.series[0].data[0][0]);
+            const lastDay = new Date(this.state.series[0].data[length - 1][0]);
+            const oneMonthBackDate = new Date();
+            const oneDayBackDate = new Date();
+            const oneYearBackDate = new Date();
+            oneMonthBackDate.setMonth(lastDay.getMonth() - 1);
+            oneDayBackDate.setDate(lastDay.getDate() - 2);
+            oneYearBackDate.setFullYear(lastDay.getFullYear() - 1);
+            const accountAgeInMonths = this.monthDiff(firstDay, lastDay);
+            this.setState({
+                selection: timeline
+            })
+
+            switch (timeline) {
+                case 'one_month':
+                    if (accountAgeInMonths >= 1) {
+                        ApexCharts.exec(
+                            'area-datetime',
+                            'zoomX',
+                            oneMonthBackDate.getTime(),
+                            lastDay.getTime()
+                        )
+                    }
+                    else {
+                        ApexCharts.exec(
+                            'area-datetime',
+                            'zoomX',
+                            firstDay.getTime(),
+                            lastDay.getTime()
+                        )
+                    }
+
+                    break
+
+                case 'one_year':
+                    if (accountAgeInMonths >= 12) {
+                        ApexCharts.exec(
+                            'area-datetime',
+                            'zoomX',
+                            oneYearBackDate.getTime(),
+                            lastDay.getTime()
+                        )
+                    }
+                    else {
+                        ApexCharts.exec(
+                            'area-datetime',
+                            'zoomX',
+                            firstDay.getTime(),
+                            lastDay.getTime()
+                        )
+                    }
+                    break
+                case 'ytd':
+                    ApexCharts.exec(
+                        'area-datetime',
+                        'zoomX',
+                        oneDayBackDate.getTime(),
+                        lastDay.getTime()
+                    )
+                    break
+                case 'all':
+                    ApexCharts.exec(
+                        'area-datetime',
+                        'zoomX',
+                        firstDay.getTime(),
+                        lastDay.getTime()
+                    )
+                    break
+                default:
+            }
+        }
+
     }
 
     render() {
         return (
-            <div style={{border:'1px solid #737373',borderRadius:'10px'}}>
+            <div style={{ border: '1px solid #737373', borderRadius: '10px' }}>
                 <div>
-                <div style={{ textAlign:'end' }}>
+                    <div style={{ textAlign: 'end' }}>
                         <button id="one_month"
 
                             onClick={() => this.updateData('one_month')} className={(this.state.selection === 'one_month' ? 'active' : '')}>
@@ -333,7 +364,7 @@ export default class PortfolioPerf extends Component {
                         <button id="ytd"
 
                             onClick={() => this.updateData('ytd')} className={(this.state.selection === 'ytd' ? 'active' : '')}>
-                            YTD
+                            24H
                         </button>
                         &nbsp;
                         <button id="all"
@@ -342,9 +373,9 @@ export default class PortfolioPerf extends Component {
                             ALL
                         </button>
                     </div>
-                    </div>
+                </div>
                 <div id="chart" className='chart'>
-                    
+
 
                     <div className='chart-timeline' style={{ float: 'left' }}>
 

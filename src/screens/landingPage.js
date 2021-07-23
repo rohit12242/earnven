@@ -60,7 +60,7 @@ export default function LandingPage(params) {
     useEffect(() => {
         if (localStorage.getItem('selected-account')) {
             const address = localStorage.getItem('selected-account')
-            navigate(`/app/dashboard/${address}`)
+            navigate(`/${address}/dashboard`)
         }
         else {
             setshoWalletComponent(true)
