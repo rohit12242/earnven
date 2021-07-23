@@ -35,6 +35,9 @@ const styles = () => ({
         "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
           borderColor: "purple"
         }
+      },
+      option:{
+          color:'#000'
       }
     
   });
