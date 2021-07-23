@@ -48,9 +48,23 @@ export default class index extends Component {
         .then(async(response) => {
             var arr1 = []
             var tokens = response.data.tokens
+
+            var total= parseFloat(response.data.ETH.price.rate)*parseInt(web3.utils.fromWei(response.data.ETH.rawBalance,'ether')) ;
+            if(tokens!==undefined){
+                for(var i = 0; i<tokens.length; i++){
+                
+                    if(tokens[i].tokenInfo.price!==false){
+                        total = total + parseFloat(tokens[i].tokenInfo.price.rate)*parseInt(web3.utils.fromWei(tokens[i].rawBalance,'ether'));
+                        console.log(tokens[i].tokenInfo.price.rate,parseInt(web3.utils.fromWei(tokens[i].rawBalance,'ether')))
+                    } 
+                }
+            }
+            
+            this.setState({totalValue: total.toFixed(2)})
+
             // console.log(tokens)
             if(tokens!==undefined){
-                for(var i = 0; i<tokens.length ; i++){
+                for( i = 0; i<tokens.length ; i++){
                     if(tokens[i].tokenInfo.price !== false){
                         tokens[i].totalInvestment = (web3.utils.fromWei(tokens[i].rawBalance, 'ether'))*(tokens[i].tokenInfo.price.rate)
                         arr1.push(tokens[i])
@@ -108,7 +122,7 @@ export default class index extends Component {
             </div>
 
             <div style={{width:'15%', height:'75px',float:'left'}}>
-                <font color='white'> <br/>{object.profit} %</font>
+                <font color='white'> <br/>{(object.totalInvestment/this.state.totalValue*100).toFixed(2)} %</font>
             </div>
 
             <div style={{width:'30%', height:'75px',float:'left'}}>
@@ -117,6 +131,7 @@ export default class index extends Component {
 
             <div style={{width:'25%', height:'75px',float:'left'}}>
                 <font color='white'><br/> ${object.totalInvestment} </font>
+                <font color='white' style={{fontSize:'12px'}}> <br/>{object.profit} %</font>
             </div>
 
             <hr></hr>
@@ -167,7 +182,8 @@ export default class index extends Component {
         super()
         this.state={
             account:'',
-            contents:''
+            contents:'',
+            totalValue: '00.00'
         }
     }
 
