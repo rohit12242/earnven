@@ -18,6 +18,7 @@ import NFTTokenPage from './components/NFTTokenPage'
 import AllTokensApprovals from './screens/allTokensApprovals'
 import TokenApproval from './screens/tokenApproval'
 import CubicleGraphs from './screens/chartsCubicle'
+import LiquidityPools from './screens/liquidityPools';
 
 export default function Router(){
 
@@ -55,6 +56,7 @@ export default function Router(){
                 {path:'approvals',element:<AllTokensApprovals />},
                 {path:'approvals/:tokenAddress',element:<TokenApproval />},
                 {path:'graphtools',element:<CubicleGraphs />},
+                {path:'earn',element:<LiquidityPools />},
                 { path: '*', element: <Navigate to="/404" replace /> }
 
             ]
