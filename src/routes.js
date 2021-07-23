@@ -17,6 +17,7 @@ import NFTpage from './screens/NFTpage';
 import NFTTokenPage from './components/NFTTokenPage'
 import AllTokensApprovals from './screens/allTokensApprovals'
 import TokenApproval from './screens/tokenApproval'
+import CubicleGraphs from './screens/chartsCubicle'
 
 export default function Router(){
 
@@ -53,6 +54,7 @@ export default function Router(){
                 {path:'nft-token/:contract/:id',element:<NFTTokenPage/>},
                 {path:'approvals',element:<AllTokensApprovals />},
                 {path:'approvals/:tokenAddress',element:<TokenApproval />},
+                {path:'graphtools',element:<CubicleGraphs />},
                 { path: '*', element: <Navigate to="/404" replace /> }
 
             ]
