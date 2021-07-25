@@ -201,14 +201,14 @@ export default class index extends Component {
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressHistory/0xbfbe5822a880a41c2075dc7e1d92663739cf119e?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressHistory/${accounts}?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
         .then(async(response) => {
             ops = response.data.operations;
             // console.log(ops)
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressTransactions/0xbfbe5822a880a41c2075dc7e1d92663739cf119e?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressTransactions/${accounts}?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
         .then(async(response) => {
             ops2 = response.data
             // console.log(ops2)
