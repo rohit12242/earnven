@@ -10,12 +10,13 @@ import PortfolioPerf from '../../components/portfolioperf/portfolioperf';
 import Balance from '../../components/Balance';
 import { Link } from 'react-router-dom';
 import './dashboard.css';
-import { Grid } from '@material-ui/core';
+import { Grid ,Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
     let {address} = useParams();
-
+    const navigate = useNavigate();
     return (
         <Page title="Dashboard">
             <Container maxWidth="xl">
@@ -43,6 +44,16 @@ export default function Dashboard() {
                             </Grid>
                         </Grid>
                     </Grid> */}
+                    <Grid item xs={12} md={4}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} md={6} >
+                              <Button onClick={() => (navigate(`/${address}/nft`))} variant='contained'>View nft</Button>  
+                            </Grid>
+                            <Grid item xs={12} md={6} >
+                            <Button onClick={() => (navigate(`/${address}/approvals`))} variant='contained'>View Approvals</Button> 
+                            </Grid>
+                        </Grid>
+                    </Grid> 
                 </Grid>
             </Container>
         </Page>

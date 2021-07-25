@@ -1,6 +1,6 @@
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 import accountLogo from '../../../../assets/icons/accountlogo.png';
-import { Box, Typography, Avatar, MenuItem, ListItemIcon, ListItemText, Stack, Divider } from '@material-ui/core';
+import { Box, Typography, Avatar, MenuItem, ListItemIcon, ListItemText, Stack, Divider, ListItem, IconButton } from '@material-ui/core';
 import { useState, useRef, useEffect } from 'react';
 import MenuPopover from '../../../../components/MenuPopover'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -9,6 +9,8 @@ import { VscAdd } from "react-icons/vsc";
 import './account.css';
 import { useNavigate } from 'react-router-dom';
 import AccountBalance from '../../../../components/AccountBalance';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { MdContentCopy } from "react-icons/md";
 const AccountStyle = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -19,7 +21,7 @@ const AccountStyle = styled('div')(({ theme }) => ({
 }));
 
 
-export default function Account({address}) {
+export default function Account({ address }) {
     const navigate = useNavigate();
     const anchorRef = useRef(null)
     const [account, setaccount] = useState(false)
@@ -49,7 +51,7 @@ export default function Account({address}) {
 
     const routeToDashboard = () => {
         const address = localStorage.getItem('selected-account');
-        navigate(`/${address}/dashboard/`,{replace:true})
+        navigate(`/${address}/dashboard/`, { replace: true })
     }
 
     function shortaddress(addy) {
@@ -74,7 +76,7 @@ export default function Account({address}) {
 
     return (
         <>
-            <AccountStyle ref={anchorRef} onClick={showAccountPopover} style={{cursor:'pointer'}}>
+            <AccountStyle ref={anchorRef} onClick={showAccountPopover} style={{ cursor: 'pointer' }}>
                 <Avatar src={accountLogo} alt="photoURL" />
                 <Box sx={{ ml: 2 }}>
                     <Stack direction='row'>
@@ -84,13 +86,15 @@ export default function Account({address}) {
                         <ExpandMoreIcon style={{ color: 'fff' }} />
                     </Stack>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        <AccountBalance address={address}/>
+                        <AccountBalance address={address} />
                     </Typography>
                 </Box>
             </AccountStyle>
             <MenuPopover open={account} onClose={hideAccountPopover} anchorEl={anchorRef.current}>
                 <Box sx={{ py: 1 }}>
                     {accountList.map((option) => (
+                        /* <>
+                        <Stack direction='coloumn' >
                         <MenuItem onClick={() => {
                             hideAccountPopover();
                             updateSelectedAccount(option.address);
@@ -101,6 +105,31 @@ export default function Account({address}) {
                                 {shortaddress1(option.address)}
                             </ListItemText>
                         </MenuItem>
+                        
+                        ......
+                        <CopyToClipboard text={option.address} style={{marginRight:'8px',marginLeft:'5px',marginTop:'8px'}}><RiSettings5Line style={{ color: 'fff' }} /></CopyToClipboard>
+                        </Stack>
+                        </> */
+                        /* <CopyToClipboard text={option.address}><RiSettings5Line style={{ color: 'fff' }} /></CopyToClipboard> */
+                        <ListItem
+
+                            secondaryAction={
+                                <IconButton edge="end" aria-label="copy">
+                                    <CopyToClipboard text={option.address}>
+                                        <MdContentCopy style={{ color: '#929292' }} />
+                                    </CopyToClipboard>
+                                </IconButton>
+                            }>
+                            <ListItemText onClick={() => {
+                                hideAccountPopover();
+                                updateSelectedAccount(option.address);
+                                routeToDashboard();
+                            }} primaryTypographyProps={{ variant: 'body2', color: '#fff' }} sx={{ px: .5, cursor: 'pointer' }}>
+                                {shortaddress1(option.address)}
+                            </ListItemText>
+
+                        </ListItem>
+
                     )
                     )}
 

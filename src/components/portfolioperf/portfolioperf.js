@@ -4,29 +4,11 @@ import ReactApexChart from 'react-apexcharts'
 import './portfolioperf.css'
 import axios from 'axios'
 
-// material
-// import { Card, CardHeader, Box, Paper } from '@material-ui/core';
-// import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
-// import { BorderColor } from '@material-ui/icons';
 
-
-// const RootStyle = styled(Paper)(({theme}) =>({
-//     backgroundColor: theme.palette.background.default,
-//     borderRadius:theme.shape.borderRadius,
-//     borderColor:'#737373'
-// }))
 export default class PortfolioPerf extends Component {
 
     componentWillMount() {
-        // const points = [{
-        //     data: [
-
-        //     ]
-        // }];
-
-        // this.setState({ series: points })
         this.getAddressChartHistory()
-
     }
 
     componentDidUpdate() {
@@ -35,24 +17,19 @@ export default class PortfolioPerf extends Component {
         }
     }
 
+   
 
     // Will return history of ethereum account address
     async getAddressChartHistory() {
-        // const web3 = window.web3;
-        // const accounts = await web3.eth.getAccounts();
-        // this.setState({account:accounts[0]})
         var data = [];
         var points = [];
         let result = [];
         let c = {};
-        // const accountAddress = localStorage.getItem('selected-account')
         const accountAddress = this.props.address;
         this.setState({ account: this.props.address })
         const path = 'https://api2.ethplorer.io/getAddressChartHistory/' + accountAddress + '?apiKey=ethplorer.widget'
-        // let points = {}
         await axios.get(path, {}, {})
             .then(async (response) => {
-                // result = JSON.parse(response.history);
                 console.log('response:::' + response.data.history.timestamp);
                 result = response.data.history.data;
 
@@ -60,26 +37,13 @@ export default class PortfolioPerf extends Component {
                     var temp = [];
                     temp.push(result[i].date);
                     temp.push((result[i].max).toFixed(2));
-                    // console.log("temp:::"+temp)
                     data.push(temp);
-                    // console.log("data array:::"+data.type);
-                    // console.log(typeof data);
-
                 }
-                // this.setState({totalValue: total.toFixed(2)})
-                // console.log(total)
                 c = { data: data };
                 // points
                 points.push(c);
                 console.log(c);
                 this.setState({ series: points })
-                // if(points[0].data.length==0){
-                //     this.setState({hideFilter:true})
-                // }
-                // else{
-                //     this.setState({hideFilter:false})
-                // }
-                console.log("account::" + this.state.account);
             })
 
 
@@ -182,15 +146,49 @@ export default class PortfolioPerf extends Component {
                 },
 
                 tooltip: {
-                    x: {
-                        format: 'dd MMM yyyy'
-                    },
-                    y: {
-                        formatter: undefined,
-                        title: {
-                            formatter: (seriesName) => seriesName,
-                        },
-                    },
+                    // x: {
+                    //     format: 'dd MMM yyyy'
+                    // },
+                    // y: {
+                    //     formatter: undefined,
+                    //     title: {
+                    //         formatter: (seriesName) => '$',
+                    //     },
+                    // },
+
+                    custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+                        function CommaFormatted(amount) {
+                            amount = amount.toString();
+                            var delimiter = ","; // replace comma if desired
+                            var ab = amount.split('.',2)
+                            var d = []
+                            if(ab[1]!==undefined){
+                                d = ab[1]
+                            }
+                            var i = parseInt(ab[0]);
+                            if(isNaN(i)) { return ''; }
+                            var minus = '';
+                            if(i < 0) { minus = '-'; }
+                            i = Math.abs(i);
+                            var n = i.toString();
+                            var a = [];
+                            while(n.length > 3) {
+                                var nn = n.substr(n.length-3);
+                                a.unshift(nn);
+                                n = n.substr(0,n.length-3);
+                            }
+                            if(n.length > 0) { a.unshift(n); }
+                            n = a.join(delimiter);
+                            if(d.length < 1) { amount = n; }
+                            else { amount = n + '.' + d; }
+                            amount = minus + amount;
+                            return amount;
+                        }
+                        let currentDate = new Date(w.globals.seriesX[0][dataPointIndex]);
+                        // eslint-disable-next-line
+                        return '<div><h3>'+'$'+CommaFormatted(series[seriesIndex][dataPointIndex]) +'</h3 ><h5>'+currentDate.toLocaleDateString()+'</h5></div >'
+                    }
+
                 },
                 stroke: {
                     show: true,
@@ -265,7 +263,7 @@ export default class PortfolioPerf extends Component {
 
     updateData(timeline) {
         if (this.state.series[0].data.length === 0) {
-            
+
         }
         else {
             const length = this.state.series[0].data.length;
@@ -382,6 +380,8 @@ export default class PortfolioPerf extends Component {
                         <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={250} />
                     </div>
                 </div>
+
+
             </div>
 
         )
