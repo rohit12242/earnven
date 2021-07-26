@@ -68,18 +68,19 @@ import NavSection from '../../../components/NavSection';
 
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import {  useLocation } from 'react-router-dom';
 // material
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 // import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@material-ui/core';
-import { Box, Link, Drawer, Typography, Avatar, Stack } from '@material-ui/core';
+import { Box, Drawer, Stack } from '@material-ui/core';
 
-import accountLogo from '../../../assets/icons/accountlogo.png';
+
 
 import {MHidden} from '../../../components/@material-extend';
 
 import CompanyLogo from '../../../assets/icons/Subtract.png';
 import Earnven from '../../../assets/icons/Earnven.png';
+import Account from './account/account';
 
 
 const DRAWER_WIDTH = 280;
@@ -91,13 +92,7 @@ const RootStyle = styled('div')(({ theme }) => ({
   }
 }));
 
-const AccountStyle = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(2, 2.5),
-  borderRadius: theme.shape.borderRadiusSm,
-  
-}));
+
 
 Sidebar.propTypes = {
   isOpenSidebar: PropTypes.bool,
@@ -105,7 +100,7 @@ Sidebar.propTypes = {
 };
 
 
-export default function Sidebar({ isOpenSidebar, onCloseSidebar }){
+export default function Sidebar({ isOpenSidebar, onCloseSidebar,address }){
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -129,23 +124,11 @@ export default function Sidebar({ isOpenSidebar, onCloseSidebar }){
         </Box>
       </Box> */}
 
-      <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={accountLogo} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                Test Account
-              </Typography>
-              {/* <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
-              </Typography> */}
-            </Box>
-          </AccountStyle>
-        </Link>
+      <Box sx={{ mb: 0, mx: 4, mt:3 }}>
+          <Account address={address}/>
       </Box>
 
-      <NavSection navConfig={sidebarConfig} />
+      <NavSection navConfig={sidebarConfig} address={address}/>
 
       <Box sx={{ flexGrow: 1 }} />
 

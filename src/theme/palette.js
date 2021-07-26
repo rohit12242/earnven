@@ -6,6 +6,11 @@ function createGradient(color1, color2) {
   return `linear-gradient(to bottom, ${color1}, ${color2})`;
 }
 
+function createGradientHorizontal(color1, color2) {
+  return `linear-gradient(to right, ${color1}, ${color2})`;
+}
+
+
 // SETUP COLORS
 const GREY = {
   0: '#FFFFFF',
@@ -92,7 +97,8 @@ const GRADIENTS = {
   success: createGradient(SUCCESS.light, SUCCESS.main),
   warning: createGradient(WARNING.light, WARNING.main),
   error: createGradient(ERROR.light, ERROR.main),
-  background: createGradient(BACKGROUND.light, BACKGROUND.dark)
+  background: createGradient(BACKGROUND.light, BACKGROUND.dark),
+  custom: createGradientHorizontal('#3b2959','#1d282f')
 };
 
 const palette = {
@@ -106,7 +112,7 @@ const palette = {
   grey: GREY,
   gradients: GRADIENTS,
   divider: GREY[500_24],
-  text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
+  text: { primary: '#fff', secondary: GREY[600], disabled: GREY[500] },
   background: { paper: '#fff', default: '#0E1214', neutral: GREY[200] },
   action: {
     active: GREY[600],

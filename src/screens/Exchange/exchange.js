@@ -118,10 +118,10 @@ export default function Exchange()  {
                                     onChange={(e)=>{setTokenFrom(e.target.value)}}
                                     label="Token"
                                     >
-                                    <MenuItem value="">
+                                    <MenuItem value="" sx={{backgroundColor:'#141a1e'}}>
                                         <em>None</em>
                                     </MenuItem>
-                                    {AllTokens.map((object)=><MenuItem value={object.symbol}>{object.symbol}</MenuItem>)}
+                                    {AllTokens.map((object)=><MenuItem value={object.symbol} sx={{backgroundColor:'#141a1e'}}>{object.symbol}</MenuItem>)}
                                     </Select>
                                 </FormControl>
 
@@ -158,10 +158,10 @@ export default function Exchange()  {
                                     onChange={(e)=>{setTokenTo(e.target.value)}}
                                     label="Token"
                                     >
-                                    <MenuItem value="">
-                                        <em>None</em>
+                                    <MenuItem value="" sx={{backgroundColor:'#141a1e'}}>
+                                        <em >None</em>
                                     </MenuItem>
-                                    {AllTokens.map((object)=><MenuItem value={object.symbol}>{object.symbol}</MenuItem>)}
+                                    {AllTokens.map((object)=><MenuItem value={object.symbol} sx={{backgroundColor:'#141a1e'}}>{object.symbol}</MenuItem>)}
                                     </Select>
                                 </FormControl>
                                 </div>

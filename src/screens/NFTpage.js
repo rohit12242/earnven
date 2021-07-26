@@ -6,12 +6,13 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import NFTPageTokenIDs from '../components/NFTPageTokenIDs'
+import { useParams } from 'react-router-dom';
 
 var contents = ''
 var arr1 = []
 
 function NFTpage() {
-
+    const {address} = useParams();
     const [Account, setAccount] = useState('0x0')
     const [Content, setContent] = useState('')
 
@@ -56,13 +57,15 @@ function NFTpage() {
 
     async function getData(){
 
-            const web3 = window.web3;
-            const accounts = await web3.eth.getAccounts();
+            // const web3 = window.web3;
+            // const accounts = await web3.eth.getAccounts();
             // var account = accounts[0]
             // var account = '0x6975be450864c02b4613023c2152ee0743572325';
-            var account = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
+            // var account = '0x48E8479b4906D45fBE702A18ac2454F800238b37'
             // var account = '0xbfbe5822a880a41c2075dc7e1d92663739cf119e';
-            setAccount(accounts[0])
+            // setAccount(accounts[0])
+            var account = address
+            setAccount(account)
             console.log(Account)
 
             // axios.get(`https://api.etherscan.io/api?module=account&action=tokennfttx&address=0x6975be450864c02b4613023c2152ee0743572325&startblock=0&endblock=999999999&sort=asc&apikey=CISZAVU4237H8CFPFCFWEA25HHBI3QKB8W`,{},{})
@@ -124,7 +127,7 @@ function NFTpage() {
         // change([''])
         
         
-    }, [Account])
+    }, [Account,address])
 
     if(Content===''){
         return (

@@ -19,23 +19,23 @@ var eth = {}
 export default class index extends Component {
 
     async componentWillMount(){
-        await this.loadWeb3();
+        // await this.loadWeb3();
         await this.loadBlockchainData();
         
     }
 
-    async loadWeb3() {
-        if (window.ethereum) {
-          window.web3 = new Web3(window.ethereum)
-          await window.ethereum.enable()
-        }
-        else if (window.web3) {
-          window.web3 = new Web3(window.web3.currentProvider)
-        }
-        else {
-          window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-        }
-    }
+    // async loadWeb3() {
+    //     if (window.ethereum) {
+    //       window.web3 = new Web3(window.ethereum)
+    //       await window.ethereum.enable()
+    //     }
+    //     else if (window.web3) {
+    //       window.web3 = new Web3(window.web3.currentProvider)
+    //     }
+    //     else {
+    //       window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    //     }
+    // }
 
     shortaddress(addy){
         if(addy===''){
@@ -189,9 +189,10 @@ export default class index extends Component {
 
     async loadBlockchainData(){
         
-        const web3 = window.web3;
-        const accounts = await web3.eth.getAccounts();
-        this.setState({account:accounts[0]})
+        // const web3 = window.web3;
+        const accounts = this.props.address;
+        console.log("account address inside transaction component::",accounts)
+        this.setState({account:accounts})
 
         await axios.get(`https://api.ethplorer.io/getTokenInfo/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
         .then(async(response) => {
@@ -200,14 +201,14 @@ export default class index extends Component {
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressHistory/0xbfbe5822a880a41c2075dc7e1d92663739cf119e?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressHistory/${accounts}?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
         .then(async(response) => {
             ops = response.data.operations;
             // console.log(ops)
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressTransactions/0xbfbe5822a880a41c2075dc7e1d92663739cf119e?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressTransactions/${accounts}?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
         .then(async(response) => {
             ops2 = response.data
             // console.log(ops2)
@@ -225,7 +226,7 @@ export default class index extends Component {
     update = () =>{
         // try{
         
-        const web3 = window.web3;
+        const web3 = new Web3();
         arr1=[]
         var start = (this.state.page-1)*10
         var end = ((this.state.page)*10)

@@ -4,65 +4,46 @@ import ReactApexChart from 'react-apexcharts'
 import './portfolioperf.css'
 import axios from 'axios'
 
-// material
-// import { Card, CardHeader, Box, Paper } from '@material-ui/core';
-// import { alpha, experimentalStyled as styled } from '@material-ui/core/styles';
-// import { BorderColor } from '@material-ui/icons';
 
-
-// const RootStyle = styled(Paper)(({theme}) =>({
-//     backgroundColor: theme.palette.background.default,
-//     borderRadius:theme.shape.borderRadius,
-//     borderColor:'#737373'
-// }))
 export default class PortfolioPerf extends Component {
 
     componentWillMount() {
-        // const points = [{
-        //     data: [
-
-        //     ]
-        // }];
-
-        // this.setState({ series: points })
         this.getAddressChartHistory()
-
     }
+
+    componentDidUpdate() {
+        if (this.state.account !== this.props.address) {
+            this.getAddressChartHistory();
+        }
+    }
+
+   
 
     // Will return history of ethereum account address
     async getAddressChartHistory() {
-        // const web3 = window.web3;
-        // const accounts = await web3.eth.getAccounts();
-        // this.setState({account:accounts[0]})
         var data = [];
         var points = [];
         let result = [];
         let c = {};
-        // let points = {}
-        await axios.get(`https://api2.ethplorer.io/getAddressChartHistory/0xf58d751CC07E55A7a64fe80b2A3D8880D03FEC39?apiKey=ethplorer.widget`, {}, {})
+        const accountAddress = this.props.address;
+        this.setState({ account: this.props.address })
+        const path = 'https://api2.ethplorer.io/getAddressChartHistory/' + accountAddress + '?apiKey=ethplorer.widget'
+        await axios.get(path, {}, {})
             .then(async (response) => {
-                // result = JSON.parse(response.history);
                 console.log('response:::' + response.data.history.timestamp);
                 result = response.data.history.data;
 
                 for (var i = 0; i < result.length; i++) {
                     var temp = [];
                     temp.push(result[i].date);
-                    temp.push(result[i].max);
-                    // console.log("temp:::"+temp)
+                    temp.push((result[i].max).toFixed(2));
                     data.push(temp);
-                    // console.log("data array:::"+data.type);
-                    // console.log(typeof data);
-
                 }
-                // this.setState({totalValue: total.toFixed(2)})
-                // console.log(total)
                 c = { data: data };
                 // points
                 points.push(c);
                 console.log(c);
                 this.setState({ series: points })
-                console.log("account::" + this.state.account);
             })
 
 
@@ -72,6 +53,7 @@ export default class PortfolioPerf extends Component {
         super(props);
         this.state = {
             account: '',
+            // hideFilter: false,
             series: [],
             options: {
                 chart: {
@@ -164,15 +146,49 @@ export default class PortfolioPerf extends Component {
                 },
 
                 tooltip: {
-                    x: {
-                        format: 'dd MMM yyyy'
-                    },
-                    y: {
-                        formatter: undefined,
-                        title: {
-                            formatter: (seriesName) => seriesName,
-                        },
-                    },
+                    // x: {
+                    //     format: 'dd MMM yyyy'
+                    // },
+                    // y: {
+                    //     formatter: undefined,
+                    //     title: {
+                    //         formatter: (seriesName) => '$',
+                    //     },
+                    // },
+
+                    custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+                        function CommaFormatted(amount) {
+                            amount = amount.toString();
+                            var delimiter = ","; // replace comma if desired
+                            var ab = amount.split('.',2)
+                            var d = []
+                            if(ab[1]!==undefined){
+                                d = ab[1]
+                            }
+                            var i = parseInt(ab[0]);
+                            if(isNaN(i)) { return ''; }
+                            var minus = '';
+                            if(i < 0) { minus = '-'; }
+                            i = Math.abs(i);
+                            var n = i.toString();
+                            var a = [];
+                            while(n.length > 3) {
+                                var nn = n.substr(n.length-3);
+                                a.unshift(nn);
+                                n = n.substr(0,n.length-3);
+                            }
+                            if(n.length > 0) { a.unshift(n); }
+                            n = a.join(delimiter);
+                            if(d.length < 1) { amount = n; }
+                            else { amount = n + '.' + d; }
+                            amount = minus + amount;
+                            return amount;
+                        }
+                        let currentDate = new Date(w.globals.seriesX[0][dataPointIndex]);
+                        // eslint-disable-next-line
+                        return '<div><h3>'+'$'+CommaFormatted(series[seriesIndex][dataPointIndex]) +'</h3 ><h5>'+currentDate.toLocaleDateString()+'</h5></div >'
+                    }
+
                 },
                 stroke: {
                     show: true,
@@ -237,68 +253,99 @@ export default class PortfolioPerf extends Component {
             },
         };
     }
-
+    monthDiff(d1, d2) {
+        var months;
+        months = (d2.getFullYear() - d1.getFullYear()) * 12;
+        months -= d1.getMonth();
+        months += d2.getMonth();
+        return months <= 0 ? 0 : months;
+    }
 
     updateData(timeline) {
-        const length = this.state.series[0].data.length;
-        const firstDay = new Date(this.state.series[0].data[0][0]);
-        const lastDay = new Date(this.state.series[0].data[length - 1][0]);
-        const oneMonthBackDate = new Date();
-        const oneDayBackDate = new Date();
-        const oneYearBackDate = new Date();
-        oneMonthBackDate.setMonth(lastDay.getMonth() - 1);
-        oneDayBackDate.setDate(lastDay.getDate() - 2);
-        oneYearBackDate.setFullYear(lastDay.getFullYear() - 1);
-        console.log("example date:::" + new Date('12 Jun 2021').getTime())
-        console.log("your result::" + oneMonthBackDate.getTime())
+        if (this.state.series[0].data.length === 0) {
 
-        this.setState({
-            selection: timeline
-        })
-
-        switch (timeline) {
-            case 'one_month':
-                ApexCharts.exec(
-                    'area-datetime',
-                    'zoomX',
-                    oneMonthBackDate.getTime(),
-                    lastDay.getTime()
-                )
-                break
-
-            case 'one_year':
-                ApexCharts.exec(
-                    'area-datetime',
-                    'zoomX',
-                    oneYearBackDate.getTime(),
-                    lastDay.getTime()
-                )
-                break
-            case 'ytd':
-                ApexCharts.exec(
-                    'area-datetime',
-                    'zoomX',
-                    oneDayBackDate.getTime(),
-                    lastDay.getTime()
-                )
-                break
-            case 'all':
-                ApexCharts.exec(
-                    'area-datetime',
-                    'zoomX',
-                    firstDay.getTime(),
-                    lastDay.getTime()
-                )
-                break
-            default:
         }
+        else {
+            const length = this.state.series[0].data.length;
+            const firstDay = new Date(this.state.series[0].data[0][0]);
+            const lastDay = new Date(this.state.series[0].data[length - 1][0]);
+            const oneMonthBackDate = new Date();
+            const oneDayBackDate = new Date();
+            const oneYearBackDate = new Date();
+            oneMonthBackDate.setMonth(lastDay.getMonth() - 1);
+            oneDayBackDate.setDate(lastDay.getDate() - 2);
+            oneYearBackDate.setFullYear(lastDay.getFullYear() - 1);
+            const accountAgeInMonths = this.monthDiff(firstDay, lastDay);
+            this.setState({
+                selection: timeline
+            })
+
+            switch (timeline) {
+                case 'one_month':
+                    if (accountAgeInMonths >= 1) {
+                        ApexCharts.exec(
+                            'area-datetime',
+                            'zoomX',
+                            oneMonthBackDate.getTime(),
+                            lastDay.getTime()
+                        )
+                    }
+                    else {
+                        ApexCharts.exec(
+                            'area-datetime',
+                            'zoomX',
+                            firstDay.getTime(),
+                            lastDay.getTime()
+                        )
+                    }
+
+                    break
+
+                case 'one_year':
+                    if (accountAgeInMonths >= 12) {
+                        ApexCharts.exec(
+                            'area-datetime',
+                            'zoomX',
+                            oneYearBackDate.getTime(),
+                            lastDay.getTime()
+                        )
+                    }
+                    else {
+                        ApexCharts.exec(
+                            'area-datetime',
+                            'zoomX',
+                            firstDay.getTime(),
+                            lastDay.getTime()
+                        )
+                    }
+                    break
+                case 'ytd':
+                    ApexCharts.exec(
+                        'area-datetime',
+                        'zoomX',
+                        oneDayBackDate.getTime(),
+                        lastDay.getTime()
+                    )
+                    break
+                case 'all':
+                    ApexCharts.exec(
+                        'area-datetime',
+                        'zoomX',
+                        firstDay.getTime(),
+                        lastDay.getTime()
+                    )
+                    break
+                default:
+            }
+        }
+
     }
 
     render() {
         return (
-            <div style={{border:'1px solid #737373',borderRadius:'10px'}}>
+            <div style={{ border: '1px solid #737373', borderRadius: '10px' }}>
                 <div>
-                <div style={{ textAlign:'end' }}>
+                    <div style={{ textAlign: 'end' }}>
                         <button id="one_month"
 
                             onClick={() => this.updateData('one_month')} className={(this.state.selection === 'one_month' ? 'active' : '')}>
@@ -315,7 +362,7 @@ export default class PortfolioPerf extends Component {
                         <button id="ytd"
 
                             onClick={() => this.updateData('ytd')} className={(this.state.selection === 'ytd' ? 'active' : '')}>
-                            YTD
+                            24H
                         </button>
                         &nbsp;
                         <button id="all"
@@ -324,15 +371,17 @@ export default class PortfolioPerf extends Component {
                             ALL
                         </button>
                     </div>
-                    </div>
+                </div>
                 <div id="chart" className='chart'>
-                    
+
 
                     <div className='chart-timeline' style={{ float: 'left' }}>
 
                         <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={250} />
                     </div>
                 </div>
+
+
             </div>
 
         )

@@ -5,7 +5,7 @@ import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom'
 import arrowIosForwardFill from '@iconify/icons-eva/arrow-ios-forward-fill';
 import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
 // material
-import { alpha, useTheme, experimentalStyled as styled } from '@material-ui/core/styles';
+import {  experimentalStyled as styled } from '@material-ui/core/styles';
 import { Box, List, ListItem, Collapse, ListItemText, ListItemIcon } from '@material-ui/core';
 
 // ----------------------------------------------------------------------
@@ -19,18 +19,7 @@ const ListItemStyle = styled((props) => <ListItem button disableGutters {...prop
     paddingLeft: theme.spacing(5),
     paddingRight: theme.spacing(2.5),
     color: theme.palette.text.secondary,
-    '&:before': {
-      top: 0,
-      right: 0,
-      width: 3,
-      bottom: 0,
-      content: "''",
-      display: 'none',
-      position: 'absolute',
-      borderTopLeftRadius: 4,
-      borderBottomLeftRadius: 4,
-      backgroundColor: theme.palette.primary.main
-    }
+    
   })
 );
 
@@ -49,10 +38,10 @@ NavItem.propTypes = {
   active: PropTypes.func
 };
 
-function NavItem({ item, active }) {
-  const theme = useTheme();
-  const isActiveRoot = active(item.path);
+function NavItem({ item, active ,address}) {
+  
   const { title, path, icon, info, children } = item;
+  const isActiveRoot = active(`/${address}${path}`);
   const [open, setOpen] = useState(isActiveRoot);
 
   const handleOpen = () => {
@@ -62,8 +51,9 @@ function NavItem({ item, active }) {
   const activeRootStyle = {
     color: 'primary.main',
     fontWeight: 'fontWeightRegular',
-    bgcolor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-    '&:before': { display: 'block' }
+    
+    background:(theme)=> theme.palette.gradients.custom,
+    borderRadius:'7px'
   };
 
   const activeSubStyle = {
@@ -135,9 +125,10 @@ function NavItem({ item, active }) {
   }
 
   return (
+   
     <ListItemStyle
       component={RouterLink}
-      to={path}
+      to= {`/${address}/${path}`}
       sx={{
         ...(isActiveRoot && activeRootStyle)
       }}
@@ -153,15 +144,15 @@ NavSection.propTypes = {
   navConfig: PropTypes.array
 };
 
-export default function NavSection({ navConfig, ...other }) {
+export default function NavSection({ navConfig,address, ...other }) {
   const { pathname } = useLocation();
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
 
   return (
-    <Box {...other} sx={{p:3}}>
+    <Box {...other} sx={{p:4,mt:3}}>
       <List disablePadding>
         {navConfig.map((item) => (
-          <NavItem key={item.title} item={item} active={match} />
+          <NavItem key={item.title} item={item} active={match} address={address} />
         ))}
       </List>
     </Box>
