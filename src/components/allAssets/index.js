@@ -4,7 +4,6 @@ import axios from 'axios';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-
 var contents = ''
 var arr2 = []
 var arr1 = []
@@ -36,8 +35,8 @@ export default class index extends Component {
         const accounts = this.props.address;
         this.setState({ account: accounts })
 
-        // await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
-        await axios.get(`https://api.ethplorer.io/getAddressInfo/${accounts}?apiKey=EK-qSPda-W9rX7yJ-UY93y`, {}, {})
+        await axios.get(`https://api.ethplorer.io/getAddressInfo/0x32Be343B94f860124dC4fEe278FDCBD38C102D88?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
+        // await axios.get(`https://api.ethplorer.io/getAddressInfo/${accounts}?apiKey=EK-qSPda-W9rX7yJ-UY93y`, {}, {})
             .then(async (response) => {
                 arr1 = [];
                 var tokens = response.data.tokens
@@ -94,7 +93,7 @@ export default class index extends Component {
 
     update = () => {
         const web3 = new Web3();
-        arr2 = []
+        // arr2 = []
         // console.log(this.state.page)
         var start = (this.state.page - 1) * 10
         var end = ((this.state.page) * 10)
@@ -117,6 +116,7 @@ export default class index extends Component {
             }
         }
         // console.log(arr2)
+        
         this.change(arr2)
         this.setState({ contents })
     }
@@ -209,6 +209,10 @@ export default class index extends Component {
         }
     }
 
+    lol = (e) =>{
+        console.log('haha')
+    }
+
     mouseOver = (e) => {
         e.target.style.background = '#BB86FC'
     }
@@ -234,7 +238,7 @@ export default class index extends Component {
                         <font color='white'> All Assets </font>
                     </div>
 
-                    <br /><font color='white'>
+                    {/* <br /><font color='white'>
                         <button
                             onClick={async (e) => { if (this.state.page !== 1) { await this.setState({ page: this.state.page - 1 }); this.update() } }}
                         > &lt; </button> &nbsp;&nbsp;&nbsp;
@@ -245,7 +249,7 @@ export default class index extends Component {
                             onClick={async (e) => { await this.setState({ page: this.state.page + 1 }); this.update() }}
                         > &gt; </button>
 
-                    </font><br /><br />
+                    </font><br /><br /> */}
 
                     <hr />
 
@@ -254,15 +258,21 @@ export default class index extends Component {
                     <hr />
 
                     <br /><font color='white'>
-                        <button
+                        {/* <button
                             onClick={async (e) => { if (this.state.page !== 1) { await this.setState({ page: this.state.page - 1 }); this.update() } }}
                         > &lt; </button> &nbsp;&nbsp;&nbsp;
 
-                        {this.state.page} &nbsp;&nbsp;&nbsp;
+                        {this.state.page} &nbsp;&nbsp;&nbsp; */}
 
-                        <button
+                        <div 
+                        style={{cursor:'pointer', float:'left'}}
+                        onClick={async (e) => { await this.setState({ page: this.state.page + 1 }); this.update() }} >
+                            &nbsp;&nbsp;&nbsp;Click to view more...
+                        </div>
+
+                        {/* <button
                             onClick={async (e) => { await this.setState({ page: this.state.page + 1 }); this.update() }}
-                        > &gt; </button>
+                        > More </button> */}
 
                     </font><br /><br />
                 </center>

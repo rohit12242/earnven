@@ -94,7 +94,7 @@ export default class index extends Component {
                 </div>
 
                 <div style={{width:'30%', float:'left', textAlign:'left', marginTop:'8px'}}>
-                <font style={{fontSize:'20px', color:'white'}}>{(parseFloat(object.value)).toFixed(2)} {object.symbol}</font>
+                <font style={{fontSize:'20px', color:'white'}}>{object.value} {object.symbol}</font>
                 </div>
 
                 <div style={{width:'15%', float:'left', textAlign:'left'}}>
@@ -201,14 +201,14 @@ export default class index extends Component {
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressHistory/${accounts}?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressHistory/0xbfbe5822a880a41c2075dc7e1d92663739cf119e?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
         .then(async(response) => {
             ops = response.data.operations;
             // console.log(ops)
             
         })
 
-        await axios.get(`https://api.ethplorer.io/getAddressTransactions/${accounts}?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
+        await axios.get(`https://api.ethplorer.io/getAddressTransactions/0xbfbe5822a880a41c2075dc7e1d92663739cf119e?apiKey=EK-qSPda-W9rX7yJ-UY93y&limit=1000`,{},{})
         .then(async(response) => {
             ops2 = response.data
             // console.log(ops2)
@@ -267,8 +267,6 @@ export default class index extends Component {
             else{
                 object.type = 'EthTransfer'
             }
-
-            
             
             if(object.diff===undefined){
                 object.diff = 'NA'
@@ -277,10 +275,23 @@ export default class index extends Component {
                 object.rate = 'NA'
             }
             if(typeof ops[i].value==='string'){
-                object.value = web3.utils.fromWei(ops[i].value,'ether')
+                if(object.symbol==='USDC'){
+                    object.value = parseFloat(ops[i].value/(10**6)).toFixed(2)
+                    // console.log(ops[i].value)
+                }
+                else{
+                    object.value = parseFloat(web3.utils.fromWei(ops[i].value,'ether')).toFixed(2)
+                    if(ops[i].type==='approve'){
+                        console.log(object.value)
+                        if(parseFloat(object.value)>10**58){
+                            object.value = 'Unlimited'
+                        }
+                    }
+
+                }
             }
             else{
-                object.value = ops[i].value
+                object.value = parseFloat(ops[i].value).toFixed(2)
             }
             
             if(object.from===this.state.account){
@@ -292,7 +303,7 @@ export default class index extends Component {
             }
             arr1.push(object)
         }
-        // console.log(arr1)
+        console.log(arr1)
         this.change(arr1)
         this.setState({contents})
 

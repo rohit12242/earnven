@@ -4,8 +4,8 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TransparentButton from '../components/TransparentButton'
-import AmountInput from '../components/amountInput'
+// import TransparentButton from '../components/TransparentButton'
+// import AmountInput from '../components/amountInput'
 
 export default function LiquidityPools() {
 
@@ -129,14 +129,14 @@ export default function LiquidityPools() {
                         var res = response.data.data.pairDayDatas
                         for(var i =0; i<res.length; i++){
                             await axios.get(`https://api.ethplorer.io/getTokenInfo/${res[i].token0.id}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
-                            .then(async(response) => {
+                            .then((response) => {
                                 if(response.data.image){
                                     // console.log(response.data.image)
                                     res[i].token0.image = response.data.image
                                 }
                             })
                             await axios.get(`https://api.ethplorer.io/getTokenInfo/${res[i].token1.id}?apiKey=EK-qSPda-W9rX7yJ-UY93y`,{},{})
-                            .then(async(response) => {
+                            .then((response) => {
                                 if(response.data.image){
                                     res[i].token1.image = response.data.image
 

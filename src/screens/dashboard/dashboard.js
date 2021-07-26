@@ -3,12 +3,13 @@
 import { Container } from '@material-ui/core';
 // components
 import Page from '../../components/Page';
-import AllAssetsMini from '../../components/allAssetsMini';
+// import AllAssetsMini from '../../components/allAssetsMini';
+import AllAssets from '../../components/allAssets'
 // import TotalValueBox from '../../components/totalValueBox';
 // import DefiAssets from '../../components/defiAssets';
 import PortfolioPerf from '../../components/portfolioperf/portfolioperf';
 import Balance from '../../components/Balance';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import './dashboard.css';
 import { Grid ,Button } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
@@ -28,8 +29,8 @@ export default function Dashboard() {
                                 <PortfolioPerf address={address}/>
                             </Grid>
                             <Grid item xs={12} md={12}>
-                                <AllAssetsMini address={address}/><br />
-                                <Link to={`/${address}/assets`} ><div style={{ float: 'right', color: 'white' }}>See More</div></Link>
+                                <AllAssets address={address}/><br />
+                                {/* <Link to={`/${address}/assets`} ><div style={{ float: 'right', color: 'white' }}>See More</div></Link> */}
                             </Grid>
                         </Grid>
 
